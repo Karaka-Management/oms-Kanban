@@ -45,7 +45,7 @@ class KanbanBoard implements \JsonSerializable
 
     private int $status = BoardStatus::ACTIVE;
 
-    private $order = 0;
+    private int $order = 0;
     /**
      * Description.
      *
