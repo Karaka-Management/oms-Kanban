@@ -12,7 +12,7 @@
  */
 declare(strict_types=1);
 
-namespace Modules\tests\Kanban\Admin;
+namespace Modules\Kanban\tests\Admin;
 
 /**
  * @internal

@@ -12,7 +12,7 @@
  */
 declare(strict_types=1);
 
-namespace Modules\tests\Kanban\Models;
+namespace Modules\Kanban\tests\Models;
 
 use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\BoardStatus;

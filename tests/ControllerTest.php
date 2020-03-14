@@ -12,7 +12,7 @@
  */
 declare(strict_types=1);
 
-namespace Modules\tests\Kanban;
+namespace Modules\Kanban\tests;
 
 require_once __DIR__ . '/../Autoloader.php';
 
