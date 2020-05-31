@@ -67,7 +67,7 @@ final class ApiController extends Controller
         }
 
         $card = $this->createKanbanCardFromRquest($request);
-        $this->createModel($request->getHeader()->getAccount(), $card, KanbanCardMapper::class, 'card');
+        $this->createModel($request->getHeader()->getAccount(), $card, KanbanCardMapper::class, 'card', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $card);
     }
 
@@ -146,7 +146,7 @@ final class ApiController extends Controller
         }
 
         $board = $this->createKanbanBoardFromRquest($request);
-        $this->createModel($request->getHeader()->getAccount(), $board, KanbanBoardMapper::class, 'board');
+        $this->createModel($request->getHeader()->getAccount(), $board, KanbanBoardMapper::class, 'board',$request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully created.', $board);
     }
 
@@ -217,7 +217,7 @@ final class ApiController extends Controller
         }
 
         $column = $this->createKanbanColumnFromRquest($request);
-        $this->createModel($request->getHeader()->getAccount(), $column, KanbanColumnMapper::class, 'column');
+        $this->createModel($request->getHeader()->getAccount(), $column, KanbanColumnMapper::class, 'column', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Column', 'Column successfully created.', $column);
     }
 
