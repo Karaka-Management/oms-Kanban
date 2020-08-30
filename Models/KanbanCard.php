@@ -47,6 +47,7 @@ class KanbanCard implements \JsonSerializable
     private int $status = CardStatus::ACTIVE;
 
     private int $type = CardType::TEXT;
+
     /**
      * Description.
      *
