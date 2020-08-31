@@ -68,16 +68,16 @@ final class KanbanCardMapper extends DataMapperAbstract
      */
     protected static array $hasMany = [
         'media'    => [
-            'mapper' => MediaMapper::class,
-            'table'  => 'kanban_card_media',
+            'mapper'   => MediaMapper::class,
+            'table'    => 'kanban_card_media',
             'external' => 'kanban_card_media_dst',
-            'self'   => 'kanban_card_media_src',
+            'self'     => 'kanban_card_media_src',
         ],
         'comments' => [
-            'mapper' => KanbanCardCommentMapper::class,
-            'table'  => 'kanban_card_comment',
+            'mapper'   => KanbanCardCommentMapper::class,
+            'table'    => 'kanban_card_comment',
             'external' => 'kanban_card_comment_card',
-            'self'   => null,
+            'self'     => null,
         ],
     ];
 

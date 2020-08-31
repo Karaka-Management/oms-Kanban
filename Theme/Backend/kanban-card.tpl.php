@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-$card = $this->getData('card');
+$card     = $this->getData('card');
 $comments = $card->getComments();
 ?>
 

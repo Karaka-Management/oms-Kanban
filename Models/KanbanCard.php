@@ -431,18 +431,18 @@ class KanbanCard implements \JsonSerializable
     public function jsonSerialize() : array
     {
         return [
-            'title' => $this->name,
+            'title'       => $this->name,
             'description' => $this->description,
-            'status' => $this->status,
-            'type' => $this->type,
-            'column' => $this->name,
-            'order' => $this->name,
-            'ref' => $this->name,
-            'createdBy' => $this->name,
-            'createdAt' => $this->name,
-            'labels' => $this->name,
-            'comments' => $this->name,
-            'media' => $this->name,
+            'status'      => $this->status,
+            'type'        => $this->type,
+            'column'      => $this->name,
+            'order'       => $this->name,
+            'ref'         => $this->name,
+            'createdBy'   => $this->name,
+            'createdAt'   => $this->name,
+            'labels'      => $this->name,
+            'comments'    => $this->name,
+            'media'       => $this->name,
         ];
     }
 

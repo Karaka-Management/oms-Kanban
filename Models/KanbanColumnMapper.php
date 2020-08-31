@@ -47,10 +47,10 @@ final class KanbanColumnMapper extends DataMapperAbstract
      */
     protected static array $hasMany = [
         'cards' => [
-            'mapper' => KanbanCardMapper::class,
-            'table'  => 'kanban_card',
+            'mapper'   => KanbanCardMapper::class,
+            'table'    => 'kanban_card',
             'external' => 'kanban_card_column',
-            'self'   => null,
+            'self'     => null,
         ],
     ];
 

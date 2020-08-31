@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-$board = $this->getData('board');
+$board   = $this->getData('board');
 $columns = $board->getColumns();
 ?>
 <!--
