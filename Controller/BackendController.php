@@ -17,7 +17,6 @@ namespace Modules\Kanban\Controller;
 use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\PermissionState;
-
 use phpOMS\Account\PermissionType;
 use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;

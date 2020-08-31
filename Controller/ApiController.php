@@ -20,11 +20,9 @@ use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Kanban\Models\KanbanBoardMapper;
-
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
-
 use Modules\Kanban\Models\KanbanColumnMapper;
 use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
