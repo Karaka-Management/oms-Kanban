@@ -26,17 +26,17 @@ use phpOMS\Stdlib\Base\Enum;
  */
 abstract class CardType extends Enum
 {
-    public const TEXT           = 1; /* Markdown -> Image, links, charts etc */
+    public const TEXT = 1; /* Markdown -> Image, links, charts etc */
 
-    public const CALENDAR       = 2;
+    public const CALENDAR = 2;
 
     public const CALENDAR_EVENT = 4;
 
-    public const TASK           = 8;
+    public const TASK = 8;
 
     public const TASK_CHECKLIST = 16;
 
-    public const MEDIA          = 32;
+    public const MEDIA = 32;
 
-    public const SURVEY         = 64;
+    public const SURVEY = 64;
 }
