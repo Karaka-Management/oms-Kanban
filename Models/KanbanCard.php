@@ -64,7 +64,7 @@ class KanbanCard implements \JsonSerializable
 
     private Account $createdBy;
 
-    private \DateTime $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     private array $comments = [];
 
@@ -79,7 +79,7 @@ class KanbanCard implements \JsonSerializable
      */
     public function __construct()
     {
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
     }
 
@@ -310,7 +310,7 @@ class KanbanCard implements \JsonSerializable
      *
      * @since 1.0.0
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt() : \DateTimeInterface
     {
         return $this->createdAt;
     }

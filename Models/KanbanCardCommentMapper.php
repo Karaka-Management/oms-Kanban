@@ -38,7 +38,7 @@ final class KanbanCardCommentMapper extends DataMapperAbstract
         'kanban_card_comment_id'          => ['name' => 'kanban_card_comment_id',          'type' => 'int',      'internal' => 'id'],
         'kanban_card_comment_description' => ['name' => 'kanban_card_comment_description', 'type' => 'string',   'internal' => 'description'],
         'kanban_card_comment_card'        => ['name' => 'kanban_card_comment_card',        'type' => 'int',      'internal' => 'card'],
-        'kanban_card_comment_created_at'  => ['name' => 'kanban_card_comment_created_at',  'type' => 'DateTime', 'internal' => 'createdAt', 'readonly' => true],
+        'kanban_card_comment_created_at'  => ['name' => 'kanban_card_comment_created_at',  'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
         'kanban_card_comment_created_by'  => ['name' => 'kanban_card_comment_created_by',  'type' => 'int',      'internal' => 'createdBy', 'readonly' => true],
     ];
 

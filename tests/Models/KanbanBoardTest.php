@@ -32,7 +32,7 @@ class KanbanBoardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals('', $board->getName());
         self::assertEquals('', $board->getDescription());
         self::assertEquals(0, $board->getCreatedBy()->getId());
-        self::assertInstanceOf('\DateTime', $board->getCreatedAt());
+        self::assertInstanceOf('\DateTimeImmutable', $board->getCreatedAt());
         self::assertEquals([], $board->getColumns());
     }
 

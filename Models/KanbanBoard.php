@@ -57,7 +57,7 @@ class KanbanBoard implements \JsonSerializable
 
     private Account $createdBy;
 
-    private \DateTime $createdAt;
+    private \DateTimeImmutable $createdAt;
 
     private array $columns = [];
 
@@ -68,7 +68,7 @@ class KanbanBoard implements \JsonSerializable
      */
     public function __construct()
     {
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
     }
 
@@ -221,7 +221,7 @@ class KanbanBoard implements \JsonSerializable
      *
      * @since 1.0.0
      */
-    public function getCreatedAt() : \DateTime
+    public function getCreatedAt() : \DateTimeInterface
     {
         return $this->createdAt;
     }

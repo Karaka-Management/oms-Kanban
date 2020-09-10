@@ -30,7 +30,7 @@ class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $comment->getCard());
         self::assertEquals('', $comment->getDescription());
         self::assertEquals(0, $comment->getCreatedBy()->getId());
-        self::assertInstanceOf('\DateTime', $comment->getCreatedAt());
+        self::assertInstanceOf('\DateTimeImmutable', $comment->getCreatedAt());
         self::assertEquals([], $comment->getMedia());
     }
 
