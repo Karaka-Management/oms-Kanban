@@ -28,6 +28,7 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
+use phpOMS\Message\Http\RequestStatusCode;
 
 /**
  * Kanban controller class.
@@ -60,6 +61,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
             $response->set('kanban_card_create', new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
@@ -139,6 +141,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
             $response->set('kanban_board_create', new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
@@ -210,6 +213,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
             $response->set('kanban_column_create', new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
 
             return;
         }
