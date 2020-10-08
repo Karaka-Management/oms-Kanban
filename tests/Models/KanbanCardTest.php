@@ -24,6 +24,10 @@ use Modules\Kanban\Models\KanbanCard;
  */
 class KanbanCardTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
     public function testDefault() : void
     {
         $card = new KanbanCard();
@@ -42,6 +46,10 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $card->getMedia());
     }
 
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
     public function testSetGet() : void
     {
         $card = new KanbanCard();

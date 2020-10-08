@@ -23,6 +23,10 @@ use Modules\Kanban\Models\KanbanBoard;
  */
 class KanbanBoardTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanBoard
+     * @group module
+     */
     public function testDefault() : void
     {
         $board = new KanbanBoard();
@@ -36,6 +40,10 @@ class KanbanBoardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $board->getColumns());
     }
 
+    /**
+     * @covers Modules\Kanban\Models\KanbanBoard
+     * @group module
+     */
     public function testSetGet() : void
     {
         $board = new KanbanBoard();

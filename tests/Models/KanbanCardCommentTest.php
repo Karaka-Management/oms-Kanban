@@ -22,6 +22,10 @@ use Modules\Kanban\Models\KanbanCardComment;
  */
 class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardComment
+     * @group module
+     */
     public function testDefault() : void
     {
         $comment = new KanbanCardComment();
@@ -34,6 +38,10 @@ class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $comment->getMedia());
     }
 
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardComment
+     * @group module
+     */
     public function testSetGet() : void
     {
         $comment = new KanbanCardComment();

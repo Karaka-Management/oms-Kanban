@@ -26,6 +26,10 @@ use phpOMS\Utils\RnG\Text;
  */
 class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardMapper
+     * @group module
+     */
     public function testCRUD() : void
     {
         $card = new KanbanCard();
@@ -56,6 +60,10 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($card->getRef(), $cardR->getRef());
     }
 
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardMapper
+     * @group module
+     */
     public function testTaskCard() : void
     {
         $card = new KanbanCard();

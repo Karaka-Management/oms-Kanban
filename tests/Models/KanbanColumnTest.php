@@ -22,6 +22,10 @@ use Modules\Kanban\Models\KanbanColumn;
  */
 class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanColumn
+     * @group module
+     */
     public function testDefault() : void
     {
         $column = new KanbanColumn();
@@ -33,6 +37,10 @@ class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $column->getCards());
     }
 
+    /**
+     * @covers Modules\Kanban\Models\KanbanColumn
+     * @group module
+     */
     public function testSetGet() : void
     {
         $column = new KanbanColumn();
