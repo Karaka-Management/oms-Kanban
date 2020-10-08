@@ -24,6 +24,10 @@ use phpOMS\Utils\RnG\Text;
  */
 class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardCommentMapper
+     * @group module
+     */
     public function testCRUD() : void
     {
         $comment = new KanbanCardComment();

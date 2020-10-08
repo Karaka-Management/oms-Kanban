@@ -24,6 +24,10 @@ use phpOMS\Utils\RnG\Text;
  */
 class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanBoardMapper
+     * @group module
+     */
     public function testCRUD() : void
     {
         $board = new KanbanBoard();

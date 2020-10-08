@@ -23,6 +23,10 @@ use phpOMS\Utils\RnG\Text;
  */
 class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @covers Modules\Kanban\Models\KanbanColumnMapper
+     * @group module
+     */
     public function testCRUD() : void
     {
         $column = new KanbanColumn();
