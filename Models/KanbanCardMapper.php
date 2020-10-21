@@ -55,7 +55,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      */
     protected static array $belongsTo = [
         'createdBy' => [
-            'mapper' => AccountMapper::class,
+            'mapper'     => AccountMapper::class,
             'external'   => 'kanban_card_created_by',
         ],
     ];
@@ -74,9 +74,9 @@ final class KanbanCardMapper extends DataMapperAbstract
             'self'     => 'kanban_card_media_dst',
         ],
         'comments' => [
-            'mapper'   => KanbanCardCommentMapper::class,
-            'table'    => 'kanban_card_comment',
-            'self' => 'kanban_card_comment_card',
+            'mapper'       => KanbanCardCommentMapper::class,
+            'table'        => 'kanban_card_comment',
+            'self'         => 'kanban_card_comment_card',
             'external'     => null,
         ],
     ];
