@@ -49,8 +49,8 @@ final class KanbanColumnMapper extends DataMapperAbstract
         'cards' => [
             'mapper'   => KanbanCardMapper::class,
             'table'    => 'kanban_card',
-            'external' => 'kanban_card_column',
-            'self'     => null,
+            'self' => 'kanban_card_column',
+            'external'     => null,
         ],
     ];
 
