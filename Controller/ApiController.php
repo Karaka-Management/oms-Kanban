@@ -29,6 +29,8 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
+use Modules\Kanban\Models\KanbanCardComment;
+use Modules\Kanban\Models\KanbanCardCommentMapper;
 
 /**
  * Kanban controller class.
@@ -66,7 +68,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $card = $this->createKanbanCardFromRquest($request);
+        $card = $this->createKanbanCardFromRequest($request);
         $this->createModel($request->getHeader()->getAccount(), $card, KanbanCardMapper::class, 'card', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $card);
     }
@@ -80,7 +82,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function createKanbanCardFromRquest(RequestAbstract $request) : KanbanCard
+    public function createKanbanCardFromRequest(RequestAbstract $request) : KanbanCard
     {
         $card = new KanbanCard();
         $card->setName((string) ($request->getData('title')));
@@ -137,6 +139,73 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
+    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+        if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
+            $response->set('kanban_comment_create', new FormValidation($val));
+            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+
+            return;
+        }
+
+        $comment = $this->createKanbanCardCommentFromRequest($request);
+        $this->createModel($request->getHeader()->getAccount(), $comment, KanbanCardCommentMapper::class, 'comment', $request->getOrigin());
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $comment);
+    }
+
+    /**
+     * Method to create comment from request.
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return KanbanCardComment
+     *
+     * @since 1.0.0
+     */
+    public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
+    {
+        $comment = new KanbanCardComment();
+        $comment->setDescription((string) ($request->getData('plain') ?? ''));
+        $comment->setCard((int) $request->getData('card'));
+        $comment->setCreatedBy(new NullAccount($request->getHeader()->getAccount()));
+
+        return $comment;
+    }
+
+    /**
+     * Validate comment create request
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return array<string, bool>
+     *
+     * @since 1.0.0
+     */
+    private function validateKanbanCardCommentCreate(RequestAbstract $request) : array
+    {
+        $val = [];
+        if (($val['plain'] = empty($request->getData('plain')))
+            || ($val['card'] = empty($request->getData('card')))
+        ) {
+            return $val;
+        }
+
+        return [];
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
     public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
@@ -146,7 +215,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $board = $this->createKanbanBoardFromRquest($request);
+        $board = $this->createKanbanBoardFromRequest($request);
         $this->createModel($request->getHeader()->getAccount(), $board, KanbanBoardMapper::class, 'board',$request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully created.', $board);
     }
@@ -160,7 +229,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function createKanbanBoardFromRquest(RequestAbstract $request) : KanbanBoard
+    public function createKanbanBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
         $board = new KanbanBoard();
         $board->setName((string) $request->getData('title'));
@@ -218,7 +287,7 @@ final class ApiController extends Controller
             return;
         }
 
-        $column = $this->createKanbanColumnFromRquest($request);
+        $column = $this->createKanbanColumnFromRequest($request);
         $this->createModel($request->getHeader()->getAccount(), $column, KanbanColumnMapper::class, 'column', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Column', 'Column successfully created.', $column);
     }
@@ -232,7 +301,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function createKanbanColumnFromRquest(RequestAbstract $request) : KanbanColumn
+    public function createKanbanColumnFromRequest(RequestAbstract $request) : KanbanColumn
     {
         $column = new KanbanColumn();
         $column->setName((string) $request->getData('title'));
