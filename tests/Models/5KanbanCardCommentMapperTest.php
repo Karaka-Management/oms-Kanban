@@ -32,19 +32,19 @@ class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
     {
         $comment = new KanbanCardComment();
 
-        $comment->setDescription('This is some card description');
+        $comment->description = 'This is some card description';
         $comment->setCard(1);
-        $comment->setCreatedBy(new NullAccount(1));
+        $comment->createdBy = new NullAccount(1);
 
         $id = KanbanCardCommentMapper::create($comment);
         self::assertGreaterThan(0, $comment->getId());
         self::assertEquals($id, $comment->getId());
 
         $commentR = KanbanCardCommentMapper::get($comment->getId());
-        self::assertEquals($comment->getDescription(), $commentR->getDescription());
+        self::assertEquals($comment->description, $commentR->description);
         self::assertEquals($comment->getCard(), $commentR->getCard());
-        self::assertEquals($comment->getCreatedBy()->getId(), $commentR->getCreatedBy()->getId());
-        self::assertEquals($comment->getCreatedAt()->format('Y-m-d'), $commentR->getCreatedAt()->format('Y-m-d'));
+        self::assertEquals($comment->createdBy->getId(), $commentR->createdBy->getId());
+        self::assertEquals($comment->createdAt->format('Y-m-d'), $commentR->createdAt->format('Y-m-d'));
     }
 
     /**
@@ -58,9 +58,9 @@ class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
             $text    = new Text();
             $comment = new KanbanCardComment();
 
-            $comment->setDescription($text->generateText(\mt_rand(20, 100)));
+            $comment->description = $text->generateText(\mt_rand(20, 100));
             $comment->setCard(1);
-            $comment->setCreatedBy(new NullAccount(1));
+            $comment->createdBy = new NullAccount(1);
 
             $id = KanbanCardCommentMapper::create($comment);
         }

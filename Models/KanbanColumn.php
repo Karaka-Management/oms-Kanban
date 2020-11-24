@@ -38,7 +38,7 @@ class KanbanColumn implements \JsonSerializable
      * @var string
      * @since 1.0.0
      */
-    private string $name = '';
+    public string $name = '';
 
     /**
      * Column order
@@ -120,32 +120,6 @@ class KanbanColumn implements \JsonSerializable
     public function getBoard() : int
     {
         return $this->board;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     *
-     * @since 1.0.0
-     */
-    public function getName() : string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name Name
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setName(string $name) : void
-    {
-        $this->name = $name;
     }
 
     /**

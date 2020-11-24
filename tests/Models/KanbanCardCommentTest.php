@@ -32,9 +32,9 @@ class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(0, $comment->getId());
         self::assertEquals(0, $comment->getCard());
-        self::assertEquals('', $comment->getDescription());
-        self::assertEquals(0, $comment->getCreatedBy()->getId());
-        self::assertInstanceOf('\DateTimeImmutable', $comment->getCreatedAt());
+        self::assertEquals('', $comment->description);
+        self::assertEquals(0, $comment->createdBy->getId());
+        self::assertInstanceOf('\DateTimeImmutable', $comment->createdAt);
         self::assertEquals([], $comment->getMedia());
     }
 
@@ -47,13 +47,13 @@ class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
         $comment = new KanbanCardComment();
 
         $comment->setCard(2);
-        $comment->setDescription('Description');
-        $comment->setCreatedBy(new NullAccount(1));
+        $comment->description = 'Description';
+        $comment->createdBy = new NullAccount(1);
         $comment->addMedia(3);
 
         self::assertEquals(2, $comment->getCard());
-        self::assertEquals('Description', $comment->getDescription());
-        self::assertEquals(1, $comment->getCreatedBy()->getId());
+        self::assertEquals('Description', $comment->description);
+        self::assertEquals(1, $comment->createdBy->getId());
         self::assertEquals([3], $comment->getMedia());
     }
 }

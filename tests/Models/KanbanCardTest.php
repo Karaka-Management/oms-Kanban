@@ -35,12 +35,12 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $card->getId());
         self::assertEquals(CardStatus::ACTIVE, $card->getStatus());
         self::assertEquals(CardType::TEXT, $card->getType());
-        self::assertEquals('', $card->getName());
-        self::assertEquals('', $card->getDescription());
+        self::assertEquals('', $card->name);
+        self::assertEquals('', $card->description);
         self::assertEquals(0, $card->getColumn());
         self::assertEquals(0, $card->getOrder());
-        self::assertEquals(0, $card->getCreatedBy()->getId());
-        self::assertInstanceOf('\DateTimeImmutable', $card->getCreatedAt());
+        self::assertEquals(0, $card->createdBy->getId());
+        self::assertInstanceOf('\DateTimeImmutable', $card->createdAt);
         self::assertEquals([], $card->getComments());
         self::assertEquals([], $card->getLabels());
         self::assertEquals([], $card->getMedia());
@@ -55,21 +55,21 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $card = new KanbanCard();
         $card->setStatus(CardStatus::ARCHIVED);
         $card->setType(CardType::TASK);
-        $card->setName('Name');
-        $card->setDescription('Description');
+        $card->name = 'Name';
+        $card->description = 'Description';
         $card->setColumn(1);
         $card->setOrder(2);
-        $card->setCreatedBy(new NullAccount(1));
+        $card->createdBy = new NullAccount(1);
         $card->addComment(5);
         $card->addMedia(7);
 
         self::assertEquals(CardStatus::ARCHIVED, $card->getStatus());
         self::assertEquals(CardType::TASK, $card->getType());
-        self::assertEquals('Name', $card->getName());
-        self::assertEquals('Description', $card->getDescription());
+        self::assertEquals('Name', $card->name);
+        self::assertEquals('Description', $card->description);
         self::assertEquals(1, $card->getColumn());
         self::assertEquals(2, $card->getOrder());
-        self::assertEquals(1, $card->getCreatedBy()->getId());
+        self::assertEquals(1, $card->createdBy->getId());
         self::assertEquals([5], $card->getComments());
         self::assertEquals([7], $card->getMedia());
     }

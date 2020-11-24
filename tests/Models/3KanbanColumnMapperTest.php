@@ -31,7 +31,7 @@ class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
     {
         $column = new KanbanColumn();
 
-        $column->setName('Some Column');
+        $column->name = 'Some Column';
         $column->setBoard(1);
         $column->setOrder(1);
 
@@ -40,7 +40,7 @@ class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($id, $column->getId());
 
         $columnR = KanbanColumnMapper::get($column->getId());
-        self::assertEquals($column->getName(), $columnR->getName());
+        self::assertEquals($column->name, $columnR->name);
         self::assertEquals($column->getBoard(), $columnR->getBoard());
         self::assertEquals($column->getOrder(), $columnR->getOrder());
     }
@@ -56,7 +56,7 @@ class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
             $text   = new Text();
             $column = new KanbanColumn();
 
-            $column->setName($text->generateText(\mt_rand(3, 7)));
+            $column->name = $text->generateText(\mt_rand(3, 7));
             $column->setBoard(1);
             $column->setOrder($i + 1);
 

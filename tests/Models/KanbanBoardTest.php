@@ -33,10 +33,10 @@ class KanbanBoardTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(0, $board->getId());
         self::assertEquals(BoardStatus::ACTIVE, $board->getStatus());
-        self::assertEquals('', $board->getName());
-        self::assertEquals('', $board->getDescription());
-        self::assertEquals(0, $board->getCreatedBy()->getId());
-        self::assertInstanceOf('\DateTimeImmutable', $board->getCreatedAt());
+        self::assertEquals('', $board->name);
+        self::assertEquals('', $board->description);
+        self::assertEquals(0, $board->createdBy->getId());
+        self::assertInstanceOf('\DateTimeImmutable', $board->createdAt);
         self::assertEquals([], $board->getColumns());
     }
 
@@ -48,16 +48,16 @@ class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     {
         $board = new KanbanBoard();
 
-        $board->setName('Name');
-        $board->setDescription('Description');
+        $board->name = 'Name';
+        $board->description = 'Description';
         $board->setStatus(BoardStatus::ARCHIVED);
-        $board->setCreatedBy(new NullAccount(1));
+        $board->createdBy = new NullAccount(1);
         $board->addColumn(2);
 
         self::assertEquals(BoardStatus::ARCHIVED, $board->getStatus());
-        self::assertEquals('Name', $board->getName());
-        self::assertEquals('Description', $board->getDescription());
-        self::assertEquals(1, $board->getCreatedBy()->getId());
+        self::assertEquals('Name', $board->name);
+        self::assertEquals('Description', $board->description);
+        self::assertEquals(1, $board->createdBy->getId());
         self::assertEquals([2], $board->getColumns());
     }
 }

@@ -63,13 +63,13 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
             $response->set('kanban_card_create', new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         $card = $this->createKanbanCardFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $card, KanbanCardMapper::class, 'card', $request->getOrigin());
+        $this->createModel($request->header->account, $card, KanbanCardMapper::class, 'card', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $card);
     }
 
@@ -85,14 +85,14 @@ final class ApiController extends Controller
     public function createKanbanCardFromRequest(RequestAbstract $request) : KanbanCard
     {
         $card = new KanbanCard();
-        $card->setName((string) ($request->getData('title')));
-        $card->setDescription((string) ($request->getData('plain') ?? ''));
+        $card->name = (string) ($request->getData('title'));
+        $card->description = (string) ($request->getData('plain') ?? '');
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
         $card->setRef((int) ($request->getData('ref') ?? 0));
         $card->setStatus((int) ($request->getData('status') ?? CardStatus::ACTIVE));
         $card->setType((int) ($request->getData('type') ?? CardType::TEXT));
-        $card->setCreatedBy(new NullAccount($request->getHeader()->getAccount()));
+        $card->createdBy = new NullAccount($request->header->account);
 
         return $card;
     }
@@ -143,13 +143,13 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
             $response->set('kanban_comment_create', new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         $comment = $this->createKanbanCardCommentFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $comment, KanbanCardCommentMapper::class, 'comment', $request->getOrigin());
+        $this->createModel($request->header->account, $comment, KanbanCardCommentMapper::class, 'comment', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $comment);
     }
 
@@ -165,9 +165,9 @@ final class ApiController extends Controller
     public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
     {
         $comment = new KanbanCardComment();
-        $comment->setDescription((string) ($request->getData('plain') ?? ''));
+        $comment->description = (string) ($request->getData('plain') ?? '');
         $comment->setCard((int) $request->getData('card'));
-        $comment->setCreatedBy(new NullAccount($request->getHeader()->getAccount()));
+        $comment->createdBy = new NullAccount($request->header->account);
 
         return $comment;
     }
@@ -210,13 +210,13 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
             $response->set('kanban_board_create', new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         $board = $this->createKanbanBoardFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $board, KanbanBoardMapper::class, 'board',$request->getOrigin());
+        $this->createModel($request->header->account, $board, KanbanBoardMapper::class, 'board',$request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully created.', $board);
     }
 
@@ -232,11 +232,11 @@ final class ApiController extends Controller
     public function createKanbanBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
         $board = new KanbanBoard();
-        $board->setName((string) $request->getData('title'));
-        $board->setDescription((string) ($request->getData('plain') ?? ''));
+        $board->name = (string) $request->getData('title');
+        $board->description = (string) ($request->getData('plain') ?? '');
         $board->setOrder((int) ($request->getData('order') ?? 1));
         $board->setStatus((int) ($request->getData('status') ?? BoardStatus::ACTIVE));
-        $board->setCreatedBy(new NullAccount($request->getHeader()->getAccount()));
+        $board->createdBy = new NullAccount($request->header->account);
 
         return $board;
     }
@@ -282,13 +282,13 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
             $response->set('kanban_column_create', new FormValidation($val));
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_400);
+            $response->header->status = RequestStatusCode::R_400;
 
             return;
         }
 
         $column = $this->createKanbanColumnFromRequest($request);
-        $this->createModel($request->getHeader()->getAccount(), $column, KanbanColumnMapper::class, 'column', $request->getOrigin());
+        $this->createModel($request->header->account, $column, KanbanColumnMapper::class, 'column', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Column', 'Column successfully created.', $column);
     }
 
@@ -304,7 +304,7 @@ final class ApiController extends Controller
     public function createKanbanColumnFromRequest(RequestAbstract $request) : KanbanColumn
     {
         $column = new KanbanColumn();
-        $column->setName((string) $request->getData('title'));
+        $column->name = (string) $request->getData('title');
         $column->setBoard((int) $request->getData('board'));
         $column->setOrder((int) ($request->getData('order') ?? 1));
 

@@ -103,14 +103,14 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $board     = KanbanBoardMapper::get((int) $request->getData('id'));
-        $accountId = $request->getHeader()->getAccount();
+        $accountId = $request->header->account;
 
-        if ($board->getCreatedBy()->getId() !== $accountId
+        if ($board->createdBy->getId() !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
                 PermissionType::READ, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::BOARD, $board->getId())
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+            $response->header->status = RequestStatusCode::R_403;
             return $view;
         }
 
@@ -158,13 +158,13 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $accountId = $request->getHeader()->getAccount();
+        $accountId = $request->header->account;
 
         if (!$this->app->accountManager->get($accountId)->hasPermission(
                 PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::BOARD)
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+            $response->header->status = RequestStatusCode::R_403;
             return $view;
         }
 
@@ -191,14 +191,14 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $card      = KanbanCardMapper::get((int) $request->getData('id'));
-        $accountId = $request->getHeader()->getAccount();
+        $accountId = $request->header->account;
 
-        if ($card->getCreatedBy()->getId() !== $accountId
+        if ($card->createdBy->getId() !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
                 PermissionType::READ, $this->app->orgId, $this->app->appName, self::MODULE_NAME, PermissionState::CARD, $card->getId())
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
-            $response->getHeader()->setStatusCode(RequestStatusCode::R_403);
+            $response->header->status = RequestStatusCode::R_403;
             return $view;
         }
 

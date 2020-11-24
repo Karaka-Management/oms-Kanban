@@ -32,20 +32,20 @@ class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
     {
         $board = new KanbanBoard();
 
-        $board->setName('Test Board 0');
-        $board->setDescription('This is some description');
-        $board->setCreatedBy(new NullAccount(1));
+        $board->name = 'Test Board 0';
+        $board->description = 'This is some description';
+        $board->createdBy = new NullAccount(1);
 
         $id = KanbanBoardMapper::create($board);
         self::assertGreaterThan(0, $board->getId());
         self::assertEquals($id, $board->getId());
 
         $boardR = KanbanBoardMapper::get($board->getId());
-        self::assertEquals($board->getName(), $boardR->getName());
+        self::assertEquals($board->name, $boardR->name);
         self::assertEquals($board->getStatus(), $boardR->getStatus());
-        self::assertEquals($board->getDescription(), $boardR->getDescription());
-        self::assertEquals($board->getCreatedBy()->getId(), $boardR->getCreatedBy()->getId());
-        self::assertEquals($board->getCreatedAt()->format('Y-m-d'), $boardR->getCreatedAt()->format('Y-m-d'));
+        self::assertEquals($board->description, $boardR->description);
+        self::assertEquals($board->createdBy->getId(), $boardR->createdBy->getId());
+        self::assertEquals($board->createdAt->format('Y-m-d'), $boardR->createdAt->format('Y-m-d'));
         self::assertEquals($board->getColumns(), $boardR->getColumns());
     }
 
@@ -60,9 +60,9 @@ class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
             $text  = new Text();
             $board = new KanbanBoard();
 
-            $board->setName($text->generateText(\mt_rand(3, 7)));
-            $board->setDescription($text->generateText(\mt_rand(20, 70)));
-            $board->setCreatedBy(new NullAccount(1));
+            $board->name = $text->generateText(\mt_rand(3, 7));
+            $board->description = $text->generateText(\mt_rand(20, 70));
+            $board->createdBy = new NullAccount(1);
 
             $id = KanbanBoardMapper::create($board);
         }

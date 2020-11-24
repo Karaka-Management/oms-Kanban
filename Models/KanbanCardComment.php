@@ -41,13 +41,13 @@ class KanbanCardComment implements \JsonSerializable
      * @var string
      * @since 1.0.0
      */
-    private string $description = '';
+    public string $description = '';
 
     private $card = 0;
 
-    private Account $createdBy;
+    public Account $createdBy;
 
-    private \DateTimeImmutable $createdAt;
+    public \DateTimeImmutable $createdAt;
 
     private array $media = [];
 
@@ -98,70 +98,6 @@ class KanbanCardComment implements \JsonSerializable
     public function getCard() : int
     {
         return $this->card;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     *
-     * @since 1.0.0
-     */
-    public function getDescription() : string
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description Description
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setDescription(string $description) : void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get created by
-     *
-     * @return Account
-     *
-     * @since 1.0.0
-     */
-    public function getCreatedBy() : Account
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set created by
-     *
-     * @param Account $account Created by
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setCreatedBy(Account $account) : void
-    {
-        $this->createdBy = $account;
-    }
-
-    /**
-     * Get created at date time
-     *
-     * @return \DateTimeImmutable
-     *
-     * @since 1.0.0
-     */
-    public function getCreatedAt() : \DateTimeImmutable
-    {
-        return $this->createdAt;
     }
 
     /**

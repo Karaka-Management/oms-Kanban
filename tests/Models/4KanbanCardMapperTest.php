@@ -34,13 +34,13 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
     {
         $card = new KanbanCard();
 
-        $card->setName('Some Card name');
-        $card->setDescription('This is some card description');
+        $card->name = 'Some Card name';
+        $card->description = 'This is some card description';
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TEXT);
         $card->setOrder(1);
         $card->setColumn(1);
-        $card->setCreatedBy(new NullAccount(1));
+        $card->createdBy = new NullAccount(1);
         $card->addLabel(1);
         $card->addLabel(2);
 
@@ -49,14 +49,14 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($id, $card->getId());
 
         $cardR = KanbanCardMapper::get($card->getId());
-        self::assertEquals($card->getName(), $cardR->getName());
-        self::assertEquals($card->getDescription(), $cardR->getDescription());
+        self::assertEquals($card->name, $cardR->name);
+        self::assertEquals($card->description, $cardR->description);
         self::assertEquals($card->getColumn(), $cardR->getColumn());
         self::assertEquals($card->getOrder(), $cardR->getOrder());
         self::assertEquals($card->getStatus(), $cardR->getStatus());
         self::assertEquals($card->getType(), $cardR->getType());
-        self::assertEquals($card->getCreatedBy()->getId(), $cardR->getCreatedBy()->getId());
-        self::assertEquals($card->getCreatedAt()->format('Y-m-d'), $cardR->getCreatedAt()->format('Y-m-d'));
+        self::assertEquals($card->createdBy->getId(), $cardR->createdBy->getId());
+        self::assertEquals($card->createdAt->format('Y-m-d'), $cardR->createdAt->format('Y-m-d'));
         self::assertEquals($card->getRef(), $cardR->getRef());
     }
 
@@ -73,7 +73,7 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->setRef(1);
         $card->setOrder(1);
         $card->setColumn(1);
-        $card->setCreatedBy(new NullAccount(1));
+        $card->createdBy = new NullAccount(1);
         $card->addLabel(1);
         $card->addLabel(2);
 
@@ -93,13 +93,13 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
             $text = new Text();
             $card = new KanbanCard();
 
-            $card->setName($text->generateText(\mt_rand(3, 7)));
-            $card->setDescription($text->generateText(\mt_rand(20, 100)));
+            $card->name = $text->generateText(\mt_rand(3, 7));
+            $card->description = $text->generateText(\mt_rand(20, 100));
             $card->setStatus(CardStatus::ACTIVE);
             $card->setType(CardType::TEXT);
             $card->setOrder(\mt_rand(1, 10));
             $card->setColumn(\mt_rand(1, 4));
-            $card->setCreatedBy(new NullAccount(1));
+            $card->createdBy = new NullAccount(1);
             $card->addLabel(2);
             $card->addLabel(3);
 

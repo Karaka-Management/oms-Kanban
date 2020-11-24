@@ -23,9 +23,9 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <a href="<?= $this->printHtml(UriFactory::build('{/prefix}kanban/board?{?}&id=' . $board->getId())); ?>">
         <section class="portlet">
-            <div class="portlet-head"><?= $this->printHtml($board->getName()); ?></div>
+            <div class="portlet-head"><?= $this->printHtml($board->name); ?></div>
             <div class="portlet-body">
-                <?= $this->printHtml($board->getDescription()); ?>
+                <?= $this->printHtml($board->description); ?>
             </div>
         </section>
         </a>

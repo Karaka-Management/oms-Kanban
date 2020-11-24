@@ -6,9 +6,9 @@ $comments = $card->getComments();
 <div class="row">
     <div class="col-xs-12">
         <section class="box wf-100">
-            <header><h1><?= $this->printHtml($card->getName()); ?></h1></header>
+            <header><h1><?= $this->printHtml($card->name); ?></h1></header>
             <div class="inner">
-                <?= $this->printHtml($card->getDescription()); ?>
+                <?= $this->printHtml($card->description); ?>
             </div>
         </section>
     </div>
@@ -19,7 +19,7 @@ $comments = $card->getComments();
     <div class="col-xs-12">
         <section class="box wf-100">
             <div class="inner">
-                <?= $this->printHtml($comment->getDescription()); ?>
+                <?= $this->printHtml($comment->description); ?>
             </div>
         </section>
     </div>

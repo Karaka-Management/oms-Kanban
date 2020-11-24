@@ -87,13 +87,13 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 
-        $request->getHeader()->setAccount(1);
+        $request->header->account = 1;
         $request->setData('title', 'Controller Test Board');
         $request->setData('plain', 'Controller Test Description');
 
         $this->module->apiKanbanBoardCreate($request, $response);
 
-        self::assertEquals('Controller Test Board', $response->get('')['response']->getName());
+        self::assertEquals('Controller Test Board', $response->get('')['response']->name);
         self::assertGreaterThan(0, $response->get('')['response']->getId());
     }
 
@@ -106,13 +106,13 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 
-        $request->getHeader()->setAccount(1);
+        $request->header->account = 1;
         $request->setData('title', 'Controller Test Column');
         $request->setData('board', 1);
 
         $this->module->apiKanbanColumnCreate($request, $response);
 
-        self::assertEquals('Controller Test Column', $response->get('')['response']->getName());
+        self::assertEquals('Controller Test Column', $response->get('')['response']->name);
         self::assertGreaterThan(0, $response->get('')['response']->getId());
     }
 
@@ -125,14 +125,14 @@ class ControllerTest extends \PHPUnit\Framework\TestCase
         $response = new HttpResponse();
         $request  = new HttpRequest(new HttpUri(''));
 
-        $request->getHeader()->setAccount(1);
+        $request->header->account = 1;
         $request->setData('title', 'Controller Test Card');
         $request->setData('plain', 'Controller Test Description');
         $request->setData('column', '1');
 
         $this->module->apiKanbanCardCreate($request, $response);
 
-        self::assertEquals('Controller Test Card', $response->get('')['response']->getName());
+        self::assertEquals('Controller Test Card', $response->get('')['response']->name);
         self::assertGreaterThan(0, $response->get('')['response']->getId());
     }
 }

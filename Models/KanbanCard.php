@@ -42,7 +42,7 @@ class KanbanCard implements \JsonSerializable
      * @var string
      * @since 1.0.0
      */
-    private string $name = '';
+    public string $name = '';
 
     private int $status = CardStatus::ACTIVE;
 
@@ -54,7 +54,7 @@ class KanbanCard implements \JsonSerializable
      * @var string
      * @since 1.0.0
      */
-    private string $description = '';
+    public string $description = '';
 
     private $column = 0;
 
@@ -62,9 +62,9 @@ class KanbanCard implements \JsonSerializable
 
     private $ref = 0;
 
-    private Account $createdBy;
+    public Account $createdBy;
 
-    private \DateTimeImmutable $createdAt;
+    public \DateTimeImmutable $createdAt;
 
     private array $comments = [];
 
@@ -148,32 +148,6 @@ class KanbanCard implements \JsonSerializable
     }
 
     /**
-     * Get name
-     *
-     * @return string
-     *
-     * @since 1.0.0
-     */
-    public function getName() : string
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name Name
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setName(string $name) : void
-    {
-        $this->name = $name;
-    }
-
-    /**
      * Get the status
      *
      * @return int
@@ -249,70 +223,6 @@ class KanbanCard implements \JsonSerializable
     public function setRef(int $ref) : void
     {
         $this->ref = $ref;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     *
-     * @since 1.0.0
-     */
-    public function getDescription() : string
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description Description
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setDescription(string $description) : void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get created by
-     *
-     * @return Account
-     *
-     * @since 1.0.0
-     */
-    public function getCreatedBy() : Account
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set created by
-     *
-     * @param Account $account Created by
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setCreatedBy(Account $account) : void
-    {
-        $this->createdBy = $account;
-    }
-
-    /**
-     * Get created at date time
-     *
-     * @return \DateTimeImmutable
-     *
-     * @since 1.0.0
-     */
-    public function getCreatedAt() : \DateTimeImmutable
-    {
-        return $this->createdAt;
     }
 
     /**
