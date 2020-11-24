@@ -34,7 +34,7 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
     {
         $card = new KanbanCard();
 
-        $card->name = 'Some Card name';
+        $card->name        = 'Some Card name';
         $card->description = 'This is some card description';
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TEXT);
@@ -93,7 +93,7 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
             $text = new Text();
             $card = new KanbanCard();
 
-            $card->name = $text->generateText(\mt_rand(3, 7));
+            $card->name        = $text->generateText(\mt_rand(3, 7));
             $card->description = $text->generateText(\mt_rand(20, 100));
             $card->setStatus(CardStatus::ACTIVE);
             $card->setType(CardType::TEXT);

@@ -21,6 +21,8 @@ use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCard;
+use Modules\Kanban\Models\KanbanCardComment;
+use Modules\Kanban\Models\KanbanCardCommentMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
@@ -29,8 +31,6 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
-use Modules\Kanban\Models\KanbanCardComment;
-use Modules\Kanban\Models\KanbanCardCommentMapper;
 
 /**
  * Kanban controller class.
@@ -84,8 +84,8 @@ final class ApiController extends Controller
      */
     public function createKanbanCardFromRequest(RequestAbstract $request) : KanbanCard
     {
-        $card = new KanbanCard();
-        $card->name = (string) ($request->getData('title'));
+        $card              = new KanbanCard();
+        $card->name        = (string) ($request->getData('title'));
         $card->description = (string) ($request->getData('plain') ?? '');
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
@@ -164,7 +164,7 @@ final class ApiController extends Controller
      */
     public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
     {
-        $comment = new KanbanCardComment();
+        $comment              = new KanbanCardComment();
         $comment->description = (string) ($request->getData('plain') ?? '');
         $comment->setCard((int) $request->getData('card'));
         $comment->createdBy = new NullAccount($request->header->account);
@@ -231,8 +231,8 @@ final class ApiController extends Controller
      */
     public function createKanbanBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
-        $board = new KanbanBoard();
-        $board->name = (string) $request->getData('title');
+        $board              = new KanbanBoard();
+        $board->name        = (string) $request->getData('title');
         $board->description = (string) ($request->getData('plain') ?? '');
         $board->setOrder((int) ($request->getData('order') ?? 1));
         $board->setStatus((int) ($request->getData('status') ?? BoardStatus::ACTIVE));
@@ -303,7 +303,7 @@ final class ApiController extends Controller
      */
     public function createKanbanColumnFromRequest(RequestAbstract $request) : KanbanColumn
     {
-        $column = new KanbanColumn();
+        $column       = new KanbanColumn();
         $column->name = (string) $request->getData('title');
         $column->setBoard((int) $request->getData('board'));
         $column->setOrder((int) ($request->getData('order') ?? 1));

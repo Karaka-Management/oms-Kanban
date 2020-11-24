@@ -55,7 +55,7 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $card = new KanbanCard();
         $card->setStatus(CardStatus::ARCHIVED);
         $card->setType(CardType::TASK);
-        $card->name = 'Name';
+        $card->name        = 'Name';
         $card->description = 'Description';
         $card->setColumn(1);
         $card->setOrder(2);

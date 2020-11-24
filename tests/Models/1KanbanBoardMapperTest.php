@@ -32,9 +32,9 @@ class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
     {
         $board = new KanbanBoard();
 
-        $board->name = 'Test Board 0';
+        $board->name        = 'Test Board 0';
         $board->description = 'This is some description';
-        $board->createdBy = new NullAccount(1);
+        $board->createdBy   = new NullAccount(1);
 
         $id = KanbanBoardMapper::create($board);
         self::assertGreaterThan(0, $board->getId());
@@ -60,9 +60,9 @@ class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
             $text  = new Text();
             $board = new KanbanBoard();
 
-            $board->name = $text->generateText(\mt_rand(3, 7));
+            $board->name        = $text->generateText(\mt_rand(3, 7));
             $board->description = $text->generateText(\mt_rand(20, 70));
-            $board->createdBy = new NullAccount(1);
+            $board->createdBy   = new NullAccount(1);
 
             $id = KanbanBoardMapper::create($board);
         }

@@ -48,7 +48,7 @@ class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 
         $comment->setCard(2);
         $comment->description = 'Description';
-        $comment->createdBy = new NullAccount(1);
+        $comment->createdBy   = new NullAccount(1);
         $comment->addMedia(3);
 
         self::assertEquals(2, $comment->getCard());

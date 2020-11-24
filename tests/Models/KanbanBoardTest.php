@@ -48,7 +48,7 @@ class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     {
         $board = new KanbanBoard();
 
-        $board->name = 'Name';
+        $board->name        = 'Name';
         $board->description = 'Description';
         $board->setStatus(BoardStatus::ARCHIVED);
         $board->createdBy = new NullAccount(1);
