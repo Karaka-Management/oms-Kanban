@@ -20,6 +20,7 @@ use Modules\Kanban\Models\PermissionState;
 use phpOMS\Account\PermissionType;
 use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\DataStorage\Database\RelationType;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -32,10 +33,6 @@ use phpOMS\Views\View;
  * @license OMS License 1.0
  * @link    https://orange-management.org
  * @since   1.0.0
- *
- * @todo Orange-Management/Modules#77
- *  Edit functionality
- *  Currently nothing can be edited (change)
  */
 final class BackendController extends Controller
 {
@@ -47,9 +44,6 @@ final class BackendController extends Controller
      * @param mixed            $data     Generic data
      *
      * @return void
-     *
-     * @todo Orange-Management/Modules#76
-     *  Style board, card and columns
      *
      * @since 1.0.0
      * @codeCoverageIgnore
@@ -80,7 +74,7 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
 
-        $list = KanbanBoardMapper::getNewest(50);
+        $list = KanbanBoardMapper::getNewest(50, null, RelationType::ALL, 1);
         $view->setData('boards', $list);
 
         return $view;
