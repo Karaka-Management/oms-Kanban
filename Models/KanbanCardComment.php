@@ -43,7 +43,7 @@ class KanbanCardComment implements \JsonSerializable
      */
     public string $description = '';
 
-    private $card = 0;
+    private int $card = 0;
 
     public Account $createdBy;
 

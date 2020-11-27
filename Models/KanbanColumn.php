@@ -48,7 +48,7 @@ class KanbanColumn implements \JsonSerializable
      */
     private int $order = 0;
 
-    private $board = 0;
+    private int $board = 0;
 
     /**
      * Cards

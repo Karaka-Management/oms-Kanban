@@ -17,6 +17,7 @@ namespace Modules\Kanban\Models;
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Tasks\Models\Task;
+use Modules\Media\Models\Media;
 
 /**
  * Kanban card class.
@@ -56,11 +57,11 @@ class KanbanCard implements \JsonSerializable
      */
     public string $description = '';
 
-    private $column = 0;
+    private int $column = 0;
 
-    private $order = 0;
+    private int $order = 0;
 
-    private $ref = 0;
+    private int $ref = 0;
 
     public Account $createdBy;
 
@@ -70,6 +71,12 @@ class KanbanCard implements \JsonSerializable
 
     private array $labels = [];
 
+    /**
+     * Media
+     *
+     * @var Media[]
+     * @since 1.0.0
+     */
     private array $media = [];
 
     /**
@@ -290,7 +297,7 @@ class KanbanCard implements \JsonSerializable
      *
      * @since 1.0.0
      */
-    public function addMedia($media) : void
+    public function addMedia(Media $media) : void
     {
         $this->media[] = $media;
     }
