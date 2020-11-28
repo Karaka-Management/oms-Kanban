@@ -18,6 +18,7 @@ use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
+use Modules\Media\Models\NullMedia;
 
 /**
  * @internal
@@ -61,7 +62,7 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $card->setOrder(2);
         $card->createdBy = new NullAccount(1);
         $card->addComment(5);
-        $card->addMedia(7);
+        $card->addMedia($m = new NullMedia(7));
 
         self::assertEquals(CardStatus::ARCHIVED, $card->getStatus());
         self::assertEquals(CardType::TASK, $card->getType());
@@ -71,6 +72,6 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(2, $card->getOrder());
         self::assertEquals(1, $card->createdBy->getId());
         self::assertEquals([5], $card->getComments());
-        self::assertEquals([7], $card->getMedia());
+        self::assertEquals([$m], $card->getMedia());
     }
 }
