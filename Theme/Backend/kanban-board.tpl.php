@@ -9,7 +9,7 @@ $columns = $board->getColumns();
 -->
 <div class="row">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $this->printHtml($i); ?>" class="col-xs-12 col-sm-3" draggable="true">
+    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3" draggable="true">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++; $labels = $card->getLabels(); ?>
             <a href="<?= $this->printHtml(\phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId())); ?>">
