@@ -31,6 +31,7 @@ use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Model\Message\FormValidation;
+use phpOMS\Utils\Parser\Markdown\Markdown;
 
 /**
  * Kanban controller class.
@@ -80,9 +81,10 @@ final class ApiController extends Controller
      */
     public function createKanbanCardFromRequest(RequestAbstract $request) : KanbanCard
     {
-        $card              = new KanbanCard();
-        $card->name        = (string) ($request->getData('title'));
-        $card->description = (string) ($request->getData('plain') ?? '');
+        $card                 = new KanbanCard();
+        $card->name           = (string) ($request->getData('title'));
+        $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
+        $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
         $card->setRef((int) ($request->getData('ref') ?? 0));

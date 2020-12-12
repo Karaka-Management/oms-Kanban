@@ -57,6 +57,14 @@ class KanbanCard implements \JsonSerializable
      */
     public string $description = '';
 
+    /**
+     * Description.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    public string $descriptionRaw = '';
+
     private int $column = 0;
 
     private int $order = 0;

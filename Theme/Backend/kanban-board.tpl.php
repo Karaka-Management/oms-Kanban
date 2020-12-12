@@ -9,13 +9,13 @@ $columns = $board->getColumns();
 -->
 <div class="row">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3" draggable="true">
+    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3 box" draggable="true">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++; $labels = $card->getLabels(); ?>
             <a href="<?= $this->printHtml(\phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId())); ?>">
-            <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="box wf-100" draggable="true">
-                <header><h1><?= $this->printHtml($card->name); ?></h1></header>
-                <div class="inner">
+            <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
+                <div class="portlet-head"><?= $this->printHtml($card->name); ?></div>
+                <div class="portlet-body">
                     <?= $this->printHtml($card->description); ?>
                     <?php foreach ($labels as $label) : ?>
                     <span class="tag" style="background: #<?= $this->printHtml(\dechex($label->getColor())); ?>"><?= $this->printHtml($label->getName()); ?></span>

@@ -94,6 +94,12 @@
                 "default": null,
                 "null": true
             },
+            "kanban_card_descriptionraw": {
+                "name": "kanban_card_descriptionraw",
+                "type": "TEXT",
+                "default": null,
+                "null": true
+            },
             "kanban_card_type": {
                 "name": "kanban_card_type",
                 "type": "TINYINT",
