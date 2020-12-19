@@ -16,6 +16,7 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\AccountMapper;
 use Modules\Media\Models\MediaMapper;
+use Modules\Tag\Models\TagMapper;
 use phpOMS\DataStorage\Database\DataMapperAbstract;
 
 /**
@@ -79,6 +80,12 @@ final class KanbanCardMapper extends DataMapperAbstract
             'table'        => 'kanban_card_comment',
             'self'         => 'kanban_card_comment_card',
             'external'     => null,
+        ],
+        'tags' => [
+            'mapper'   => TagMapper::class,
+            'table'    => 'kanban_card_tag',
+            'self'     => 'kanban_card_tag_dst',
+            'external' => 'kanban_card_tag_src',
         ],
     ];
 

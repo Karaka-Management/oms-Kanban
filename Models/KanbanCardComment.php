@@ -43,6 +43,14 @@ class KanbanCardComment implements \JsonSerializable
      */
     public string $description = '';
 
+    /**
+     * Description.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    public string $descriptionRaw = '';
+
     private int $card = 0;
 
     public Account $createdBy;

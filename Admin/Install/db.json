@@ -20,6 +20,12 @@
                 "default": null,
                 "null": true
             },
+            "kanban_board_descraw": {
+                "name": "kanban_board_descraw",
+                "type": "TEXT",
+                "default": null,
+                "null": true
+            },
             "kanban_board_status": {
                 "name": "kanban_board_status",
                 "type": "TINYINT",
@@ -41,6 +47,32 @@
                 "null": false,
                 "foreignTable": "account",
                 "foreignKey": "account_id"
+            }
+        }
+    },
+    "kanban_board_tag": {
+        "name": "kanban_board_tag",
+        "fields": {
+            "kanban_board_tag_id": {
+                "name": "kanban_board_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "kanban_board_tag_dst": {
+                "name": "kanban_board_tag_dst",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "kanban_board",
+                "foreignKey": "kanban_board_id"
+            },
+            "kanban_board_tag_src": {
+                "name": "kanban_board_tag_src",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "tag",
+                "foreignKey": "tag_id"
             }
         }
     },
@@ -141,6 +173,32 @@
             }
         }
     },
+    "kanban_card_tag": {
+        "name": "kanban_card_tag",
+        "fields": {
+            "kanban_card_tag_id": {
+                "name": "kanban_card_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "kanban_card_tag_dst": {
+                "name": "kanban_card_tag_dst",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "kanban_card",
+                "foreignKey": "kanban_card_id"
+            },
+            "kanban_card_tag_src": {
+                "name": "kanban_card_tag_src",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "tag",
+                "foreignKey": "tag_id"
+            }
+        }
+    },
     "kanban_card_media": {
         "name": "kanban_card_media",
         "fields": {
@@ -179,6 +237,12 @@
             },
             "kanban_card_comment_description": {
                 "name": "kanban_card_comment_description",
+                "type": "TEXT",
+                "default": null,
+                "null": true
+            },
+            "kanban_card_comment_descriptionraw": {
+                "name": "kanban_card_comment_descriptionraw",
                 "type": "TEXT",
                 "default": null,
                 "null": true

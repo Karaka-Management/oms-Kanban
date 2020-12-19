@@ -11,15 +11,21 @@ $columns = $board->getColumns();
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
     <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3 box" draggable="true">
         <header><?= $this->printHtml($column->name); ?></header>
-        <?php $j = 0; foreach ($cards as $card) : $j++; $labels = $card->getLabels(); ?>
-            <a href="<?= $this->printHtml(\phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId())); ?>">
+        <?php $j = 0; foreach ($cards as $card) : $j++;
+            $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());
+        ?>
             <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
-                <div class="portlet-head"><?= $this->printHtml($card->name); ?></div>
+                <div class="portlet-head"><a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a></div>
                 <div class="portlet-body">
-                    <?= $this->printHtml($card->description); ?>
-                    <?php foreach ($labels as $label) : ?>
-                    <span class="tag" style="background: #<?= $this->printHtml(\dechex($label->getColor())); ?>"><?= $this->printHtml($label->getName()); ?></span>
-                    <?php endforeach; ?>
+                    <article><?= $card->description; ?></article>
+                </div>
+                <div class="portlet-foot">
+                    <div class="overflowfix">
+                        <?php $tags = $card->getTags(); foreach ($tags as $tag) : ?>
+                            <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= $tag->icon !== null ? '<i class="' . $this->printHtml($tag->icon ?? '') . '"></i>' : ''; ?><?= $this->printHtml($tag->getTitle()); ?></span>
+                        <?php endforeach; ?>
+                        <a href="<?= $url; ?>" class="button floatRight">More</a>
+                    </div>
                 </div>
             </section>
             </a>

@@ -8,7 +8,7 @@ $comments = $card->getComments();
         <section class="portlet">
             <div class="portlet-head"><?= $this->printHtml($card->name); ?></div>
             <div class="portlet-body">
-                <?= $this->printHtml($card->description); ?>
+                <article><?= $card->description; ?></article>
             </div>
         </section>
     </div>
@@ -19,7 +19,7 @@ $comments = $card->getComments();
     <div class="col-xs-12">
         <section class="portlet">
             <div class="portlet-body">
-                <?= $this->printHtml($comment->description); ?>
+                <article><?= $comment->description; ?></article>
             </div>
         </section>
     </div>

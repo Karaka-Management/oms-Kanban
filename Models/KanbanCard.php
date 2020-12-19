@@ -18,6 +18,7 @@ use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Media\Models\Media;
 use Modules\Tasks\Models\Task;
+use Modules\Tag\Models\Tag;
 
 /**
  * Kanban card class.
@@ -65,6 +66,14 @@ class KanbanCard implements \JsonSerializable
      */
     public string $descriptionRaw = '';
 
+    /**
+     * Tags.
+     *
+     * @var Tag[]
+     * @since 1.0.0
+     */
+    private array $tags = [];
+
     private int $column = 0;
 
     private int $order = 0;
@@ -76,8 +85,6 @@ class KanbanCard implements \JsonSerializable
     public \DateTimeImmutable $createdAt;
 
     private array $comments = [];
-
-    private array $labels = [];
 
     /**
      * Media
@@ -311,43 +318,29 @@ class KanbanCard implements \JsonSerializable
     }
 
     /**
-     * Set labels of the card
-     *
-     * @param array $labels Labels
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setLabels(array $labels) : void
-    {
-        $this->labels = $labels;
-    }
-
-    /**
-     * Get the labels
+     * Get tags
      *
      * @return array
      *
      * @since 1.0.0
      */
-    public function getLabels() : array
+    public function getTags() : array
     {
-        return $this->labels;
+        return $this->tags;
     }
 
     /**
-     * Add a label/tag
+     * Add tag
      *
-     * @param mixed $label Label
+     * @param Tag $tag Tag
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addLabel($label) : void
+    public function addTag(Tag $tag) : void
     {
-        $this->labels[] = $label;
+        $this->tags[] = $tag;
     }
 
     /**
@@ -365,7 +358,6 @@ class KanbanCard implements \JsonSerializable
             'ref'         => $this->name,
             'createdBy'   => $this->name,
             'createdAt'   => $this->name,
-            'labels'      => $this->name,
             'comments'    => $this->name,
             'media'       => $this->name,
         ];

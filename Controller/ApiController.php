@@ -26,6 +26,7 @@ use Modules\Kanban\Models\KanbanCardCommentMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
+use Modules\Tag\Models\NullTag;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
@@ -83,14 +84,31 @@ final class ApiController extends Controller
     {
         $card                 = new KanbanCard();
         $card->name           = (string) ($request->getData('title'));
-        $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
+        $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
         $card->setRef((int) ($request->getData('ref') ?? 0));
         $card->setStatus((int) ($request->getData('status') ?? CardStatus::ACTIVE));
         $card->setType((int) ($request->getData('type') ?? CardType::TEXT));
         $card->createdBy = new NullAccount($request->header->account);
+
+        if (!empty($tags = $request->getDataJson('tags'))) {
+            foreach ($tags as $tag) {
+                if (!isset($tag['id'])) {
+                    $request->setData('title', $tag['title'], true);
+                    $request->setData('color', $tag['color'], true);
+                    $request->setData('icon', $tag['icon'] ?? null, true);
+                    $request->setData('language', $tag['language'], true);
+
+                    $internalResponse = new HttpResponse();
+                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
+                    $card->addTag($internalResponse->get($request->uri->__toString())['response']);
+                } else {
+                    $card->addTag(new NullTag((int) $tag['id']));
+                }
+            }
+        }
 
         return $card;
     }
@@ -163,7 +181,8 @@ final class ApiController extends Controller
     public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
     {
         $comment              = new KanbanCardComment();
-        $comment->description = (string) ($request->getData('plain') ?? '');
+        $comment->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
+        $comment->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $comment->setCard((int) $request->getData('card'));
         $comment->createdBy = new NullAccount($request->header->account);
 
@@ -229,12 +248,30 @@ final class ApiController extends Controller
      */
     public function createKanbanBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
-        $board              = new KanbanBoard();
-        $board->name        = (string) $request->getData('title');
-        $board->description = (string) ($request->getData('plain') ?? '');
+        $board                 = new KanbanBoard();
+        $board->name           = (string) $request->getData('title');
+        $board->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
+        $board->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $board->setOrder((int) ($request->getData('order') ?? 1));
         $board->setStatus((int) ($request->getData('status') ?? BoardStatus::ACTIVE));
         $board->createdBy = new NullAccount($request->header->account);
+
+        if (!empty($tags = $request->getDataJson('tags'))) {
+            foreach ($tags as $tag) {
+                if (!isset($tag['id'])) {
+                    $request->setData('title', $tag['title'], true);
+                    $request->setData('color', $tag['color'], true);
+                    $request->setData('icon', $tag['icon'] ?? null, true);
+                    $request->setData('language', $tag['language'], true);
+
+                    $internalResponse = new HttpResponse();
+                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
+                    $board->addTag($internalResponse->get($request->uri->__toString())['response']);
+                } else {
+                    $board->addTag(new NullTag((int) $tag['id']));
+                }
+            }
+        }
 
         return $board;
     }

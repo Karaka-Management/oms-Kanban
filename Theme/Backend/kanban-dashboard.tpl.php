@@ -19,13 +19,24 @@ $boards = $this->getData('boards');
 echo $this->getData('nav')->render(); ?>
 
 <div class="row">
-    <?php foreach ($boards as $board) : ?>
+    <?php foreach ($boards as $board) :
+        $url = UriFactory::build('{/prefix}kanban/board?{?}&id=' . $board->getId());
+        ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
-        <a href="<?= $this->printHtml(UriFactory::build('{/prefix}kanban/board?{?}&id=' . $board->getId())); ?>">
         <section class="portlet">
-            <div class="portlet-head"><?= $this->printHtml($board->name); ?></div>
+            <div class="portlet-head">
+                <a href="<?= $url; ?>"><?= $this->printHtml($board->name); ?></a>
+            </div>
             <div class="portlet-body">
-                <?= $this->printHtml($board->description); ?>
+                <article><?= $board->description; ?></article>
+            </div>
+            <div class="portlet-foot">
+                 <div class="overflowfix">
+                    <?php $tags = $board->getTags(); foreach ($tags as $tag) : ?>
+                        <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= $tag->icon !== null ? '<i class="' . $this->printHtml($tag->icon ?? '') . '"></i>' : ''; ?><?= $this->printHtml($tag->getTitle()); ?></span>
+                    <?php endforeach; ?>
+                    <a tabindex="0" href="<?= $url; ?>" class="button floatRight">Open</a>
+                </div>
             </div>
         </section>
         </a>

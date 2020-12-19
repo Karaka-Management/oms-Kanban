@@ -16,6 +16,7 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
+use Modules\Tag\Models\Tag;
 
 /**
  * Task class.
@@ -54,6 +55,22 @@ class KanbanBoard implements \JsonSerializable
      * @since 1.0.0
      */
     public string $description = '';
+
+    /**
+     * Description.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    public string $descriptionRaw = '';
+
+    /**
+     * Tags.
+     *
+     * @var Tag[]
+     * @since 1.0.0
+     */
+    private array $tags = [];
 
     public Account $createdBy;
 
@@ -134,6 +151,32 @@ class KanbanBoard implements \JsonSerializable
     public function setOrder(int $order) : void
     {
         $this->order = $order;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return array
+     *
+     * @since 1.0.0
+     */
+    public function getTags() : array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param Tag $tag Tag
+     *
+     * @return void
+     *
+     * @since 1.0.0
+     */
+    public function addTag(Tag $tag) : void
+    {
+        $this->tags[] = $tag;
     }
 
     /**
