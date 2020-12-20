@@ -75,7 +75,7 @@ final class BackendController extends Controller
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
 
         $list = KanbanBoardMapper::withConditional('language', $response->getLanguage())
-            ::getNewest(50, depth: 3);
+            ::getNewest(20, depth: 3);
         $view->setData('boards', $list);
 
         return $view;
