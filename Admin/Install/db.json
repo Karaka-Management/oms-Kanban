@@ -54,7 +54,7 @@
         "name": "kanban_board_tag",
         "fields": {
             "kanban_board_tag_id": {
-                "name": "kanban_board_id",
+                "name": "kanban_board_tag_id",
                 "type": "INT",
                 "null": false,
                 "primary": true,
@@ -177,7 +177,7 @@
         "name": "kanban_card_tag",
         "fields": {
             "kanban_card_tag_id": {
-                "name": "kanban_card_id",
+                "name": "kanban_card_tag_id",
                 "type": "INT",
                 "null": false,
                 "primary": true,

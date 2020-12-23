@@ -19,6 +19,8 @@ use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Kanban\Models\KanbanCardMapper;
+use Modules\Tag\Models\Tag;
+use Modules\Tag\Models\NullTag;
 use phpOMS\Utils\RnG\Text;
 
 /**
@@ -41,8 +43,8 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->setOrder(1);
         $card->setColumn(1);
         $card->createdBy = new NullAccount(1);
-        $card->addLabel(1);
-        $card->addLabel(2);
+        $card->addTag(new Tag());
+        $card->addTag(new Tag());
 
         $id = KanbanCardMapper::create($card);
         self::assertGreaterThan(0, $card->getId());
@@ -74,8 +76,8 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->setOrder(1);
         $card->setColumn(1);
         $card->createdBy = new NullAccount(1);
-        $card->addLabel(1);
-        $card->addLabel(2);
+        $card->addTag(new Tag());
+        $card->addTag(new Tag());
 
         $id = KanbanCardMapper::create($card);
         self::assertGreaterThan(0, $card->getId());
@@ -100,8 +102,8 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
             $card->setOrder(\mt_rand(1, 10));
             $card->setColumn(\mt_rand(1, 4));
             $card->createdBy = new NullAccount(1);
-            $card->addLabel(2);
-            $card->addLabel(3);
+            $card->addTag(new NullTag(1));
+            $card->addTag(new NullTag(2));
 
             $id = KanbanCardMapper::create($card);
         }

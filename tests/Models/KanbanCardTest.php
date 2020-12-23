@@ -43,7 +43,7 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $card->createdBy->getId());
         self::assertInstanceOf('\DateTimeImmutable', $card->createdAt);
         self::assertEquals([], $card->getComments());
-        self::assertEquals([], $card->getLabels());
+        self::assertEquals([], $card->getTags());
         self::assertEquals([], $card->getMedia());
     }
 
