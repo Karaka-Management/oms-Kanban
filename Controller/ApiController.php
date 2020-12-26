@@ -180,7 +180,7 @@ final class ApiController extends Controller
      */
     public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
     {
-        $comment              = new KanbanCardComment();
+        $comment                 = new KanbanCardComment();
         $comment->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $comment->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $comment->setCard((int) $request->getData('card'));
