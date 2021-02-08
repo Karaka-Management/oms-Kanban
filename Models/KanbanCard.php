@@ -17,8 +17,8 @@ namespace Modules\Kanban\Models;
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Media\Models\Media;
-use Modules\Tasks\Models\Task;
 use Modules\Tag\Models\Tag;
+use Modules\Tasks\Models\Task;
 
 /**
  * Kanban card class.

@@ -35,14 +35,14 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @since 1.0.0
      */
     protected static array $columns = [
-        'kanban_board_id'         => ['name' => 'kanban_board_id',         'type' => 'int',      'internal' => 'id'],
-        'kanban_board_name'       => ['name' => 'kanban_board_name',       'type' => 'string',   'internal' => 'name'],
-        'kanban_board_desc'       => ['name' => 'kanban_board_desc',       'type' => 'string',   'internal' => 'description'],
+        'kanban_board_id'            => ['name' => 'kanban_board_id',         'type' => 'int',      'internal' => 'id'],
+        'kanban_board_name'          => ['name' => 'kanban_board_name',       'type' => 'string',   'internal' => 'name'],
+        'kanban_board_desc'          => ['name' => 'kanban_board_desc',       'type' => 'string',   'internal' => 'description'],
         'kanban_board_descraw'       => ['name' => 'kanban_board_descraw',       'type' => 'string',   'internal' => 'descriptionRaw'],
-        'kanban_board_status'     => ['name' => 'kanban_board_status',     'type' => 'int',      'internal' => 'status'],
-        'kanban_board_order'      => ['name' => 'kanban_board_order',      'type' => 'int',      'internal' => 'order'],
-        'kanban_board_created_by' => ['name' => 'kanban_board_created_by', 'type' => 'int',      'internal' => 'createdBy', 'readonly' => true],
-        'kanban_board_created_at' => ['name' => 'kanban_board_created_at', 'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
+        'kanban_board_status'        => ['name' => 'kanban_board_status',     'type' => 'int',      'internal' => 'status'],
+        'kanban_board_order'         => ['name' => 'kanban_board_order',      'type' => 'int',      'internal' => 'order'],
+        'kanban_board_created_by'    => ['name' => 'kanban_board_created_by', 'type' => 'int',      'internal' => 'createdBy', 'readonly' => true],
+        'kanban_board_created_at'    => ['name' => 'kanban_board_created_at', 'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
     ];
 
     /**
