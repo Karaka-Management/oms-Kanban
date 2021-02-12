@@ -24,7 +24,7 @@ $columns = $board->getColumns();
                         <?php $tags = $card->getTags(); foreach ($tags as $tag) : ?>
                             <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= $tag->icon !== null ? '<i class="' . $this->printHtml($tag->icon ?? '') . '"></i>' : ''; ?><?= $this->printHtml($tag->getTitle()); ?></span>
                         <?php endforeach; ?>
-                        <a href="<?= $url; ?>" class="button floatRight">More</a>
+                        <a href="<?= $url; ?>" class="button floatRight"><?= $this->getHtml('More', '0', '0'); ?></a>
                     </div>
                 </div>
             </section>
