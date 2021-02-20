@@ -15,7 +15,7 @@ $columns = $board->getColumns();
             $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());
         ?>
             <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
-                <div class="portlet-head"><a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a></div>
+                <div class="portlet-head"><a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a><span class="floatRight tag"><?= $card->getCommentCount(); ?></span></div>
                 <div class="portlet-body">
                     <article><?= $card->description; ?></article>
                 </div>
