@@ -73,7 +73,9 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
 
-        $list = KanbanBoardMapper::withConditional('language', $response->getLanguage())
+        $list = KanbanBoardMapper
+            ::with('columns', models: null)
+            ::with('language', $response->getLanguage())
             ::getNewest(20, depth: 3);
         $view->setData('boards', $list);
 
@@ -96,7 +98,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $board     = KanbanBoardMapper::withConditional('language', $response->getLanguage())
+        $board     = KanbanBoardMapper::with('language', $response->getLanguage())
             ::get((int) $request->getData('id'), depth: 5);
         $accountId = $request->header->account;
 
