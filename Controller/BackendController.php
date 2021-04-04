@@ -135,6 +135,13 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-archive');
+        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+
+        $list = KanbanBoardMapper::with('columns', models: null)
+            ::with('language', $response->getLanguage())
+            ::getNewest(20, depth: 3);
+
+        $view->setData('boards', $list);
 
         return $view;
     }
