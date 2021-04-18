@@ -27,7 +27,7 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Archive'); ?><i class="fa fa-download floatRight download btn"></i></div>
-            <table id="kanbanArchiveList" class="default">
+            <table id="kanbanArchiveList" class="default sticky">
                 <thead>
                 <tr>
                     <td class="wf-100"><?= $this->getHtml('Title'); ?>
