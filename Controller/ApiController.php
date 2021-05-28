@@ -87,7 +87,7 @@ final class ApiController extends Controller
         $card->name           = (string) ($request->getData('title'));
         $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
-        $card->style = (string) ($request->getData('style') ?? '');
+        $card->style          = (string) ($request->getData('style') ?? '');
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
         $card->setRef((int) ($request->getData('ref') ?? 0));
@@ -335,7 +335,7 @@ final class ApiController extends Controller
     private function updateBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
         /** @var KanbanBoard $board */
-        $board = KanbanBoardMapper::get((int) $request->getData('id'));
+        $board                 = KanbanBoardMapper::get((int) $request->getData('id'));
         $board->name           = $request->getData('title') ?? $board->name;
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
