@@ -36,6 +36,12 @@
                 "type": "INT",
                 "null": false
             },
+            "kanban_board_style": {
+                "name": "kanban_board_style",
+                "type": "TEXT",
+                "null": true,
+                "default": null
+            },
             "kanban_board_created_at": {
                 "name": "kanban_board_created_at",
                 "type": "DATETIME",
@@ -140,6 +146,11 @@
             "kanban_card_status": {
                 "name": "kanban_card_status",
                 "type": "TINYINT",
+                "null": false
+            },
+            "kanban_card_color": {
+                "name": "kanban_card_color",
+                "type": "VARCHAR(10)",
                 "null": false
             },
             "kanban_card_order": {

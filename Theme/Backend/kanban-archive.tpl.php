@@ -30,6 +30,18 @@ echo $this->getData('nav')->render(); ?>
             <table id="kanbanArchiveList" class="default sticky">
                 <thead>
                 <tr>
+                    <td class="wf-100"><?= $this->getHtml('Status'); ?>
+                        <label for="kanbanArchiveList-sort-1">
+                            <input type="radio" name="kanbanArchiveList-sort" id="kanbanArchiveList-sort-1">
+                            <i class="sort-asc fa fa-chevron-up"></i>
+                        </label>
+                        <label for="kanbanArchiveList-sort-2">
+                            <input type="radio" name="kanbanArchiveList-sort" id="kanbanArchiveList-sort-2">
+                            <i class="sort-desc fa fa-chevron-down"></i>
+                        </label>
+                        <label>
+                            <i class="filter fa fa-filter"></i>
+                        </label>
                     <td class="wf-100"><?= $this->getHtml('Title'); ?>
                         <label for="kanbanArchiveList-sort-3">
                             <input type="radio" name="kanbanArchiveList-sort" id="kanbanArchiveList-sort-3">
@@ -62,8 +74,9 @@ echo $this->getData('nav')->render(); ?>
                     $url   = UriFactory::build('{/prefix}kanban/board?{?}&id=' . $board->getId());
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
-                        <td><a href="<?= $url; ?>"><?= $this->printHtml($board->title); ?></a>
-                        <td><a href="<?= $url; ?>"><?= $this->printHtml($board->getPublish()->format('Y-m-d')); ?></a>
+                        <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->getStatus()); ?></a>
+                        <td><a href="<?= $url; ?>"><?= $this->printHtml($board->name); ?></a>
+                        <td><a href="<?= $url; ?>"><?= $this->printHtml($board->createdAt->format('Y-m-d')); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                     <tr><td colspan="2" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>

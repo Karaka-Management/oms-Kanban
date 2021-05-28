@@ -43,6 +43,7 @@ final class KanbanCardMapper extends DataMapperAbstract
         'kanban_card_type'           => ['name' => 'kanban_card_type',        'type' => 'int',      'internal' => 'type'],
         'kanban_card_status'         => ['name' => 'kanban_card_status',      'type' => 'int',      'internal' => 'status'],
         'kanban_card_order'          => ['name' => 'kanban_card_order',       'type' => 'int',      'internal' => 'order'],
+        'kanban_card_color'          => ['name' => 'kanban_card_color',       'type' => 'string',      'internal' => 'color'],
         'kanban_card_ref'            => ['name' => 'kanban_card_ref',         'type' => 'int',      'internal' => 'ref'],
         'kanban_card_column'         => ['name' => 'kanban_card_column',      'type' => 'int',      'internal' => 'column'],
         'kanban_card_created_at'     => ['name' => 'kanban_card_created_at',  'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],

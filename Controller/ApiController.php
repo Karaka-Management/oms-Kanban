@@ -87,6 +87,7 @@ final class ApiController extends Controller
         $card->name           = (string) ($request->getData('title'));
         $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
+        $card->style = (string) ($request->getData('style') ?? '');
         $card->setColumn((int) $request->getData('column'));
         $card->setOrder((int) ($request->getData('order') ?? 1));
         $card->setRef((int) ($request->getData('ref') ?? 0));
@@ -299,6 +300,50 @@ final class ApiController extends Controller
         }
 
         return [];
+    }
+
+    /**
+     * Routing end-point for application behaviour.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param mixed            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    {
+        $old = clone KanbanBoardMapper::get((int) $request->getData('id'));
+        $new = $this->updateBoardFromRequest($request);
+        $this->updateModel($request->header->account, $old, $new, KanbanBoardMapper::class, 'board', $request->getOrigin());
+        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully updated', $new);
+    }
+
+    /**
+     * Method to update board from request.
+     *
+     * @param RequestAbstract $request Request
+     *
+     * @return KanbanBoard
+     *
+     * @since 1.0.0
+     */
+    private function updateBoardFromRequest(RequestAbstract $request) : KanbanBoard
+    {
+        /** @var KanbanBoard $board */
+        $board = KanbanBoardMapper::get((int) $request->getData('id'));
+        $board->name           = $request->getData('title') ?? $board->name;
+        $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
+        $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
+        $board->setOrder((int) ($request->getData('order') ?? $board->order));
+        $board->setStatus((int) ($request->getData('status') ?? $board->getStatus()));
+        $board->style = (string) ($request->getData('style') ?? $board->style);
+
+        return $board;
     }
 
     /**
