@@ -4,7 +4,7 @@
  *
  * PHP Version 8.0
  *
- * @package   Modules\Tasks
+ * @package   Modules\Kanban
  * @copyright Dennis Eichhorn
  * @license   OMS License 1.0
  * @version   1.0.0
@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 use phpOMS\Uri\UriFactory;
 
+/** @var \Modules\Kanban\Models\KanbanBoard[] $boards */
 $boards = $this->getData('boards');
 
 echo $this->getData('nav')->render(); ?>
