@@ -1,5 +1,11 @@
-<?php declare(strict_types=1);
-$board   = $this->getData('board');
+<?php 
+
+declare(strict_types=1);
+
+/** @var \Modules\Kanban\Models\KanbanBoard $board */
+$board = $this->getData('board');
+
+/** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
 ?>
 <!--
