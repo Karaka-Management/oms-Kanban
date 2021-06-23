@@ -1,5 +1,21 @@
-<?php declare(strict_types=1);
-$board   = $this->getData('board');
+<?php
+/**
+ * Orange Management
+ *
+ * PHP Version 8.0
+ *
+ * @package   Modules\Kanban
+ * @copyright Dennis Eichhorn
+ * @license   OMS License 1.0
+ * @version   1.0.0
+ * @link      https://orange-management.org
+ */
+declare(strict_types=1);
+
+/** @var \Modules\Kanban\Models\KanbanBoard $board */
+$board = $this->getData('board');
+
+/** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
 ?>
 <!--
