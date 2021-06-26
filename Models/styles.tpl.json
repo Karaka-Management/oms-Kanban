@@ -1,11 +1,11 @@
 {
-	"version": "",
-	"board": {
-		"dashboard_background": "",
-		"board_background": "",
+    "version": "",
+    "board": {
+        "dashboard_background": "",
+        "board_background": "",
 
-	},
-	"cards": [
+    },
+    "cards": [
 
-	],
+    ],
 }

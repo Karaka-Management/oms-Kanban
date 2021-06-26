@@ -249,6 +249,13 @@ class KanbanCard implements \JsonSerializable
         $this->ref = $ref;
     }
 
+    /**
+     * Count the amount of comments in a card
+     *
+     * @return int
+     *
+     * @since 1.0.0
+     */
     public function getCommentCount() : int
     {
         return \count($this->comments);
