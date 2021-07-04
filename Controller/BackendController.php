@@ -26,7 +26,7 @@ use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
 
 /**
- * Task class.
+ * Kanban backend controller class.
  *
  * @package Modules\Kanban
  * @license OMS License 1.0

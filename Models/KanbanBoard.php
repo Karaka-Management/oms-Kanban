@@ -19,7 +19,7 @@ use Modules\Admin\Models\NullAccount;
 use Modules\Tag\Models\Tag;
 
 /**
- * Task class.
+ * Kanban board class.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 1.0

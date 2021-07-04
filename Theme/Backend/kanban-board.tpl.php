@@ -25,13 +25,16 @@ $columns = $board->getColumns();
 -->
 <div class="row">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3 box" draggable="true">
+    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3 box kanban-column" draggable="true">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());
         ?>
             <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
-                <div class="portlet-head"><a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a><span class="floatRight tag"><?= $card->getCommentCount(); ?></span></div>
+                <div class="portlet-head">
+                    <a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a>
+                    <div><span class="tag"><?= $card->getCommentCount(); ?></span></div>
+                </div>
                 <div class="portlet-body">
                     <article><?= $card->description; ?></article>
                 </div>

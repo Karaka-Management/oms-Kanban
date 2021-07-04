@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace Modules\Kanban\Models;
 
 /**
- * Task class.
+ * Kanban column class.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 1.0

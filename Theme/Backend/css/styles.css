@@ -1,0 +1,7 @@
+.kanban-column .portlet-head {
+  display: flex;
+  flex-direction: row; }
+  .kanban-column .portlet-head > a {
+    flex: 1; }
+  .kanban-column .portlet-head div {
+    flex: 0; }

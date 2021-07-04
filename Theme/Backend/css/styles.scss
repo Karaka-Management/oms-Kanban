@@ -1,3 +1,14 @@
-.m-kanban {
+.kanban-column {
+    .portlet-head {
+        display: flex;
+        flex-direction: row;
 
+        > a {
+            flex: 1;
+        }
+
+        div {
+            flex: 0;
+        }
+    }
 }

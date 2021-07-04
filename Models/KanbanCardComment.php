@@ -18,7 +18,7 @@ use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 
 /**
- * Task class.
+ * Kanban card comment class.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 1.0

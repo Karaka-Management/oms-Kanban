@@ -17,7 +17,7 @@ namespace Modules\Kanban\Controller;
 use phpOMS\Module\ModuleAbstract;
 
 /**
- * Task class.
+ * Kanban controller class.
  *
  * @package Modules\Kanban
  * @license OMS License 1.0
