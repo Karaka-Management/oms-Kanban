@@ -33,6 +33,11 @@ $comments = $card->getComments();
             <div class="portlet-body">
                 <article><?= $card->description; ?></article>
             </div>
+            <div class="portlet-foot">
+                <?php $files = $card->getMedia(); foreach ($files as $file) : ?>
+                    <span class="file"><?= $this->printHtml($file->name); ?></span>
+                <?php endforeach; ?>
+            </div>
         </section>
     </div>
 </div>
@@ -43,6 +48,11 @@ $comments = $card->getComments();
         <section class="portlet">
             <div class="portlet-body">
                 <article><?= $comment->description; ?></article>
+            </div>
+            <div class="portlet-foot">
+                <?php $files = $comment->getMedia(); foreach ($files as $file) : ?>
+                    <span class="file"><?= $this->printHtml($file->name); ?></span>
+                <?php endforeach; ?>
             </div>
         </section>
     </div>

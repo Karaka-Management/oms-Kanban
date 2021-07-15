@@ -112,6 +112,20 @@ final class ApiController extends Controller
             }
         }
 
+        if (!empty($uploadedFiles = $request->getFiles() ?? [])) {
+            $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
+                [''],
+                $uploadedFiles,
+                $request->header->account,
+                __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
+                '/Modules/Kanban',
+            );
+
+            foreach ($uploaded as $media) {
+                $card->addMedia($media);
+            }
+        }
+
         return $card;
     }
 
@@ -187,6 +201,20 @@ final class ApiController extends Controller
         $comment->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $comment->setCard((int) $request->getData('card'));
         $comment->createdBy = new NullAccount($request->header->account);
+
+        if (!empty($uploadedFiles = $request->getFiles() ?? [])) {
+            $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
+                [''],
+                $uploadedFiles,
+                $request->header->account,
+                __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
+                '/Modules/Kanban',
+            );
+
+            foreach ($uploaded as $media) {
+                $comment->addMedia($media);
+            }
+        }
 
         return $comment;
     }
