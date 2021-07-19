@@ -53,8 +53,8 @@ final class KanbanCardCommentMapper extends DataMapperAbstract
         'media' => [
             'mapper'   => MediaMapper::class,
             'table'    => 'kanban_card_comment_media',
-            'external' => 'kanban_card_comment_media_src',
-            'self'     => 'kanban_card_comment_media_dst',
+            'external' => 'kanban_card_comment_media_dst',
+            'self'     => 'kanban_card_comment_media_src',
         ],
     ];
 
