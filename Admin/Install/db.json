@@ -138,6 +138,12 @@
                 "default": null,
                 "null": true
             },
+            "kanban_card_style": {
+                "name": "kanban_card_style",
+                "type": "TEXT",
+                "null": true,
+                "default": null
+            },
             "kanban_card_type": {
                 "name": "kanban_card_type",
                 "type": "TINYINT",

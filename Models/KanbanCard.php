@@ -52,6 +52,8 @@ class KanbanCard implements \JsonSerializable
 
     public string $color = '';
 
+    public string $style = '';
+
     /**
      * Description.
      *
