@@ -17,12 +17,15 @@ use phpOMS\Uri\UriFactory;
 /** @var \Modules\Kanban\Models\KanbanBoard[] $boards */
 $boards = $this->getData('boards');
 
+$previous = empty($boards) ? '{/prefix}kanban/dashboard' : '{/prefix}kanban/dashboard?{?}&id=' . \reset($boards)->getId() . '&ptype=p';
+$next     = empty($boards) ? '{/prefix}kanban/dashboard' : '{/prefix}kanban/dashboard?{?}&id=' . \end($boards)->getId() . '&ptype=n';
+
 echo $this->getData('nav')->render(); ?>
 
 <div class="row">
     <?php foreach ($boards as $board) :
         $url = UriFactory::build('{/prefix}kanban/board?{?}&id=' . $board->getId());
-        ?>
+    ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <section class="portlet">
             <div class="portlet-head">
@@ -40,7 +43,15 @@ echo $this->getData('nav')->render(); ?>
                 </div>
             </div>
         </section>
-        </a>
     </div>
     <?php endforeach; ?>
+
+    <?php if (empty($boards)) : ?>
+    <div class="emptyPage"></div>
+    <?php else : ?>
+    <div class="plain-portlet">
+        <a tabindex="0" class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
+        <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
+    </div>
+    <?php endif; ?>
 <div>
