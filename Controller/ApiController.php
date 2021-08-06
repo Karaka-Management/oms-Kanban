@@ -27,6 +27,7 @@ use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
 use Modules\Tag\Models\NullTag;
+use Modules\Media\Models\NullMedia;
 use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\NotificationLevel;
@@ -123,6 +124,12 @@ final class ApiController extends Controller
 
             foreach ($uploaded as $media) {
                 $card->addMedia($media);
+            }
+        }
+
+        if (!empty($mediaFiles = $request->getDataJson('media') ?? [])) {
+            foreach ($mediaFiles as $media) {
+                $card->addMedia(new NullMedia($media));
             }
         }
 
