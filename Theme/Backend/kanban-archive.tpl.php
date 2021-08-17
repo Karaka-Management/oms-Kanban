@@ -30,7 +30,7 @@ echo $this->getData('nav')->render(); ?>
             <table id="kanbanArchiveList" class="default sticky">
                 <thead>
                 <tr>
-                    <td class="wf-100"><?= $this->getHtml('Status'); ?>
+                    <td><?= $this->getHtml('Status'); ?>
                         <label for="kanbanArchiveList-sort-1">
                             <input type="radio" name="kanbanArchiveList-sort" id="kanbanArchiveList-sort-1">
                             <i class="sort-asc fa fa-chevron-up"></i>
