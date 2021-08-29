@@ -59,7 +59,7 @@ class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $card->name        = 'Name';
         $card->description = 'Description';
         $card->setColumn(1);
-        $card->setOrder(2);
+        $card->order = 2;
         $card->createdBy = new NullAccount(1);
         $card->addComment(5);
         $card->addMedia($m = new NullMedia(7));

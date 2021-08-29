@@ -126,7 +126,7 @@ class KanbanCard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $ref = 0;
+    public int $ref = 0;
 
     /**
      * Created by.
@@ -259,32 +259,6 @@ class KanbanCard implements \JsonSerializable
     public function setType(int $type) : void
     {
         $this->type = $type;
-    }
-
-    /**
-     * Get the reference if the card references another object (e.g. task, calendar etc.)
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getRef() : int
-    {
-        return $this->ref;
-    }
-
-    /**
-     * Set the reference
-     *
-     * @param int $ref Reference
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setRef(int $ref) : void
-    {
-        $this->ref = $ref;
     }
 
     /**

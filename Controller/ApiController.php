@@ -90,8 +90,8 @@ final class ApiController extends Controller
         $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $card->style          = (string) ($request->getData('style') ?? '');
         $card->setColumn((int) $request->getData('column'));
-        $card->setOrder((int) ($request->getData('order') ?? 1));
-        $card->setRef((int) ($request->getData('ref') ?? 0));
+        $card->order = (int) ($request->getData('order') ?? 1);
+        $card->ref = (int) ($request->getData('ref') ?? 0);
         $card->setStatus((int) ($request->getData('status') ?? CardStatus::ACTIVE));
         $card->setType((int) ($request->getData('type') ?? CardType::TEXT));
         $card->createdBy = new NullAccount($request->header->account);
@@ -289,7 +289,7 @@ final class ApiController extends Controller
         $board->name           = (string) $request->getData('title');
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? '');
-        $board->setOrder((int) ($request->getData('order') ?? 1));
+        $board->order = (int) ($request->getData('order') ?? 1);
         $board->setStatus((int) ($request->getData('status') ?? BoardStatus::ACTIVE));
         $board->createdBy = new NullAccount($request->header->account);
 
@@ -374,7 +374,7 @@ final class ApiController extends Controller
         $board->name           = $request->getData('title') ?? $board->name;
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
-        $board->setOrder((int) ($request->getData('order') ?? $board->order));
+        $board->order = (int) ($request->getData('order') ?? $board->order);
         $board->setStatus((int) ($request->getData('status') ?? $board->getStatus()));
         $board->style = (string) ($request->getData('style') ?? $board->style);
 
@@ -422,7 +422,7 @@ final class ApiController extends Controller
         $column       = new KanbanColumn();
         $column->name = (string) $request->getData('title');
         $column->setBoard((int) $request->getData('board'));
-        $column->setOrder((int) ($request->getData('order') ?? 1));
+        $column->order = (int) ($request->getData('order') ?? 1);
 
         return $column;
     }

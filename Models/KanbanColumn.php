@@ -46,7 +46,7 @@ class KanbanColumn implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $order = 0;
+    public int $order = 0;
 
     /**
      * Board.
@@ -74,32 +74,6 @@ class KanbanColumn implements \JsonSerializable
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Get the order
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getOrder() : int
-    {
-        return $this->order;
-    }
-
-    /**
-     * Set the order
-     *
-     * @param int $order Order
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setOrder(int $order) : void
-    {
-        $this->order = $order;
     }
 
     /**

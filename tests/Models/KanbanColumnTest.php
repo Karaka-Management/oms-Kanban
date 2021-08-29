@@ -46,7 +46,7 @@ class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         $column = new KanbanColumn();
 
         $column->name = 'Name';
-        $column->setOrder(2);
+        $column->order = 2;
         $column->setBoard(3);
         $column->addCard(new KanbanCard());
 
