@@ -46,12 +46,36 @@ class KanbanCard implements \JsonSerializable
      */
     public string $name = '';
 
+    /**
+     * Card status.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $status = CardStatus::ACTIVE;
 
+    /**
+     * Card type.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $type = CardType::TEXT;
 
+    /**
+     * Color schme.
+     *
+     * @var string
+     * @since 1.0.0
+     */
     public string $color = '';
 
+    /**
+     * Card style.
+     *
+     * @var string
+     * @since 1.0.0
+     */
     public string $style = '';
 
     /**
@@ -78,16 +102,54 @@ class KanbanCard implements \JsonSerializable
      */
     private array $tags = [];
 
+    /**
+     * Column this card belongs to.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $column = 0;
 
-    private int $order = 0;
+    /**
+     * Card order/position.
+     *
+     * @var int
+     * @since 1.0.0
+     */
+    public int $order = 0;
 
+    /**
+     * Reference of this card.
+     *
+     * The reference is based on the card type and can be a task, calendar, ...
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $ref = 0;
 
+    /**
+     * Created by.
+     *
+     * @var Account
+     * @since 1.0.0
+     */
     public Account $createdBy;
 
+    /**
+     * Created at.
+     *
+     * @var \DateTimeImmutable
+     * @since 1.0.0
+     */
     public \DateTimeImmutable $createdAt;
 
+    /**
+     * Comments.
+     *
+     * @var \Modules\Kanban\Models\KanbanCardComment[]
+     * @since 1.0.0
+     */
     private array $comments = [];
 
     /**
@@ -107,32 +169,6 @@ class KanbanCard implements \JsonSerializable
     {
         $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
-    }
-
-    /**
-     * Get the order
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getOrder() : int
-    {
-        return $this->order;
-    }
-
-    /**
-     * Set the order
-     *
-     * @param int $order Order
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setOrder(int $order) : void
-    {
-        $this->order = $order;
     }
 
     /**

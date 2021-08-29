@@ -41,17 +41,23 @@ class KanbanColumn implements \JsonSerializable
     public string $name = '';
 
     /**
-     * Column order
+     * Column order.
      *
      * @var int
      * @since 1.0.0
      */
     private int $order = 0;
 
+    /**
+     * Board.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $board = 0;
 
     /**
-     * Cards
+     * Cards.
      *
      * @var array
      * @since 1.0.0

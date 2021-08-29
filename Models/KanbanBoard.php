@@ -44,8 +44,20 @@ class KanbanBoard implements \JsonSerializable
      */
     public string $name = '';
 
+    /**
+     * Board status.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     private int $status = BoardStatus::ACTIVE;
 
+    /**
+     * Order.
+     *
+     * @var int
+     * @since 1.0.0
+     */
     public int $order = 0;
 
     /**
@@ -64,6 +76,12 @@ class KanbanBoard implements \JsonSerializable
      */
     public string $descriptionRaw = '';
 
+    /**
+     * Board style.
+     *
+     * @var string
+     * @since 1.0.0
+     */
     public string $style = '';
 
     /**
@@ -74,10 +92,28 @@ class KanbanBoard implements \JsonSerializable
      */
     private array $tags = [];
 
+    /**
+     * Creator.
+     *
+     * @var Account
+     * @since 1.0.0
+     */
     public Account $createdBy;
 
+    /**
+     * Created.
+     *
+     * @var \DateTimeImmutable
+     * @since 1.0.0
+     */
     public \DateTimeImmutable $createdAt;
 
+    /**
+     * Board columns.
+     *
+     * @var \Modules\Kanban\Models\KanbanColumn[]
+     * @since 1.0.0
+     */
     private array $columns = [];
 
     /**
@@ -127,32 +163,6 @@ class KanbanBoard implements \JsonSerializable
     public function setStatus(int $status) : void
     {
         $this->status = $status;
-    }
-
-    /**
-     * Get the order
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getOrder() : int
-    {
-        return $this->order;
-    }
-
-    /**
-     * Set the order
-     *
-     * @param int $order Order
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setOrder(int $order) : void
-    {
-        $this->order = $order;
     }
 
     /**

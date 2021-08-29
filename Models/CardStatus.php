@@ -17,7 +17,7 @@ namespace Modules\Kanban\Models;
 use phpOMS\Stdlib\Base\Enum;
 
 /**
- * Task status enum.
+ * Card status enum.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 1.0
