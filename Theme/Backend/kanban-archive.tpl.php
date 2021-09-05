@@ -27,6 +27,7 @@ echo $this->getData('nav')->render(); ?>
     <div class="col-xs-12">
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Archive'); ?><i class="fa fa-download floatRight download btn"></i></div>
+            <div class="slider">
             <table id="kanbanArchiveList" class="default sticky">
                 <thead>
                 <tr>
@@ -82,6 +83,7 @@ echo $this->getData('nav')->render(); ?>
                     <tr><td colspan="2" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
+            </div>
             <div class="portlet-foot">
                 <a class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
                 <a class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
