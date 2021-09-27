@@ -18,14 +18,9 @@ $board = $this->getData('board');
 /** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
 ?>
-<!--
-@todo Orange-Management/Modules#197
-    Columns width should be in % but with min-width and on smaller screens full width
-    The amount of columns depends on the user settings
--->
 <div class="row">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-sm-3 box kanban-column" draggable="true">
+    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-md-6 col-lg-3 box kanban-column" draggable="true">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());
