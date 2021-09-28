@@ -72,7 +72,7 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TASK);
-        $card->ref = 1;
+        $card->ref   = 1;
         $card->order = 1;
         $card->setColumn(1);
         $card->createdBy = new NullAccount(1);
