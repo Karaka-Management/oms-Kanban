@@ -32,7 +32,7 @@ class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(0, $column->getId());
         self::assertEquals('', $column->name);
-        self::assertEquals(0, $column->getOrder());
+        self::assertEquals(0, $column->order);
         self::assertEquals(0, $column->getBoard());
         self::assertEquals([], $column->getCards());
     }
@@ -51,7 +51,7 @@ class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         $column->addCard(new KanbanCard());
 
         self::assertEquals('Name', $column->name);
-        self::assertEquals(2, $column->getOrder());
+        self::assertEquals(2, $column->order);
         self::assertEquals(3, $column->getBoard());
     }
 }

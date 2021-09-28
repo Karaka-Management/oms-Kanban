@@ -42,7 +42,7 @@ class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
         $columnR = KanbanColumnMapper::get($column->getId());
         self::assertEquals($column->name, $columnR->name);
         self::assertEquals($column->getBoard(), $columnR->getBoard());
-        self::assertEquals($column->getOrder(), $columnR->getOrder());
+        self::assertEquals($column->order, $columnR->order);
     }
 
     /**

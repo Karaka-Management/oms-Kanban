@@ -54,12 +54,12 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($card->name, $cardR->name);
         self::assertEquals($card->description, $cardR->description);
         self::assertEquals($card->getColumn(), $cardR->getColumn());
-        self::assertEquals($card->getOrder(), $cardR->getOrder());
+        self::assertEquals($card->order, $cardR->order);
         self::assertEquals($card->getStatus(), $cardR->getStatus());
         self::assertEquals($card->getType(), $cardR->getType());
         self::assertEquals($card->createdBy->getId(), $cardR->createdBy->getId());
         self::assertEquals($card->createdAt->format('Y-m-d'), $cardR->createdAt->format('Y-m-d'));
-        self::assertEquals($card->getRef(), $cardR->getRef());
+        self::assertEquals($card->ref, $cardR->ref);
     }
 
     /**
@@ -72,7 +72,7 @@ class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TASK);
-        $card->setRef(1);
+        $card->ref = 1;
         $card->order = 1;
         $card->setColumn(1);
         $card->createdBy = new NullAccount(1);
