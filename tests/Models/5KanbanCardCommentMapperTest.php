@@ -22,7 +22,7 @@ use phpOMS\Utils\RnG\Text;
 /**
  * @internal
  */
-class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
+final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanCardCommentMapper

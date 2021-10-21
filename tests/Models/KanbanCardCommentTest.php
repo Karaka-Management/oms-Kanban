@@ -20,7 +20,7 @@ use Modules\Kanban\Models\KanbanCardComment;
 /**
  * @internal
  */
-class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
+final class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanCardComment

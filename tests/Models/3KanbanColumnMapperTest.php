@@ -21,7 +21,7 @@ use phpOMS\Utils\RnG\Text;
 /**
  * @internal
  */
-class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
+final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanColumnMapper

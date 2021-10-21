@@ -21,7 +21,7 @@ use Modules\Kanban\Models\KanbanBoard;
 /**
  * @internal
  */
-class KanbanBoardTest extends \PHPUnit\Framework\TestCase
+final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanBoard

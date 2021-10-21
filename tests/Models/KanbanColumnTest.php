@@ -20,7 +20,7 @@ use Modules\Kanban\Models\KanbanColumn;
 /**
  * @internal
  */
-class KanbanColumnTest extends \PHPUnit\Framework\TestCase
+final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanColumn

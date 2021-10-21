@@ -23,7 +23,7 @@ use Modules\Media\Models\NullMedia;
 /**
  * @internal
  */
-class KanbanCardTest extends \PHPUnit\Framework\TestCase
+final class KanbanCardTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanCard

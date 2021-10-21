@@ -26,7 +26,7 @@ use phpOMS\Utils\RnG\Text;
 /**
  * @internal
  */
-class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
+final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\KanbanCardMapper
