@@ -115,7 +115,8 @@ final class ApiController extends Controller
 
         if (!empty($uploadedFiles = $request->getFiles() ?? [])) {
             $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
-                [''],
+                [],
+                [],
                 $uploadedFiles,
                 $request->header->account,
                 __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
@@ -211,7 +212,8 @@ final class ApiController extends Controller
 
         if (!empty($uploadedFiles = $request->getFiles() ?? [])) {
             $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
-                [''],
+                [],
+                [],
                 $uploadedFiles,
                 $request->header->account,
                 __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
