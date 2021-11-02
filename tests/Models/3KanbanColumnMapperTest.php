@@ -32,7 +32,7 @@ final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
         $column = new KanbanColumn();
 
         $column->name = 'Some Column';
-        $column->setBoard(1);
+        $column->board = 1;
         $column->order = 1;
 
         $id = KanbanColumnMapper::create($column);
@@ -41,26 +41,7 @@ final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 
         $columnR = KanbanColumnMapper::get($column->getId());
         self::assertEquals($column->name, $columnR->name);
-        self::assertEquals($column->getBoard(), $columnR->getBoard());
+        self::assertEquals($column->board, $columnR->board);
         self::assertEquals($column->order, $columnR->order);
-    }
-
-    /**
-     * @group volume
-     * @group module
-     * @coversNothing
-     */
-    public function testVolume() : void
-    {
-        for ($i = 1; $i < 4; ++$i) {
-            $text   = new Text();
-            $column = new KanbanColumn();
-
-            $column->name = $text->generateText(\mt_rand(3, 7));
-            $column->setBoard(1);
-            $column->order = $i + 1;
-
-            $id = KanbanColumnMapper::create($column);
-        }
     }
 }

@@ -18,6 +18,7 @@ use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Media\Models\Media;
 use Modules\Tag\Models\Tag;
+use Modules\Tag\Models\NullTag;
 use Modules\Tasks\Models\Task;
 
 /**
@@ -108,7 +109,7 @@ class KanbanCard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $column = 0;
+    public int $column = 0;
 
     /**
      * Card order/position.
@@ -181,32 +182,6 @@ class KanbanCard implements \JsonSerializable
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Set the column
-     *
-     * @param int $id Id
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setColumn(int $id) : void
-    {
-        $this->column = $id;
-    }
-
-    /**
-     * Get the column
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getColumn() : int
-    {
-        return $this->column;
     }
 
     /**
@@ -356,6 +331,20 @@ class KanbanCard implements \JsonSerializable
     }
 
     /**
+     * Get task elements.
+     *
+     * @param int $id Element id
+     *
+     * @return Tag
+     *
+     * @since 1.0.0
+     */
+    public function getTag(int $id) : Tag
+    {
+        return $this->tags[$id] ?? new NullTag();
+    }
+
+    /**
      * Add tag
      *
      * @param Tag $tag Tag
@@ -372,21 +361,31 @@ class KanbanCard implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize() : array
+    public function toArray() : array
     {
         return [
+            'id'       => $this->id,
             'title'       => $this->name,
             'description' => $this->description,
+            'descriptionRaw' => $this->descriptionRaw,
             'status'      => $this->status,
             'type'        => $this->type,
-            'column'      => $this->name,
-            'order'       => $this->name,
-            'ref'         => $this->name,
-            'createdBy'   => $this->name,
-            'createdAt'   => $this->name,
-            'comments'    => $this->name,
-            'media'       => $this->name,
+            'column'      => $this->column,
+            'order'       => $this->order,
+            'ref'         => $this->ref,
+            'createdBy'   => $this->createdBy,
+            'createdAt'   => $this->createdAt,
+            'comments'    => $this->comments,
+            'media'       => $this->media,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 
     /**

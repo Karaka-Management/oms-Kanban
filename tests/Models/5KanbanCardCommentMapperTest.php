@@ -33,7 +33,7 @@ final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
         $comment = new KanbanCardComment();
 
         $comment->description = 'This is some card description';
-        $comment->setCard(1);
+        $comment->card = 1;
         $comment->createdBy = new NullAccount(1);
 
         $id = KanbanCardCommentMapper::create($comment);
@@ -42,27 +42,8 @@ final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 
         $commentR = KanbanCardCommentMapper::get($comment->getId());
         self::assertEquals($comment->description, $commentR->description);
-        self::assertEquals($comment->getCard(), $commentR->getCard());
+        self::assertEquals($comment->card, $commentR->card);
         self::assertEquals($comment->createdBy->getId(), $commentR->createdBy->getId());
         self::assertEquals($comment->createdAt->format('Y-m-d'), $commentR->createdAt->format('Y-m-d'));
-    }
-
-    /**
-     * @group volume
-     * @group module
-     * @coversNothing
-     */
-    public function testVolume() : void
-    {
-        for ($i = 1; $i < 10; ++$i) {
-            $text    = new Text();
-            $comment = new KanbanCardComment();
-
-            $comment->description = $text->generateText(\mt_rand(20, 100));
-            $comment->setCard(1);
-            $comment->createdBy = new NullAccount(1);
-
-            $id = KanbanCardCommentMapper::create($comment);
-        }
     }
 }

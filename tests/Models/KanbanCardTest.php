@@ -19,59 +19,164 @@ use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Media\Models\NullMedia;
+use Modules\Tasks\Models\Task;
+use Modules\Tag\Models\Tag;
 
 /**
  * @internal
  */
 final class KanbanCardTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testDefault() : void
-    {
-        $card = new KanbanCard();
+    private KanbanCard $card;
 
-        self::assertEquals(0, $card->getId());
-        self::assertEquals(CardStatus::ACTIVE, $card->getStatus());
-        self::assertEquals(CardType::TEXT, $card->getType());
-        self::assertEquals('', $card->name);
-        self::assertEquals('', $card->description);
-        self::assertEquals(0, $card->getColumn());
-        self::assertEquals(0, $card->order);
-        self::assertEquals(0, $card->createdBy->getId());
-        self::assertInstanceOf('\DateTimeImmutable', $card->createdAt);
-        self::assertEquals([], $card->getComments());
-        self::assertEquals([], $card->getTags());
-        self::assertEquals([], $card->getMedia());
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp() : void
+    {
+        $this->card = new KanbanCard();
     }
 
     /**
      * @covers Modules\Kanban\Models\KanbanCard
      * @group module
      */
-    public function testSetGet() : void
+    public function testDefault() : void
     {
-        $card = new KanbanCard();
-        $card->setStatus(CardStatus::ARCHIVED);
-        $card->setType(CardType::TASK);
-        $card->name        = 'Name';
-        $card->description = 'Description';
-        $card->setColumn(1);
-        $card->order     = 2;
-        $card->createdBy = new NullAccount(1);
-        $card->addComment(5);
-        $card->addMedia($m = new NullMedia(7));
+        self::assertEquals(0, $this->card->getId());
+        self::assertEquals(CardStatus::ACTIVE, $this->card->getStatus());
+        self::assertEquals(CardType::TEXT, $this->card->getType());
+        self::assertEquals('', $this->card->name);
+        self::assertEquals('', $this->card->description);
+        self::assertEquals(0, $this->card->column);
+        self::assertEquals(0, $this->card->order);
+        self::assertEquals(0, $this->card->createdBy->getId());
+        self::assertInstanceOf('\DateTimeImmutable', $this->card->createdAt);
+        self::assertEquals([], $this->card->getComments());
+        self::assertEquals([], $this->card->getTags());
+        self::assertEquals([], $this->card->getMedia());
+    }
 
-        self::assertEquals(CardStatus::ARCHIVED, $card->getStatus());
-        self::assertEquals(CardType::TASK, $card->getType());
-        self::assertEquals('Name', $card->name);
-        self::assertEquals('Description', $card->description);
-        self::assertEquals(1, $card->getColumn());
-        self::assertEquals(2, $card->order);
-        self::assertEquals(1, $card->createdBy->getId());
-        self::assertEquals([5], $card->getComments());
-        self::assertEquals([$m], $card->getMedia());
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testStatusInputOutput() : void
+    {
+        $this->card->setStatus(CardStatus::ARCHIVED);
+        self::assertEquals(CardStatus::ARCHIVED, $this->card->getStatus());
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testTypeInputOutput() : void
+    {
+        $this->card->setType(CardType::TASK);
+        self::assertEquals(CardType::TASK, $this->card->getType());
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testColumnInputOutput() : void
+    {
+        $this->card->column = 1;
+        self::assertEquals(1, $this->card->column);
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testMediaInputOutput() : void
+    {
+        $this->card->addMedia($m = new NullMedia(7));
+        self::assertCount(1, $this->card->getMedia());
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testCommentInputOutput() : void
+    {
+        $this->card->addComment(5);
+        self::assertEquals([5], $this->card->getComments());
+        self::assertEquals(1, $this->card->getCommentCount());
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testTagInputOutput() : void
+    {
+        $tag = new Tag();
+        $tag->setL11n('Tag');
+
+        $this->card->addTag($tag);
+        self::assertEquals($tag, $this->card->getTag(0));
+        self::assertCount(1, $this->card->getTags());
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testCommentRemove() : void
+    {
+        $this->card->addComment(5);
+        self::assertCount(1, $this->card->getComments());
+        self::assertTrue($this->card->removeComment(0));
+        self::assertCount(0, $this->card->getComments());
+        self::assertFalse($this->card->removeComment(0));
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testCreateFromTask() : void
+    {
+        self::assertInstanceOf('\Modules\Kanban\Models\KanbanCard', $this->card->createFromTask(new Task()));
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\KanbanCard
+     * @group module
+     */
+    public function testSerialize() : void
+    {
+        $this->card->name = 'Title';
+        $this->card->description = 'Description';
+        $this->card->descriptionRaw = 'DescriptionRaw';
+        $this->card->order = 3;
+        $this->card->column = 2;
+        $this->card->setStatus(CardStatus::ARCHIVED);
+        $this->card->setType(CardType::TASK);
+
+        $serialized = $this->card->jsonSerialize();
+        unset($serialized['createdBy']);
+        unset($serialized['createdAt']);
+
+        self::assertEquals(
+            [
+                'id'       => 0,
+                'title'       => 'Title',
+                'description' => 'Description',
+                'descriptionRaw' => 'DescriptionRaw',
+                'status'      => CardStatus::ARCHIVED,
+                'type'        => CardType::TASK,
+                'column'      => 2,
+                'order'       => 3,
+                'ref'         => 0,
+                'comments'    => [],
+                'media'       => [],
+            ],
+            $serialized
+        );
     }
 }

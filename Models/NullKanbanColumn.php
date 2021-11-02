@@ -22,7 +22,7 @@ namespace Modules\Kanban\Models;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class NullKanbanBoard extends KanbanBoard
+final class NullKanbanColumn extends KanbanColumn
 {
     /**
      * Constructor
@@ -33,7 +33,6 @@ final class NullKanbanBoard extends KanbanBoard
      */
     public function __construct(int $id = 0)
     {
-        parent::__construct();
         $this->id = $id;
     }
 }

@@ -54,7 +54,7 @@ class KanbanColumn implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $board = 0;
+    public int $board = 0;
 
     /**
      * Cards.
@@ -74,32 +74,6 @@ class KanbanColumn implements \JsonSerializable
     public function getId() : int
     {
         return $this->id;
-    }
-
-    /**
-     * Get the board this column belongs to
-     *
-     * @param int $board Board
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setBoard(int $board) : void
-    {
-        $this->board = $board;
-    }
-
-    /**
-     * Get the board this column belongs to
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getBoard() : int
-    {
-        return $this->board;
     }
 
     /**
@@ -151,8 +125,22 @@ class KanbanColumn implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize() : array
+    public function toArray() : array
     {
-        return [];
+        return [
+            'id'       => $this->id,
+            'name'       => $this->name,
+            'order'       => $this->order,
+            'board'         => $this->board,
+            'cards'    => $this->cards,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }

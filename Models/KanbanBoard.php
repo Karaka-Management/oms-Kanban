@@ -17,6 +17,7 @@ namespace Modules\Kanban\Models;
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Tag\Models\Tag;
+use Modules\Tag\Models\NullTag;
 
 /**
  * Kanban board class.
@@ -192,6 +193,20 @@ class KanbanBoard implements \JsonSerializable
     }
 
     /**
+     * Get task elements.
+     *
+     * @param int $id Element id
+     *
+     * @return Tag
+     *
+     * @since 1.0.0
+     */
+    public function getTag(int $id) : Tag
+    {
+        return $this->tags[$id] ?? new NullTag();
+    }
+
+    /**
      * Get the columns
      *
      * @return array
@@ -240,8 +255,21 @@ class KanbanBoard implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize() : array
+    public function toArray() : array
     {
-        return [];
+        return [
+            'id'          => $this->id,
+            'status'      => $this->status,
+            'columns'      => $this->columns,
+            'tags'      => $this->tags,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }

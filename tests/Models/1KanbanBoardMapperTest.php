@@ -48,23 +48,4 @@ final class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($board->createdAt->format('Y-m-d'), $boardR->createdAt->format('Y-m-d'));
         self::assertEquals($board->getColumns(), $boardR->getColumns());
     }
-
-    /**
-     * @group volume
-     * @group module
-     * @coversNothing
-     */
-    public function testVolume() : void
-    {
-        for ($i = 1; $i < 30; ++$i) {
-            $text  = new Text();
-            $board = new KanbanBoard();
-
-            $board->name        = $text->generateText(\mt_rand(3, 7));
-            $board->description = $text->generateText(\mt_rand(20, 70));
-            $board->createdBy   = new NullAccount(1);
-
-            $id = KanbanBoardMapper::create($board);
-        }
-    }
 }

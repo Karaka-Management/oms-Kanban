@@ -22,7 +22,7 @@ namespace Modules\Kanban\Models;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class NullKanbanBoard extends KanbanBoard
+final class NullKanbanCardComment extends KanbanCardComment
 {
     /**
      * Constructor

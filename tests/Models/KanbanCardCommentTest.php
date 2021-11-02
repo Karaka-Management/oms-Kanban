@@ -16,44 +16,70 @@ namespace Modules\Kanban\tests\Models;
 
 use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\KanbanCardComment;
+use Modules\Media\Models\NullMedia;
 
 /**
  * @internal
  */
 final class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers Modules\Kanban\Models\KanbanCardComment
-     * @group module
-     */
-    public function testDefault() : void
-    {
-        $comment = new KanbanCardComment();
+    private KanbanCardComment $comment;
 
-        self::assertEquals(0, $comment->getId());
-        self::assertEquals(0, $comment->getCard());
-        self::assertEquals('', $comment->description);
-        self::assertEquals(0, $comment->createdBy->getId());
-        self::assertInstanceOf('\DateTimeImmutable', $comment->createdAt);
-        self::assertEquals([], $comment->getMedia());
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp() : void
+    {
+        $this->comment = new KanbanCardComment();
     }
 
     /**
      * @covers Modules\Kanban\Models\KanbanCardComment
      * @group module
      */
-    public function testSetGet() : void
+    public function testDefault() : void
     {
-        $comment = new KanbanCardComment();
+        self::assertEquals(0, $this->comment->getId());
+        self::assertEquals(0, $this->comment->card);
+        self::assertEquals('', $this->comment->description);
+        self::assertEquals(0, $this->comment->createdBy->getId());
+        self::assertInstanceOf('\DateTimeImmutable', $this->comment->createdAt);
+        self::assertEquals([], $this->comment->getMedia());
+    }
 
-        $comment->setCard(2);
-        $comment->description = 'Description';
-        $comment->createdBy   = new NullAccount(1);
-        $comment->addMedia(3);
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardComment
+     * @group module
+     */
+    public function testMediaInputOutput() : void
+    {
+        $this->comment->addMedia($m = new NullMedia(7));
+        self::assertCount(1, $this->comment->getMedia());
+    }
 
-        self::assertEquals(2, $comment->getCard());
-        self::assertEquals('Description', $comment->description);
-        self::assertEquals(1, $comment->createdBy->getId());
-        self::assertEquals([3], $comment->getMedia());
+    /**
+     * @covers Modules\Kanban\Models\KanbanCardComment
+     * @group module
+     */
+    public function testSerialize() : void
+    {
+        $this->comment->description = 'Description';
+        $this->comment->descriptionRaw = 'DescriptionRaw';
+        $this->comment->card = 2;
+
+        $serialized = $this->comment->jsonSerialize();
+        unset($serialized['createdBy']);
+        unset($serialized['createdAt']);
+
+        self::assertEquals(
+            [
+                'id'       => 0,
+                'description' => 'Description',
+                'descriptionRaw' => 'DescriptionRaw',
+                'card'      => 2,
+                'media'       => [],
+            ],
+            $serialized
+        );
     }
 }

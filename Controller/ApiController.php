@@ -89,7 +89,7 @@ final class ApiController extends Controller
         $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $card->style          = (string) ($request->getData('style') ?? '');
-        $card->setColumn((int) $request->getData('column'));
+        $card->column = (int) $request->getData('column');
         $card->order = (int) ($request->getData('order') ?? 1);
         $card->ref   = (int) ($request->getData('ref') ?? 0);
         $card->setStatus((int) ($request->getData('status') ?? CardStatus::ACTIVE));
@@ -207,7 +207,7 @@ final class ApiController extends Controller
         $comment                 = new KanbanCardComment();
         $comment->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $comment->descriptionRaw = (string) ($request->getData('plain') ?? '');
-        $comment->setCard((int) $request->getData('card'));
+        $comment->card = (int) $request->getData('card');
         $comment->createdBy = new NullAccount($request->header->account);
 
         if (!empty($uploadedFiles = $request->getFiles() ?? [])) {
@@ -423,7 +423,7 @@ final class ApiController extends Controller
     {
         $column       = new KanbanColumn();
         $column->name = (string) $request->getData('title');
-        $column->setBoard((int) $request->getData('board'));
+        $column->board = (int) $request->getData('board');
         $column->order = (int) ($request->getData('order') ?? 1);
 
         return $column;
