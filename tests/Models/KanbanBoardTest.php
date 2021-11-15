@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\Kanban\tests\Models;
 
-use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\BoardStatus;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Tag\Models\Tag;
@@ -107,10 +106,10 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'          => 0,
-                'status'      => BoardStatus::ARCHIVED,
+                'id'             => 0,
+                'status'         => BoardStatus::ARCHIVED,
                 'columns'        => [],
-                'tags'        => [],
+                'tags'           => [],
             ],
             $serialized
         );

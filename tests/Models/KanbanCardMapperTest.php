@@ -19,9 +19,7 @@ use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Kanban\Models\KanbanCardMapper;
-use Modules\Tag\Models\NullTag;
 use Modules\Tag\Models\Tag;
-use phpOMS\Utils\RnG\Text;
 
 /**
  * @internal
@@ -29,6 +27,7 @@ use phpOMS\Utils\RnG\Text;
 final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
      * @covers Modules\Kanban\Models\KanbanCardMapper
      * @group module
      */
@@ -40,8 +39,8 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->description = 'This is some card description';
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TEXT);
-        $card->order = 1;
-        $card->column = 1;
+        $card->order     = 1;
+        $card->column    = 1;
         $card->createdBy = new NullAccount(1);
         $card->addTag(new Tag());
         $card->addTag(new Tag());
@@ -72,9 +71,9 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 
         $card->setStatus(CardStatus::ACTIVE);
         $card->setType(CardType::TASK);
-        $card->ref   = 1;
-        $card->order = 1;
-        $card->column = 1;
+        $card->ref       = 1;
+        $card->order     = 1;
+        $card->column    = 1;
         $card->createdBy = new NullAccount(1);
         $card->addTag(new Tag());
         $card->addTag(new Tag());

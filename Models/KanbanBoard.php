@@ -16,8 +16,8 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
-use Modules\Tag\Models\Tag;
 use Modules\Tag\Models\NullTag;
+use Modules\Tag\Models\Tag;
 
 /**
  * Kanban board class.
@@ -258,10 +258,10 @@ class KanbanBoard implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'          => $this->id,
-            'status'      => $this->status,
+            'id'           => $this->id,
+            'status'       => $this->status,
             'columns'      => $this->columns,
-            'tags'      => $this->tags,
+            'tags'         => $this->tags,
         ];
     }
 

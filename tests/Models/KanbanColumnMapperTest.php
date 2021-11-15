@@ -16,7 +16,6 @@ namespace Modules\Kanban\tests\Models;
 
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
-use phpOMS\Utils\RnG\Text;
 
 /**
  * @internal
@@ -24,6 +23,7 @@ use phpOMS\Utils\RnG\Text;
 final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @depends Modules\Kanban\tests\Models\KanbanBoardMapperTest::testCRUD
      * @covers Modules\Kanban\Models\KanbanColumnMapper
      * @group module
      */
@@ -31,7 +31,7 @@ final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
     {
         $column = new KanbanColumn();
 
-        $column->name = 'Some Column';
+        $column->name  = 'Some Column';
         $column->board = 1;
         $column->order = 1;
 

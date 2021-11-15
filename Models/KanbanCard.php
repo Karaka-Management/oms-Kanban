@@ -17,8 +17,8 @@ namespace Modules\Kanban\Models;
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
 use Modules\Media\Models\Media;
-use Modules\Tag\Models\Tag;
 use Modules\Tag\Models\NullTag;
+use Modules\Tag\Models\Tag;
 use Modules\Tasks\Models\Task;
 
 /**
@@ -364,19 +364,19 @@ class KanbanCard implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'       => $this->id,
-            'title'       => $this->name,
-            'description' => $this->description,
+            'id'             => $this->id,
+            'title'          => $this->name,
+            'description'    => $this->description,
             'descriptionRaw' => $this->descriptionRaw,
-            'status'      => $this->status,
-            'type'        => $this->type,
-            'column'      => $this->column,
-            'order'       => $this->order,
-            'ref'         => $this->ref,
-            'createdBy'   => $this->createdBy,
-            'createdAt'   => $this->createdAt,
-            'comments'    => $this->comments,
-            'media'       => $this->media,
+            'status'         => $this->status,
+            'type'           => $this->type,
+            'column'         => $this->column,
+            'order'          => $this->order,
+            'ref'            => $this->ref,
+            'createdBy'      => $this->createdBy,
+            'createdAt'      => $this->createdAt,
+            'comments'       => $this->comments,
+            'media'          => $this->media,
         ];
     }
 

@@ -138,13 +138,13 @@ class KanbanCardComment implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'       => $this->id,
-            'description' => $this->description,
+            'id'             => $this->id,
+            'description'    => $this->description,
             'descriptionRaw' => $this->descriptionRaw,
-            'card'      => $this->card,
-            'createdBy'   => $this->createdBy,
-            'createdAt'   => $this->createdAt,
-            'media'       => $this->media,
+            'card'           => $this->card,
+            'createdBy'      => $this->createdBy,
+            'createdAt'      => $this->createdAt,
+            'media'          => $this->media,
         ];
     }
 

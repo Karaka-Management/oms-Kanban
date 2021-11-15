@@ -17,7 +17,6 @@ namespace Modules\Kanban\tests\Models;
 use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\KanbanCardComment;
 use Modules\Kanban\Models\KanbanCardCommentMapper;
-use phpOMS\Utils\RnG\Text;
 
 /**
  * @internal
@@ -25,6 +24,7 @@ use phpOMS\Utils\RnG\Text;
 final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
+     * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
      * @covers Modules\Kanban\Models\KanbanCardCommentMapper
      * @group module
      */
@@ -33,8 +33,8 @@ final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
         $comment = new KanbanCardComment();
 
         $comment->description = 'This is some card description';
-        $comment->card = 1;
-        $comment->createdBy = new NullAccount(1);
+        $comment->card        = 1;
+        $comment->createdBy   = new NullAccount(1);
 
         $id = KanbanCardCommentMapper::create($comment);
         self::assertGreaterThan(0, $comment->getId());

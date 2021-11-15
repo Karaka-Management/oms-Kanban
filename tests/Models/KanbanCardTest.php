@@ -14,13 +14,12 @@ declare(strict_types=1);
 
 namespace Modules\Kanban\tests\Models;
 
-use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Media\Models\NullMedia;
-use Modules\Tasks\Models\Task;
 use Modules\Tag\Models\Tag;
+use Modules\Tasks\Models\Task;
 
 /**
  * @internal
@@ -150,11 +149,11 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
      */
     public function testSerialize() : void
     {
-        $this->card->name = 'Title';
-        $this->card->description = 'Description';
+        $this->card->name           = 'Title';
+        $this->card->description    = 'Description';
         $this->card->descriptionRaw = 'DescriptionRaw';
-        $this->card->order = 3;
-        $this->card->column = 2;
+        $this->card->order          = 3;
+        $this->card->column         = 2;
         $this->card->setStatus(CardStatus::ARCHIVED);
         $this->card->setType(CardType::TASK);
 
@@ -164,17 +163,17 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'       => 0,
-                'title'       => 'Title',
-                'description' => 'Description',
+                'id'             => 0,
+                'title'          => 'Title',
+                'description'    => 'Description',
                 'descriptionRaw' => 'DescriptionRaw',
-                'status'      => CardStatus::ARCHIVED,
-                'type'        => CardType::TASK,
-                'column'      => 2,
-                'order'       => 3,
-                'ref'         => 0,
-                'comments'    => [],
-                'media'       => [],
+                'status'         => CardStatus::ARCHIVED,
+                'type'           => CardType::TASK,
+                'column'         => 2,
+                'order'          => 3,
+                'ref'            => 0,
+                'comments'       => [],
+                'media'          => [],
             ],
             $serialized
         );

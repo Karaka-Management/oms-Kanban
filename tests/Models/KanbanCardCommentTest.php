@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\Kanban\tests\Models;
 
-use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\KanbanCardComment;
 use Modules\Media\Models\NullMedia;
 
@@ -63,9 +62,9 @@ final class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
      */
     public function testSerialize() : void
     {
-        $this->comment->description = 'Description';
+        $this->comment->description    = 'Description';
         $this->comment->descriptionRaw = 'DescriptionRaw';
-        $this->comment->card = 2;
+        $this->comment->card           = 2;
 
         $serialized = $this->comment->jsonSerialize();
         unset($serialized['createdBy']);
@@ -73,11 +72,11 @@ final class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'       => 0,
-                'description' => 'Description',
+                'id'             => 0,
+                'description'    => 'Description',
                 'descriptionRaw' => 'DescriptionRaw',
-                'card'      => 2,
-                'media'       => [],
+                'card'           => 2,
+                'media'          => [],
             ],
             $serialized
         );

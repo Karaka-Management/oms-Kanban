@@ -128,11 +128,11 @@ class KanbanColumn implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'       => $this->id,
-            'name'       => $this->name,
-            'order'       => $this->order,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'order'         => $this->order,
             'board'         => $this->board,
-            'cards'    => $this->cards,
+            'cards'         => $this->cards,
         ];
     }
 

@@ -74,7 +74,7 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
      */
     public function testSerialize() : void
     {
-        $this->column->name = 'Name';
+        $this->column->name  = 'Name';
         $this->column->board = 2;
         $this->column->order = 3;
 
@@ -84,10 +84,10 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'       => 0,
-                'name' => 'Name',
-                'order'      => 3,
-                'board'      => 2,
+                'id'          => 0,
+                'name'        => 'Name',
+                'order'       => 3,
+                'board'       => 2,
                 'cards'       => [],
             ],
             $serialized

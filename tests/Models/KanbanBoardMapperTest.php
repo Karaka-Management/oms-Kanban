@@ -17,7 +17,6 @@ namespace Modules\Kanban\tests\Models;
 use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Kanban\Models\KanbanBoardMapper;
-use phpOMS\Utils\RnG\Text;
 
 /**
  * @internal
