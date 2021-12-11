@@ -354,7 +354,7 @@ final class ApiController extends Controller
      */
     public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
     {
-        $old = clone KanbanBoardMapper::get((int) $request->getData('id'));
+        $old = clone KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $new = $this->updateBoardFromRequest($request);
         $this->updateModel($request->header->account, $old, $new, KanbanBoardMapper::class, 'board', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully updated', $new);
@@ -372,7 +372,7 @@ final class ApiController extends Controller
     private function updateBoardFromRequest(RequestAbstract $request) : KanbanBoard
     {
         /** @var KanbanBoard $board */
-        $board                 = KanbanBoardMapper::get((int) $request->getData('id'));
+        $board                 = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $board->name           = $request->getData('title') ?? $board->name;
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);

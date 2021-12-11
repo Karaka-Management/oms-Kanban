@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\Kanban\Models;
 
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * Mapper class.
@@ -24,7 +24,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class KanbanColumnMapper extends DataMapperAbstract
+final class KanbanColumnMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -32,7 +32,7 @@ final class KanbanColumnMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'kanban_column_id'    => ['name' => 'kanban_column_id',    'type' => 'int',    'internal' => 'id'],
         'kanban_column_name'  => ['name' => 'kanban_column_name',  'type' => 'string', 'internal' => 'name'],
         'kanban_column_order' => ['name' => 'kanban_column_order', 'type' => 'int',    'internal' => 'order'],
@@ -45,7 +45,7 @@ final class KanbanColumnMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, table:string, self?:?string, external?:?string, column?:string}>
      * @since 1.0.0
      */
-    protected static array $hasMany = [
+    public const HAS_MANY = [
         'cards' => [
             'mapper'       => KanbanCardMapper::class,
             'table'        => 'kanban_card',
@@ -60,7 +60,7 @@ final class KanbanColumnMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'kanban_column';
+    public const TABLE = 'kanban_column';
 
     /**
      * Primary field name.
@@ -68,5 +68,5 @@ final class KanbanColumnMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'kanban_column_id';
+    public const PRIMARYFIELD ='kanban_column_id';
 }

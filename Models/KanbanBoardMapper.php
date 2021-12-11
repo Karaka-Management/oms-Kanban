@@ -16,7 +16,7 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\AccountMapper;
 use Modules\Tag\Models\TagMapper;
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * Mapper class.
@@ -26,7 +26,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class KanbanBoardMapper extends DataMapperAbstract
+final class KanbanBoardMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -34,7 +34,7 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'kanban_board_id'            => ['name' => 'kanban_board_id',         'type' => 'int',      'internal' => 'id'],
         'kanban_board_name'          => ['name' => 'kanban_board_name',       'type' => 'string',   'internal' => 'name'],
         'kanban_board_desc'          => ['name' => 'kanban_board_desc',       'type' => 'string',   'internal' => 'description'],
@@ -52,7 +52,7 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, table:string, self?:?string, external?:?string, column?:string}>
      * @since 1.0.0
      */
-    protected static array $hasMany = [
+    public const HAS_MANY = [
         'columns' => [
             'mapper'       => KanbanColumnMapper::class,
             'table'        => 'kanban_column',
@@ -73,7 +73,7 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, external:string}>
      * @since 1.0.0
      */
-    protected static array $belongsTo = [
+    public const BELONGS_TO = [
         'createdBy' => [
             'mapper'     => AccountMapper::class,
             'external'   => 'kanban_board_created_by',
@@ -86,7 +86,7 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'kanban_board';
+    public const TABLE = 'kanban_board';
 
     /**
      * Created at.
@@ -94,7 +94,7 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $createdAt = 'kanban_board_created_at';
+    public const CREATED_AT = 'kanban_board_created_at';
 
     /**
      * Primary field name.
@@ -102,5 +102,5 @@ final class KanbanBoardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'kanban_board_id';
+    public const PRIMARYFIELD ='kanban_board_id';
 }

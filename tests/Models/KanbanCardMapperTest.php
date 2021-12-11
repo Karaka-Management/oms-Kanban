@@ -45,11 +45,11 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->addTag(new Tag());
         $card->addTag(new Tag());
 
-        $id = KanbanCardMapper::create($card);
+        $id = KanbanCardMapper::create()->execute($card);
         self::assertGreaterThan(0, $card->getId());
         self::assertEquals($id, $card->getId());
 
-        $cardR = KanbanCardMapper::get($card->getId());
+        $cardR = KanbanCardMapper::get()->where('id', $card->getId())->execute();
         self::assertEquals($card->name, $cardR->name);
         self::assertEquals($card->description, $cardR->description);
         self::assertEquals($card->column, $cardR->column);
@@ -78,7 +78,7 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         $card->addTag(new Tag());
         $card->addTag(new Tag());
 
-        $id = KanbanCardMapper::create($card);
+        $id = KanbanCardMapper::create()->execute($card);
         self::assertGreaterThan(0, $card->getId());
         self::assertEquals($id, $card->getId());
     }

@@ -35,11 +35,11 @@ final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
         $column->board = 1;
         $column->order = 1;
 
-        $id = KanbanColumnMapper::create($column);
+        $id = KanbanColumnMapper::create()->execute($column);
         self::assertGreaterThan(0, $column->getId());
         self::assertEquals($id, $column->getId());
 
-        $columnR = KanbanColumnMapper::get($column->getId());
+        $columnR = KanbanColumnMapper::get()->where('id', $column->getId())->execute();
         self::assertEquals($column->name, $columnR->name);
         self::assertEquals($column->board, $columnR->board);
         self::assertEquals($column->order, $columnR->order);

@@ -17,7 +17,7 @@ namespace Modules\Kanban\Models;
 use Modules\Admin\Models\AccountMapper;
 use Modules\Media\Models\MediaMapper;
 use Modules\Tag\Models\TagMapper;
-use phpOMS\DataStorage\Database\DataMapperAbstract;
+use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
  * Mapper class.
@@ -27,7 +27,7 @@ use phpOMS\DataStorage\Database\DataMapperAbstract;
  * @link    https://orange-management.org
  * @since   1.0.0
  */
-final class KanbanCardMapper extends DataMapperAbstract
+final class KanbanCardMapper extends DataMapperFactory
 {
     /**
      * Columns.
@@ -35,7 +35,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var array<string, array{name:string, type:string, internal:string, autocomplete?:bool, readonly?:bool, writeonly?:bool, annotations?:array}>
      * @since 1.0.0
      */
-    protected static array $columns = [
+    public const COLUMNS = [
         'kanban_card_id'             => ['name' => 'kanban_card_id',          'type' => 'int',      'internal' => 'id'],
         'kanban_card_name'           => ['name' => 'kanban_card_name',        'type' => 'string',   'internal' => 'name'],
         'kanban_card_description'    => ['name' => 'kanban_card_description', 'type' => 'string',   'internal' => 'description'],
@@ -57,7 +57,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, external:string}>
      * @since 1.0.0
      */
-    protected static array $belongsTo = [
+    public const BELONGS_TO = [
         'createdBy' => [
             'mapper'     => AccountMapper::class,
             'external'   => 'kanban_card_created_by',
@@ -70,7 +70,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var array<string, array{mapper:string, table:string, self?:?string, external?:?string, column?:string}>
      * @since 1.0.0
      */
-    protected static array $hasMany = [
+    public const HAS_MANY = [
         'media'    => [
             'mapper'   => MediaMapper::class,
             'table'    => 'kanban_card_media',
@@ -97,7 +97,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $table = 'kanban_card';
+    public const TABLE = 'kanban_card';
 
     /**
      * Created at.
@@ -105,7 +105,7 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $createdAt = 'kanban_card_created_at';
+    public const CREATED_AT = 'kanban_card_created_at';
 
     /**
      * Primary field name.
@@ -113,5 +113,5 @@ final class KanbanCardMapper extends DataMapperAbstract
      * @var string
      * @since 1.0.0
      */
-    protected static string $primaryField = 'kanban_card_id';
+    public const PRIMARYFIELD ='kanban_card_id';
 }

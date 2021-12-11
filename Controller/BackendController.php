@@ -18,8 +18,10 @@ use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\PermissionState;
 use phpOMS\Account\PermissionType;
+use phpOMS\Algorithm\Sort\SortOrder;
 use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\DataStorage\Database\Query\OrderType;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -74,10 +76,14 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-dashboard');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
 
-        $list = KanbanBoardMapper
-            ::with('columns', models: null)
-            ::with('language', $response->getLanguage())
-            ::getNewest(20, depth: 3);
+        $list = KanbanBoardMapper::getAll()
+            ->with('tags')
+            ->with('tags/title')
+            ->where('tags/title/language', $request->getLanguage())
+            ->sort('createdAt', OrderType::DESC)
+            ->limit(20)
+            ->execute();
+
         $view->setData('boards', $list);
 
         return $view;
@@ -99,8 +105,15 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $board     = KanbanBoardMapper::with('language', $response->getLanguage())
-            ::get((int) $request->getData('id'), depth: 5);
+        $board     = KanbanBoardMapper::get()
+            ->with('columns')
+            ->with('columns/cards')
+            ->with('columns/cards/tags')
+            ->with('columns/cards/tags/title')
+            ->where('id', (int) $request->getData('id'))
+            ->where('columns/cards/tags/title/language', $request->getLanguage())
+            ->execute();
+
         $accountId = $request->header->account;
 
         if ($board->createdBy->getId() !== $accountId
@@ -138,9 +151,13 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-archive');
         $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
 
-        $list = KanbanBoardMapper::with('columns', models: null)
-            ::with('language', $response->getLanguage())
-            ::getNewest(20, depth: 3);
+        $list = KanbanBoardMapper::getAll()
+            ->with('tags')
+            ->with('tags/title')
+            ->where('tags/title/language', $request->getLanguage())
+            ->sort('createdAt', OrderType::DESC)
+            ->limit(25)
+            ->execute();
 
         $view->setData('boards', $list);
 
@@ -195,7 +212,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $card      = KanbanCardMapper::get((int) $request->getData('id'));
+        $card      = KanbanCardMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $accountId = $request->header->account;
 
         if ($card->createdBy->getId() !== $accountId
