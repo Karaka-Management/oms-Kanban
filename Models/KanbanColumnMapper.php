@@ -47,10 +47,10 @@ final class KanbanColumnMapper extends DataMapperFactory
      */
     public const HAS_MANY = [
         'cards' => [
-            'mapper'       => KanbanCardMapper::class,
-            'table'        => 'kanban_card',
-            'self'         => 'kanban_card_column',
-            'external'     => null,
+            'mapper'   => KanbanCardMapper::class,
+            'table'    => 'kanban_card',
+            'self'     => 'kanban_card_column',
+            'external' => null,
         ],
     ];
 

@@ -18,7 +18,6 @@ use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\PermissionState;
 use phpOMS\Account\PermissionType;
-use phpOMS\Algorithm\Sort\SortOrder;
 use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\DataStorage\Database\Query\OrderType;
@@ -105,7 +104,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $board     = KanbanBoardMapper::get()
+        $board = KanbanBoardMapper::get()
             ->with('columns')
             ->with('columns/cards')
             ->with('columns/cards/tags')

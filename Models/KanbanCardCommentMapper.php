@@ -35,12 +35,12 @@ final class KanbanCardCommentMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'kanban_card_comment_id'             => ['name' => 'kanban_card_comment_id',          'type' => 'int',      'internal' => 'id'],
-        'kanban_card_comment_description'    => ['name' => 'kanban_card_comment_description', 'type' => 'string',   'internal' => 'description'],
-        'kanban_card_comment_descriptionraw' => ['name' => 'kanban_card_comment_descriptionraw', 'type' => 'string',   'internal' => 'descriptionRaw'],
-        'kanban_card_comment_card'           => ['name' => 'kanban_card_comment_card',        'type' => 'int',      'internal' => 'card'],
-        'kanban_card_comment_created_at'     => ['name' => 'kanban_card_comment_created_at',  'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
-        'kanban_card_comment_created_by'     => ['name' => 'kanban_card_comment_created_by',  'type' => 'int',      'internal' => 'createdBy', 'readonly' => true],
+        'kanban_card_comment_id'             => ['name' => 'kanban_card_comment_id',             'type' => 'int',               'internal' => 'id'],
+        'kanban_card_comment_description'    => ['name' => 'kanban_card_comment_description',    'type' => 'string',            'internal' => 'description'],
+        'kanban_card_comment_descriptionraw' => ['name' => 'kanban_card_comment_descriptionraw', 'type' => 'string',            'internal' => 'descriptionRaw'],
+        'kanban_card_comment_card'           => ['name' => 'kanban_card_comment_card',           'type' => 'int',               'internal' => 'card'],
+        'kanban_card_comment_created_at'     => ['name' => 'kanban_card_comment_created_at',     'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
+        'kanban_card_comment_created_by'     => ['name' => 'kanban_card_comment_created_by',     'type' => 'int',               'internal' => 'createdBy', 'readonly' => true],
     ];
 
     /**
@@ -66,8 +66,8 @@ final class KanbanCardCommentMapper extends DataMapperFactory
      */
     public const BELONGS_TO = [
         'createdBy' => [
-            'mapper'     => AccountMapper::class,
-            'external'   => 'kanban_card_comment_created_by',
+            'mapper'   => AccountMapper::class,
+            'external' => 'kanban_card_comment_created_by',
         ],
     ];
 

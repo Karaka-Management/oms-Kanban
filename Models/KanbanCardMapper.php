@@ -36,19 +36,19 @@ final class KanbanCardMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'kanban_card_id'             => ['name' => 'kanban_card_id',          'type' => 'int',      'internal' => 'id'],
-        'kanban_card_name'           => ['name' => 'kanban_card_name',        'type' => 'string',   'internal' => 'name'],
-        'kanban_card_description'    => ['name' => 'kanban_card_description', 'type' => 'string',   'internal' => 'description'],
-        'kanban_card_descriptionraw' => ['name' => 'kanban_card_descriptionraw', 'type' => 'string',   'internal' => 'descriptionRaw'],
-        'kanban_card_style'          => ['name' => 'kanban_card_style',       'type' => 'string',   'internal' => 'style'],
-        'kanban_card_type'           => ['name' => 'kanban_card_type',        'type' => 'int',      'internal' => 'type'],
-        'kanban_card_status'         => ['name' => 'kanban_card_status',      'type' => 'int',      'internal' => 'status'],
-        'kanban_card_order'          => ['name' => 'kanban_card_order',       'type' => 'int',      'internal' => 'order'],
-        'kanban_card_color'          => ['name' => 'kanban_card_color',       'type' => 'string',      'internal' => 'color'],
-        'kanban_card_ref'            => ['name' => 'kanban_card_ref',         'type' => 'int',      'internal' => 'ref'],
-        'kanban_card_column'         => ['name' => 'kanban_card_column',      'type' => 'int',      'internal' => 'column'],
-        'kanban_card_created_at'     => ['name' => 'kanban_card_created_at',  'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
-        'kanban_card_created_by'     => ['name' => 'kanban_card_created_by',  'type' => 'int',      'internal' => 'createdBy', 'readonly' => true],
+        'kanban_card_id'             => ['name' => 'kanban_card_id',             'type' => 'int',               'internal' => 'id'],
+        'kanban_card_name'           => ['name' => 'kanban_card_name',           'type' => 'string',            'internal' => 'name'],
+        'kanban_card_description'    => ['name' => 'kanban_card_description',    'type' => 'string',            'internal' => 'description'],
+        'kanban_card_descriptionraw' => ['name' => 'kanban_card_descriptionraw', 'type' => 'string',            'internal' => 'descriptionRaw'],
+        'kanban_card_style'          => ['name' => 'kanban_card_style',          'type' => 'string',            'internal' => 'style'],
+        'kanban_card_type'           => ['name' => 'kanban_card_type',           'type' => 'int',               'internal' => 'type'],
+        'kanban_card_status'         => ['name' => 'kanban_card_status',         'type' => 'int',               'internal' => 'status'],
+        'kanban_card_order'          => ['name' => 'kanban_card_order',          'type' => 'int',               'internal' => 'order'],
+        'kanban_card_color'          => ['name' => 'kanban_card_color',          'type' => 'string',            'internal' => 'color'],
+        'kanban_card_ref'            => ['name' => 'kanban_card_ref',            'type' => 'int',               'internal' => 'ref'],
+        'kanban_card_column'         => ['name' => 'kanban_card_column',         'type' => 'int',               'internal' => 'column'],
+        'kanban_card_created_at'     => ['name' => 'kanban_card_created_at',     'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
+        'kanban_card_created_by'     => ['name' => 'kanban_card_created_by',     'type' => 'int',               'internal' => 'createdBy', 'readonly' => true],
     ];
 
     /**
@@ -59,8 +59,8 @@ final class KanbanCardMapper extends DataMapperFactory
      */
     public const BELONGS_TO = [
         'createdBy' => [
-            'mapper'     => AccountMapper::class,
-            'external'   => 'kanban_card_created_by',
+            'mapper'   => AccountMapper::class,
+            'external' => 'kanban_card_created_by',
         ],
     ];
 
@@ -78,10 +78,10 @@ final class KanbanCardMapper extends DataMapperFactory
             'self'     => 'kanban_card_media_src',
         ],
         'comments' => [
-            'mapper'       => KanbanCardCommentMapper::class,
-            'table'        => 'kanban_card_comment',
-            'self'         => 'kanban_card_comment_card',
-            'external'     => null,
+            'mapper'   => KanbanCardCommentMapper::class,
+            'table'    => 'kanban_card_comment',
+            'self'     => 'kanban_card_comment_card',
+            'external' => null,
         ],
         'tags' => [
             'mapper'   => TagMapper::class,
