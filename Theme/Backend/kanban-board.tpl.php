@@ -20,7 +20,7 @@ $columns = $board->getColumns();
 ?>
 <div class="row">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-md-6 col-lg-3 box kanban-column" draggable="true">
+    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-md-6 col-lg-3 box kanban-column">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());

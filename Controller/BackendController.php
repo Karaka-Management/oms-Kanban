@@ -211,7 +211,18 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
-        $card      = KanbanCardMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $card = KanbanCardMapper::get()
+            ->with('tags')
+            ->with('tags/title')
+            ->with('media')
+            ->with('createdBy')
+            ->with('comments')
+            ->with('comments/media')
+            ->with('comments/createdBy')
+            ->where('id', (int) $request->getData('id'))
+            ->where('tags/title/language', $response->getLanguage())
+            ->execute();
+
         $accountId = $request->header->account;
 
         if ($card->createdBy->getId() !== $accountId
