@@ -13,8 +13,8 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Archive' => 'Archive',
-    'Boards'  => 'Boards',
-    'Create'  => 'Create',
+    'Archive' => 'Archívum',
+    'Boards'  => 'Táblák',
+    'Create'  => 'Teremt',
     'Kanban'  => 'Kanban',
 ]];

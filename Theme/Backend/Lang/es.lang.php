@@ -13,5 +13,13 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    'Dashboard' => 'Tablero',
+    ':bStatus1' => 'Activo',
+    ':bStatus2' => 'Inactivo',
+    ':bStatus3' => 'Archivado',
+    'Archive'   => '#VALUE!',
+    'Back'      => '#VALUE!',
+    'Dashboard' => 'Tablero de mandos',
+    'Date'      => '#VALUE!',
+    'Status'    => '#VALUE!',
+    'Title'     => '#VALUE!',
 ]];

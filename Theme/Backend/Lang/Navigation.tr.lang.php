@@ -13,8 +13,8 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Archive' => 'Archive',
-    'Boards'  => 'Boards',
-    'Create'  => 'Create',
-    'Kanban'  => 'Kanban',
+    'Archive' => 'Arşiv',
+    'Boards'  => 'Kurulu',
+    'Create'  => 'Yaratmak',
+    'Kanban'  => 'KANBAN',
 ]];

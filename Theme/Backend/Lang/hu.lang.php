@@ -13,5 +13,13 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
+    ':bStatus1' => 'Aktív',
+    ':bStatus2' => 'Inaktív',
+    ':bStatus3' => 'Archivált',
+    'Archive'   => '#VALUE!',
+    'Back'      => '#VALUE!',
     'Dashboard' => 'Irányítópult',
+    'Date'      => '#VALUE!',
+    'Status'    => '#VALUE!',
+    'Title'     => '#VALUE!',
 ]];

@@ -13,8 +13,8 @@
 declare(strict_types=1);
 
 return ['Navigation' => [
-    'Archive' => 'Archive',
-    'Boards'  => 'Boards',
-    'Create'  => 'Create',
-    'Kanban'  => 'Kanban',
+    'Archive' => '档案',
+    'Boards'  => '董事会',
+    'Create'  => '创建',
+    'Kanban'  => '卡班',
 ]];
