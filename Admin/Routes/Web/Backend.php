@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 use Modules\Kanban\Controller\BackendController;
-use Modules\Kanban\Models\PermissionState;
+use Modules\Kanban\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
@@ -25,7 +25,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::KANBAN,
+                'state'  => PermissionCategory::KANBAN,
             ],
         ],
     ],
@@ -36,7 +36,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::KANBAN,
+                'state'  => PermissionCategory::KANBAN,
             ],
         ],
     ],
@@ -47,7 +47,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::KANBAN,
+                'state'  => PermissionCategory::KANBAN,
             ],
         ],
     ],
@@ -58,7 +58,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::BOARD,
+                'state'  => PermissionCategory::BOARD,
             ],
         ],
     ],
@@ -69,7 +69,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
-                'state'  => PermissionState::CARD,
+                'state'  => PermissionCategory::CARD,
             ],
         ],
     ],
@@ -80,7 +80,7 @@ return [
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::CREATE,
-                'state'  => PermissionState::KANBAN,
+                'state'  => PermissionCategory::KANBAN,
             ],
         ],
     ],

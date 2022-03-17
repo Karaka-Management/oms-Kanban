@@ -16,7 +16,7 @@ namespace Modules\Kanban\Controller;
 
 use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
-use Modules\Kanban\Models\PermissionState;
+use Modules\Kanban\Models\PermissionCategory;
 use phpOMS\Account\PermissionType;
 use phpOMS\Asset\AssetType;
 use phpOMS\Contract\RenderableInterface;
@@ -117,7 +117,7 @@ final class BackendController extends Controller
 
         if ($board->createdBy->getId() !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
-                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::BOARD, $board->getId())
+                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionCategory::BOARD, $board->getId())
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
             $response->header->status = RequestStatusCode::R_403;
@@ -182,7 +182,7 @@ final class BackendController extends Controller
         $accountId = $request->header->account;
 
         if (!$this->app->accountManager->get($accountId)->hasPermission(
-                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::BOARD)
+                PermissionType::CREATE, $this->app->orgId, $this->app->appName, self::NAME, PermissionCategory::BOARD)
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
             $response->header->status = RequestStatusCode::R_403;
@@ -227,7 +227,7 @@ final class BackendController extends Controller
 
         if ($card->createdBy->getId() !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
-                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionState::CARD, $card->getId())
+                PermissionType::READ, $this->app->orgId, $this->app->appName, self::NAME, PermissionCategory::CARD, $card->getId())
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
             $response->header->status = RequestStatusCode::R_403;
