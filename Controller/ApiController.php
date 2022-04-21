@@ -59,7 +59,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
             $response->set('kanban_card_create', new FormValidation($val));
@@ -179,7 +179,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
             $response->set('kanban_comment_create', new FormValidation($val));
@@ -262,7 +262,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
             $response->set('kanban_board_create', new FormValidation($val));
@@ -352,7 +352,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         $old = clone KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
         $new = $this->updateBoardFromRequest($request);
@@ -396,7 +396,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, $data = null) : void
+    public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
             $response->set('kanban_column_create', new FormValidation($val));
