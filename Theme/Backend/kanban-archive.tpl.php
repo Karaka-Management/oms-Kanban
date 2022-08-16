@@ -80,7 +80,7 @@ echo $this->getData('nav')->render(); ?>
                         <td><a href="<?= $url; ?>"><?= $this->printHtml($board->createdAt->format('Y-m-d')); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
-                    <tr><td colspan="2" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
+                    <tr><td colspan="3" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
                 <?php endif; ?>
             </table>
             </div>

@@ -53,7 +53,7 @@ final class BackendController extends Controller
     {
         /** @var \phpOMS\Model\Html\Head $head */
         $head = $response->get('Content')->getData('head');
-        $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css');
+        $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css?v=1.0.0');
     }
 
     /**
