@@ -22,7 +22,7 @@ $comments = $card->getComments();
 
 <div class="row">
     <div class="box">
-        <a tabindex="0" class="button" href="<?= $this->request->getReferer() !== '' ? $this->request->getReferer() : UriFactory::build('{/prefix}kanban/dashboard'); ?>"><?= $this->getHtml('Back'); ?></a>
+        <a tabindex="0" class="button" href="<?= $this->request->getReferer() !== '' ? $this->request->getReferer() : UriFactory::build('kanban/dashboard'); ?>"><?= $this->getHtml('Back'); ?></a>
     </div>
 </div>
 
@@ -35,7 +35,7 @@ $comments = $card->getComments();
             </div>
             <div class="portlet-foot">
                 <?php $files = $card->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/prefix}media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
+                     <span><a class="content" href="<?= UriFactory::build('media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>
@@ -51,7 +51,7 @@ $comments = $card->getComments();
             </div>
             <div class="portlet-foot">
                 <?php $files = $comment->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/prefix}media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
+                     <span><a class="content" href="<?= UriFactory::build('media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>

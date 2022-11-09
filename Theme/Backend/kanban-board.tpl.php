@@ -23,7 +23,7 @@ $columns = $board->getColumns();
     <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-md-6 col-lg-3 box kanban-column">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
-            $url = \phpOMS\Uri\UriFactory::build('{/prefix}kanban/card?{?}&id=' . $card->getId());
+            $url = \phpOMS\Uri\UriFactory::build('kanban/card?{?}&id=' . $card->getId());
         ?>
             <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
                 <div class="portlet-head">
