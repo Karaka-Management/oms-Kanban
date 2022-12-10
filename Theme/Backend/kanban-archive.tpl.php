@@ -72,7 +72,7 @@ echo $this->getData('nav')->render(); ?>
                     $count = 0;
 
                 foreach ($boards as $key => $board) : ++$count;
-                    $url   = UriFactory::build('kanban/board?{?}&id=' . $board->getId());
+                    $url   = UriFactory::build('{/lang}/{/app}/kanban/board?{?}&id=' . $board->getId());
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->getStatus()); ?></a>

@@ -24,7 +24,7 @@ echo $this->getData('nav')->render(); ?>
 
 <div class="row">
     <?php foreach ($boards as $board) :
-        $url = UriFactory::build('kanban/board?{?}&id=' . $board->getId());
+        $url = UriFactory::build('{/lang}/{/app}/kanban/board?{?}&id=' . $board->getId());
     ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <section class="portlet">
