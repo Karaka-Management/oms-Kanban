@@ -17,7 +17,6 @@ namespace Modules\Kanban\tests\Models;
 use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
-use Modules\Kanban\Models\NullKanbanCard;
 use Modules\Kanban\Models\NullKanbanCardComment;
 use Modules\Media\Models\NullMedia;
 use Modules\Tag\Models\Tag;
