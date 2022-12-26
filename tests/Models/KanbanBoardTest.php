@@ -16,6 +16,7 @@ namespace Modules\Kanban\tests\Models;
 
 use Modules\Kanban\Models\BoardStatus;
 use Modules\Kanban\Models\KanbanBoard;
+use Modules\Kanban\Models\NullKanbanColumn;
 use Modules\Tag\Models\Tag;
 
 /**
@@ -64,8 +65,8 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
      */
     public function testColumnsInputOutput() : void
     {
-        $this->board->addColumn(2);
-        self::assertEquals([2], $this->board->getColumns());
+        $this->board->addColumn($column = new NullKanbanColumn(2));
+        self::assertEquals([$column], $this->board->getColumns());
     }
 
     /**
@@ -74,7 +75,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
      */
     public function testColumnRemove() : void
     {
-        $this->board->addColumn(2);
+        $this->board->addColumn(new NullKanbanColumn(2));
         self::assertTrue($this->board->removeColumn(0));
         self::assertCount(0, $this->board->getColumns());
         self::assertFalse($this->board->removeColumn(0));

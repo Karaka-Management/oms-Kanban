@@ -17,6 +17,8 @@ namespace Modules\Kanban\tests\Models;
 use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
+use Modules\Kanban\Models\NullKanbanCard;
+use Modules\Kanban\Models\NullKanbanCardComment;
 use Modules\Media\Models\NullMedia;
 use Modules\Tag\Models\Tag;
 use Modules\Tasks\Models\Task;
@@ -102,8 +104,8 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
      */
     public function testCommentInputOutput() : void
     {
-        $this->card->addComment(5);
-        self::assertEquals([5], $this->card->getComments());
+        $this->card->addComment($card = new NullKanbanCardComment(5));
+        self::assertEquals([$card], $this->card->getComments());
         self::assertEquals(1, $this->card->getCommentCount());
     }
 
@@ -127,7 +129,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
      */
     public function testCommentRemove() : void
     {
-        $this->card->addComment(5);
+        $this->card->addComment($comment = new NullKanbanCardComment(5));
         self::assertCount(1, $this->card->getComments());
         self::assertTrue($this->card->removeComment(0));
         self::assertCount(0, $this->card->getComments());
