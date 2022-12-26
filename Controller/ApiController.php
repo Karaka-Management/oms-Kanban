@@ -106,7 +106,12 @@ final class ApiController extends Controller
 
                     $internalResponse = new HttpResponse();
                     $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
-                    $card->addTag($internalResponse->get($request->uri->__toString())['response']);
+
+                    if (!\is_array($data = $internalResponse->get($request->uri->__toString()))) {
+                        continue;
+                    }
+
+                    $card->addTag($data['response']);
                 } else {
                     $card->addTag(new NullTag((int) $tag['id']));
                 }
@@ -305,7 +310,12 @@ final class ApiController extends Controller
 
                     $internalResponse = new HttpResponse();
                     $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
-                    $board->addTag($internalResponse->get($request->uri->__toString())['response']);
+
+                    if (!\is_array($data = $internalResponse->get($request->uri->__toString()))) {
+                        continue;
+                    }
+
+                    $board->addTag($data['response']);
                 } else {
                     $board->addTag(new NullTag((int) $tag['id']));
                 }
@@ -354,7 +364,9 @@ final class ApiController extends Controller
      */
     public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
-        $old = clone KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        /** @var \Modules\Kanban\Models\KanbanBoard $old */
+        $old = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $old = clone $old;
         $new = $this->updateBoardFromRequest($request);
         $this->updateModel($request->header->account, $old, $new, KanbanBoardMapper::class, 'board', $request->getOrigin());
         $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully updated', $new);
@@ -373,7 +385,7 @@ final class ApiController extends Controller
     {
         /** @var KanbanBoard $board */
         $board                 = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $board->name           = $request->getData('title') ?? $board->name;
+        $board->name           = (string) ($request->getData('title') ?? $board->name);
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
         $board->order          = (int) ($request->getData('order') ?? $board->order);

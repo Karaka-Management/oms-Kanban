@@ -263,13 +263,13 @@ class KanbanCard implements \JsonSerializable
     /**
      * Add a comment
      *
-     * @param mixed $comment Comment
+     * @param KanbanCardComment $comment Comment
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addComment($comment) : void
+    public function addComment(KanbanCardComment $comment) : void
     {
         $this->comments[] = $comment;
     }

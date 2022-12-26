@@ -104,6 +104,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
+        /** @var \Modules\Kanban\Models\KanbanBoard $board */
         $board = KanbanBoardMapper::get()
             ->with('columns')
             ->with('columns/cards')
@@ -211,6 +212,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
 
+        /** @var \Modules\Kanban\Models\KanbanCard $card */
         $card = KanbanCardMapper::get()
             ->with('tags')
             ->with('tags/title')

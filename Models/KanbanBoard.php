@@ -221,13 +221,13 @@ class KanbanBoard implements \JsonSerializable
     /**
      * Add a column
      *
-     * @param mixed $column Column
+     * @param KanbanColumn $column Column
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addColumn($column) : void
+    public function addColumn(KanbanColumn $column) : void
     {
         $this->columns[] = $column;
     }

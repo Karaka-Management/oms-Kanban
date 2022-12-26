@@ -16,6 +16,7 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
+use Modules\Media\Models\Media;
 
 /**
  * Kanban card comment class.
@@ -121,13 +122,13 @@ class KanbanCardComment implements \JsonSerializable
     /**
      * Add a media file
      *
-     * @param mixed $media Media
+     * @param Media $media Media
      *
      * @return void
      *
      * @since 1.0.0
      */
-    public function addMedia($media) : void
+    public function addMedia(Media $media) : void
     {
         $this->media[] = $media;
     }
