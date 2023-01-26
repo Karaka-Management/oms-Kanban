@@ -14,6 +14,11 @@
                 "type": "VARCHAR(255)",
                 "null": false
             },
+            "kanban_board_color": {
+                "color": "kanban_board_color",
+                "type": "VARCHAR(9)",
+                "null": false
+            },
             "kanban_board_desc": {
                 "name": "kanban_board_desc",
                 "type": "TEXT",

@@ -294,6 +294,7 @@ final class ApiController extends Controller
     {
         $board                 = new KanbanBoard();
         $board->name           = (string) $request->getData('title');
+        $board->color          = (string) ($request->getData('color') ?? '');
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? '');
         $board->order          = (int) ($request->getData('order') ?? 1);

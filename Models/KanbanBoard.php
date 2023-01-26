@@ -46,6 +46,14 @@ class KanbanBoard implements \JsonSerializable
     public string $name = '';
 
     /**
+     * Color.
+     *
+     * @var string
+     * @since 1.0.0
+     */
+    public string $color = '';
+
+    /**
      * Board status.
      *
      * @var int
