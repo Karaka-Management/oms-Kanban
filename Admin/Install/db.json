@@ -15,7 +15,7 @@
                 "null": false
             },
             "kanban_board_color": {
-                "color": "kanban_board_color",
+                "name": "kanban_board_color",
                 "type": "VARCHAR(9)",
                 "null": false
             },
