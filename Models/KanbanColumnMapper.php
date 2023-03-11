@@ -68,5 +68,5 @@ final class KanbanColumnMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='kanban_column_id';
+    public const PRIMARYFIELD = 'kanban_column_id';
 }

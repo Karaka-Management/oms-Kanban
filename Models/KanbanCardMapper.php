@@ -113,5 +113,5 @@ final class KanbanCardMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='kanban_card_id';
+    public const PRIMARYFIELD = 'kanban_card_id';
 }

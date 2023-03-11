@@ -103,5 +103,5 @@ final class KanbanBoardMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='kanban_board_id';
+    public const PRIMARYFIELD = 'kanban_board_id';
 }

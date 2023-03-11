@@ -93,5 +93,5 @@ final class KanbanCardCommentMapper extends DataMapperFactory
      * @var string
      * @since 1.0.0
      */
-    public const PRIMARYFIELD ='kanban_card_comment_id';
+    public const PRIMARYFIELD = 'kanban_card_comment_id';
 }
