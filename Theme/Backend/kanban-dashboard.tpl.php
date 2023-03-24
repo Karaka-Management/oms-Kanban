@@ -6,7 +6,7 @@
  *
  * @package   Modules\Kanban
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -24,7 +24,7 @@ echo $this->getData('nav')->render(); ?>
 
 <div class="row">
     <?php foreach ($boards as $board) :
-        $url = UriFactory::build('{/lang}/{/app}/kanban/board?{?}&id=' . $board->getId());
+        $url = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->getId());
     ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <section class="portlet">

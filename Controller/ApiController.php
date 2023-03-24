@@ -6,7 +6,7 @@
  *
  * @package   Modules\Kanban
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -40,7 +40,7 @@ use phpOMS\Utils\Parser\Markdown\Markdown;
  * Kanban controller class.
  *
  * @package Modules\Kanban
- * @license OMS License 1.0
+ * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
@@ -85,15 +85,15 @@ final class ApiController extends Controller
     public function createKanbanCardFromRequest(RequestAbstract $request) : KanbanCard
     {
         $card                 = new KanbanCard();
-        $card->name           = (string) ($request->getData('title'));
-        $card->descriptionRaw = (string) ($request->getData('plain') ?? '');
-        $card->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
-        $card->style          = (string) ($request->getData('style') ?? '');
+        $card->name           = $request->getDataString('title') ?? '';
+        $card->descriptionRaw = $request->getDataString('plain') ?? '';
+        $card->description    = Markdown::parse($request->getDataString('plain') ?? '');
+        $card->style          = $request->getDataString('style') ?? '';
         $card->column         = (int) $request->getData('column');
-        $card->order          = (int) ($request->getData('order') ?? 1);
-        $card->ref            = (int) ($request->getData('ref') ?? 0);
-        $card->setStatus((int) ($request->getData('status') ?? CardStatus::ACTIVE));
-        $card->setType((int) ($request->getData('type') ?? CardType::TEXT));
+        $card->order          = $request->getDataInt('order') ?? 1;
+        $card->ref            = $request->getDataInt('ref') ?? 0;
+        $card->setStatus($request->getDataInt('status') ?? CardStatus::ACTIVE);
+        $card->setType($request->getDataInt('type') ?? CardType::TEXT);
         $card->createdBy = new NullAccount($request->header->account);
 
         if (!empty($tags = $request->getDataJson('tags'))) {
@@ -157,11 +157,11 @@ final class ApiController extends Controller
         if (($val['title'] = empty($request->getData('title')))
             || ($val['column'] = empty($request->getData('column')))
             || ($val['status'] = (
-                $request->getData('status') !== null
+                $request->hasData('status')
                 && !CardStatus::isValidValue((int) $request->getData('status'))
             ))
             || ($val['type'] = (
-                $request->getData('type') !== null
+                $request->hasData('type')
                 && !CardType::isValidValue((int) $request->getData('type'))
             ))
         ) {
@@ -210,8 +210,8 @@ final class ApiController extends Controller
     public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
     {
         $comment                 = new KanbanCardComment();
-        $comment->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
-        $comment->descriptionRaw = (string) ($request->getData('plain') ?? '');
+        $comment->description    = Markdown::parse($request->getDataString('plain') ?? '');
+        $comment->descriptionRaw = $request->getDataString('plain') ?? '';
         $comment->card           = (int) $request->getData('card');
         $comment->createdBy      = new NullAccount($request->header->account);
 
@@ -294,11 +294,11 @@ final class ApiController extends Controller
     {
         $board                 = new KanbanBoard();
         $board->name           = (string) $request->getData('title');
-        $board->color          = (string) ($request->getData('color') ?? '');
-        $board->description    = Markdown::parse((string) ($request->getData('plain') ?? ''));
-        $board->descriptionRaw = (string) ($request->getData('plain') ?? '');
-        $board->order          = (int) ($request->getData('order') ?? 1);
-        $board->setStatus((int) ($request->getData('status') ?? BoardStatus::ACTIVE));
+        $board->color          = $request->getDataString('color') ?? '';
+        $board->description    = Markdown::parse($request->getDataString('plain') ?? '');
+        $board->descriptionRaw = $request->getDataString('plain') ?? '';
+        $board->order          = $request->getDataInt('order') ?? 1;
+        $board->setStatus($request->getDataInt('status') ?? BoardStatus::ACTIVE);
         $board->createdBy = new NullAccount($request->header->account);
 
         if (!empty($tags = $request->getDataJson('tags'))) {
@@ -340,7 +340,7 @@ final class ApiController extends Controller
         $val = [];
         if (($val['title'] = empty($request->getData('title')))
             || ($val['status'] = (
-                $request->getData('status') !== null
+                $request->hasData('status')
                 && !CardStatus::isValidValue((int) $request->getData('status'))
             ))
         ) {
@@ -389,8 +389,8 @@ final class ApiController extends Controller
         $board->name           = (string) ($request->getData('title') ?? $board->name);
         $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
         $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
-        $board->order          = (int) ($request->getData('order') ?? $board->order);
-        $board->setStatus((int) ($request->getData('status') ?? $board->getStatus()));
+        $board->order          = $request->getDataInt('order') ?? $board->order;
+        $board->setStatus($request->getDataInt('status') ?? $board->getStatus());
         $board->style = (string) ($request->getData('style') ?? $board->style);
 
         return $board;
@@ -437,7 +437,7 @@ final class ApiController extends Controller
         $column        = new KanbanColumn();
         $column->name  = (string) $request->getData('title');
         $column->board = (int) $request->getData('board');
-        $column->order = (int) ($request->getData('order') ?? 1);
+        $column->order = $request->getDataInt('order') ?? 1;
 
         return $column;
     }

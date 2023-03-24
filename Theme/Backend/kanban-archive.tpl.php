@@ -6,7 +6,7 @@
  *
  * @package   Modules\News
  * @copyright Dennis Eichhorn
- * @license   OMS License 1.0
+ * @license   OMS License 2.0
  * @version   1.0.0
  * @link      https://jingga.app
  */
@@ -72,7 +72,7 @@ echo $this->getData('nav')->render(); ?>
                     $count = 0;
 
                 foreach ($boards as $key => $board) : ++$count;
-                    $url   = UriFactory::build('{/lang}/{/app}/kanban/board?{?}&id=' . $board->getId());
+                    $url   = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->getId());
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->getStatus()); ?></a>
