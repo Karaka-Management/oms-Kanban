@@ -154,8 +154,8 @@ final class ApiController extends Controller
     private function validateKanbanCardCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = empty($request->getData('title')))
-            || ($val['column'] = empty($request->getData('column')))
+        if (($val['title'] = !$request->hasData('title'))
+            || ($val['column'] = !$request->hasData('column'))
             || ($val['status'] = (
                 $request->hasData('status')
                 && !CardStatus::isValidValue((int) $request->getData('status'))
@@ -245,8 +245,8 @@ final class ApiController extends Controller
     private function validateKanbanCardCommentCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['plain'] = empty($request->getData('plain')))
-            || ($val['card'] = empty($request->getData('card')))
+        if (($val['plain'] = !$request->hasData('plain'))
+            || ($val['card'] = !$request->hasData('card'))
         ) {
             return $val;
         }
@@ -338,7 +338,7 @@ final class ApiController extends Controller
     private function validateKanbanBoardCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = empty($request->getData('title')))
+        if (($val['title'] = !$request->hasData('title'))
             || ($val['status'] = (
                 $request->hasData('status')
                 && !CardStatus::isValidValue((int) $request->getData('status'))
@@ -454,8 +454,8 @@ final class ApiController extends Controller
     private function validateKanbanColumnCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = empty($request->getData('title'))
-            || ($val['board'] = empty($request->getData('board'))))
+        if (($val['title'] = !$request->hasData('title')
+            || ($val['board'] = !$request->hasData('board')))
         ) {
             return $val;
         }
