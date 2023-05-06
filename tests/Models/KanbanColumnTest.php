@@ -38,7 +38,7 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->column->getId());
+        self::assertEquals(0, $this->column->id);
         self::assertEquals('', $this->column->name);
         self::assertEquals(0, $this->column->order);
         self::assertEquals(0, $this->column->board);

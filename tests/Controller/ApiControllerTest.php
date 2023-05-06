@@ -106,7 +106,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $this->module->apiKanbanBoardCreate($request, $response);
 
         self::assertEquals('Controller Test Board', $response->get('')['response']->name);
-        self::assertGreaterThan(0, $bId = $response->get('')['response']->getId());
+        self::assertGreaterThan(0, $bId = $response->get('')['response']->id);
 
         // update
         $response = new HttpResponse();
@@ -136,7 +136,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $this->module->apiKanbanColumnCreate($request, $response);
 
         self::assertEquals('Controller Test Column', $response->get('')['response']->name);
-        self::assertGreaterThan(0, $response->get('')['response']->getId());
+        self::assertGreaterThan(0, $response->get('')['response']->id);
     }
 
     /**
@@ -173,7 +173,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $this->module->apiKanbanCardCreate($request, $response);
 
         self::assertEquals('Controller Test Card', $response->get('')['response']->name);
-        self::assertGreaterThan(0, $response->get('')['response']->getId());
+        self::assertGreaterThan(0, $response->get('')['response']->id);
     }
 
     /**
@@ -206,7 +206,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('media', \json_encode([1]));
 
         $this->module->apiKanbanCardCommentCreate($request, $response);
-        self::assertGreaterThan(0, $response->get('')['response']->getId());
+        self::assertGreaterThan(0, $response->get('')['response']->id);
     }
 
     /**

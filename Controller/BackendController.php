@@ -116,9 +116,9 @@ final class BackendController extends Controller
 
         $accountId = $request->header->account;
 
-        if ($board->createdBy->getId() !== $accountId
+        if ($board->createdBy->id !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
-                PermissionType::READ, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::BOARD, $board->getId())
+                PermissionType::READ, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::BOARD, $board->id)
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
             $response->header->status = RequestStatusCode::R_403;
@@ -227,9 +227,9 @@ final class BackendController extends Controller
 
         $accountId = $request->header->account;
 
-        if ($card->createdBy->getId() !== $accountId
+        if ($card->createdBy->id !== $accountId
             && !$this->app->accountManager->get($accountId)->hasPermission(
-                PermissionType::READ, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::CARD, $card->getId())
+                PermissionType::READ, $this->app->unitId, $this->app->appId, self::NAME, PermissionCategory::CARD, $card->id)
         ) {
             $view->setTemplate('/Web/Backend/Error/403_inline');
             $response->header->status = RequestStatusCode::R_403;

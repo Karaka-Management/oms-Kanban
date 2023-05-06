@@ -35,7 +35,7 @@ class KanbanBoard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    protected int $id = 0;
+    public int $id = 0;
 
     /**
      * Name.
@@ -59,7 +59,7 @@ class KanbanBoard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $status = BoardStatus::ACTIVE;
+    public int $status = BoardStatus::ACTIVE;
 
     /**
      * Order.

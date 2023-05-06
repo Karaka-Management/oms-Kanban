@@ -40,11 +40,11 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->board->getId());
+        self::assertEquals(0, $this->board->id);
         self::assertEquals(BoardStatus::ACTIVE, $this->board->getStatus());
         self::assertEquals('', $this->board->name);
         self::assertEquals('', $this->board->description);
-        self::assertEquals(0, $this->board->createdBy->getId());
+        self::assertEquals(0, $this->board->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->board->createdAt);
         self::assertEquals([], $this->board->getColumns());
     }

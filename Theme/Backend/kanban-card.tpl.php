@@ -35,7 +35,7 @@ $comments = $card->getComments();
             </div>
             <div class="portlet-foot">
                 <?php $files = $card->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
+                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->id);?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>
@@ -51,7 +51,7 @@ $comments = $card->getComments();
             </div>
             <div class="portlet-foot">
                 <?php $files = $comment->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->getId());?>"><?= $file->name; ?></a></span>
+                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->id);?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>

@@ -36,14 +36,14 @@ final class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
         $board->createdBy   = new NullAccount(1);
 
         $id = KanbanBoardMapper::create()->execute($board);
-        self::assertGreaterThan(0, $board->getId());
-        self::assertEquals($id, $board->getId());
+        self::assertGreaterThan(0, $board->id);
+        self::assertEquals($id, $board->id);
 
-        $boardR = KanbanBoardMapper::get()->where('id', $board->getId())->execute();
+        $boardR = KanbanBoardMapper::get()->where('id', $board->id)->execute();
         self::assertEquals($board->name, $boardR->name);
         self::assertEquals($board->getStatus(), $boardR->getStatus());
         self::assertEquals($board->description, $boardR->description);
-        self::assertEquals($board->createdBy->getId(), $boardR->createdBy->getId());
+        self::assertEquals($board->createdBy->id, $boardR->createdBy->id);
         self::assertEquals($board->createdAt->format('Y-m-d'), $boardR->createdAt->format('Y-m-d'));
         self::assertEquals($board->getColumns(), $boardR->getColumns());
     }

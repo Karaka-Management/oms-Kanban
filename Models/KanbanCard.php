@@ -37,7 +37,7 @@ class KanbanCard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    protected int $id = 0;
+    public int $id = 0;
 
     /**
      * Name.
@@ -53,7 +53,7 @@ class KanbanCard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $status = CardStatus::ACTIVE;
+    public int $status = CardStatus::ACTIVE;
 
     /**
      * Card type.
@@ -61,7 +61,7 @@ class KanbanCard implements \JsonSerializable
      * @var int
      * @since 1.0.0
      */
-    private int $type = CardType::TEXT;
+    public int $type = CardType::TEXT;
 
     /**
      * Color schme.
@@ -400,7 +400,7 @@ class KanbanCard implements \JsonSerializable
     public static function createFromTask(Task $task) : self
     {
         $card      = new self();
-        $card->ref = $task->getId();
+        $card->ref = $task->id;
 
         return $card;
     }

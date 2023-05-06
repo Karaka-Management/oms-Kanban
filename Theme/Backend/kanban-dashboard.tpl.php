@@ -17,14 +17,14 @@ use phpOMS\Uri\UriFactory;
 /** @var \Modules\Kanban\Models\KanbanBoard[] $boards */
 $boards = $this->getData('boards');
 
-$previous = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \reset($boards)->getId() . '&ptype=p';
-$next     = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \end($boards)->getId() . '&ptype=n';
+$previous = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \reset($boards)->id . '&ptype=p';
+$next     = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \end($boards)->id . '&ptype=n';
 
 echo $this->getData('nav')->render(); ?>
 
 <div class="row">
     <?php foreach ($boards as $board) :
-        $url = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->getId());
+        $url = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->id);
     ?>
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <section class="portlet">

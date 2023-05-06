@@ -37,13 +37,13 @@ final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
         $comment->createdBy   = new NullAccount(1);
 
         $id = KanbanCardCommentMapper::create()->execute($comment);
-        self::assertGreaterThan(0, $comment->getId());
-        self::assertEquals($id, $comment->getId());
+        self::assertGreaterThan(0, $comment->id);
+        self::assertEquals($id, $comment->id);
 
-        $commentR = KanbanCardCommentMapper::get()->where('id', $comment->getId())->execute();
+        $commentR = KanbanCardCommentMapper::get()->where('id', $comment->id)->execute();
         self::assertEquals($comment->description, $commentR->description);
         self::assertEquals($comment->card, $commentR->card);
-        self::assertEquals($comment->createdBy->getId(), $commentR->createdBy->getId());
+        self::assertEquals($comment->createdBy->id, $commentR->createdBy->id);
         self::assertEquals($comment->createdAt->format('Y-m-d'), $commentR->createdAt->format('Y-m-d'));
     }
 }

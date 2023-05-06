@@ -43,14 +43,14 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
      */
     public function testDefault() : void
     {
-        self::assertEquals(0, $this->card->getId());
+        self::assertEquals(0, $this->card->id);
         self::assertEquals(CardStatus::ACTIVE, $this->card->getStatus());
         self::assertEquals(CardType::TEXT, $this->card->getType());
         self::assertEquals('', $this->card->name);
         self::assertEquals('', $this->card->description);
         self::assertEquals(0, $this->card->column);
         self::assertEquals(0, $this->card->order);
-        self::assertEquals(0, $this->card->createdBy->getId());
+        self::assertEquals(0, $this->card->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->card->createdAt);
         self::assertEquals([], $this->card->getComments());
         self::assertEquals([], $this->card->getTags());

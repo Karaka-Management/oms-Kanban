@@ -18,8 +18,8 @@ use phpOMS\Uri\UriFactory;
 /** @var \Modules\News\Models\NewsArticle[] $boards */
 $boards = $this->getData('boards') ?? [];
 
-$previous = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \reset($boards)->getId() . '&ptype=p';
-$next     = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \end($boards)->getId() . '&ptype=n';
+$previous = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \reset($boards)->id . '&ptype=p';
+$next     = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \end($boards)->id . '&ptype=n';
 
 echo $this->getData('nav')->render(); ?>
 
@@ -72,7 +72,7 @@ echo $this->getData('nav')->render(); ?>
                     $count = 0;
 
                 foreach ($boards as $key => $board) : ++$count;
-                    $url   = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->getId());
+                    $url   = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->id);
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
                         <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->getStatus()); ?></a>
