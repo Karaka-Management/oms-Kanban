@@ -108,6 +108,7 @@ final class BackendController extends Controller
         $board = KanbanBoardMapper::get()
             ->with('columns')
             ->with('columns/cards')
+            ->with('columns/cards/comments')
             ->with('columns/cards/tags')
             ->with('columns/cards/tags/title')
             ->where('id', (int) $request->getData('id'))

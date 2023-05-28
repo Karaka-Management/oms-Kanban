@@ -17,10 +17,13 @@ $board = $this->getData('board');
 
 /** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
+
+$columnCount = \count($columns);
+$layout = \max(4, $columnCount);
 ?>
-<div class="row">
+<div class="row kanban-board">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="col-xs-12 col-md-6 col-lg-3 box kanban-column">
+    <div id="kanban-column-<?= $i; ?>" class="box kanban-column">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = \phpOMS\Uri\UriFactory::build('kanban/card?{?}&id=' . $card->id);
@@ -32,12 +35,13 @@ $columns = $board->getColumns();
                 </div>
                 <div class="portlet-body">
                     <article><?= $card->description; ?></article>
+
+                    <?php $tags = $card->getTags(); foreach ($tags as $tag) : ?>
+                        <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= !empty($tag->icon) ? '<i class="' . $this->printHtml($tag->icon) . '"></i>' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
+                    <?php endforeach; ?>
                 </div>
                 <div class="portlet-foot">
                     <div class="overflowfix">
-                        <?php $tags = $card->getTags(); foreach ($tags as $tag) : ?>
-                            <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= !empty($tag->icon) ? '<i class="' . $this->printHtml($tag->icon) . '"></i>' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
-                        <?php endforeach; ?>
                         <a href="<?= $url; ?>" class="button floatRight"><?= $this->getHtml('More', '0', '0'); ?></a>
                     </div>
                 </div>

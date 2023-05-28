@@ -5,3 +5,10 @@
     flex: 1; }
   .kanban-column .portlet-head div {
     flex: 0; }
+    .kanban-board {
+      column-gap: 1rem;
+      flex-wrap: nowrap;
+  }
+  .kanban-column {
+    min-width: 300px;
+  }

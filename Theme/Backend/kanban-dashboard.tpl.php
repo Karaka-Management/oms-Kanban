@@ -23,6 +23,17 @@ $next     = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \
 echo $this->getData('nav')->render(); ?>
 
 <div class="row">
+    <?php if (empty($boards)) : ?>
+        <div class="emptyPage"></div>
+        <?php else : ?>
+        <div class="plain-portlet">
+            <a tabindex="0" class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
+            <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="row">
     <?php foreach ($boards as $board) :
         $url = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->id);
     ?>
@@ -33,25 +44,16 @@ echo $this->getData('nav')->render(); ?>
             </div>
             <div class="portlet-body">
                 <article><?= $board->description; ?></article>
+                <?php $tags = $board->getTags(); foreach ($tags as $tag) : ?>
+                    <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= !empty($tag->icon) ? '<i class="' . $this->printHtml($tag->icon) . '"></i>' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
+                <?php endforeach; ?>
             </div>
             <div class="portlet-foot">
                  <div class="overflowfix">
-                    <?php $tags = $board->getTags(); foreach ($tags as $tag) : ?>
-                        <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= !empty($tag->icon) ? '<i class="' . $this->printHtml($tag->icon) . '"></i>' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
-                    <?php endforeach; ?>
                     <a tabindex="0" href="<?= $url; ?>" class="button floatRight"><?= $this->getHtml('Open', '0', '0'); ?></a>
                 </div>
             </div>
         </section>
     </div>
     <?php endforeach; ?>
-
-    <?php if (empty($boards)) : ?>
-    <div class="emptyPage"></div>
-    <?php else : ?>
-    <div class="plain-portlet">
-        <a tabindex="0" class="button" href="<?= UriFactory::build($previous); ?>"><?= $this->getHtml('Previous', '0', '0'); ?></a>
-        <a tabindex="0" class="button" href="<?= UriFactory::build($next); ?>"><?= $this->getHtml('Next', '0', '0'); ?></a>
-    </div>
-    <?php endif; ?>
 <div>
