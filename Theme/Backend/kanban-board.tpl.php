@@ -19,7 +19,7 @@ $board = $this->getData('board');
 $columns = $board->getColumns();
 
 $columnCount = \count($columns);
-$layout = \max(4, $columnCount);
+$layout      = \max(4, $columnCount);
 ?>
 <div class="row kanban-board">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
