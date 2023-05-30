@@ -62,7 +62,7 @@ final class ApiController extends Controller
     public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
-            $response->set('kanban_card_create', new FormValidation($val));
+            $response->data['kanban_card_create'] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -118,7 +118,7 @@ final class ApiController extends Controller
             }
         }
 
-        if (!empty($uploadedFiles = $request->getFiles())) {
+        if (!empty($uploadedFiles = $request->files)) {
             $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
                 [],
                 [],
@@ -187,7 +187,7 @@ final class ApiController extends Controller
     public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
-            $response->set('kanban_comment_create', new FormValidation($val));
+            $response->data['kanban_comment_create'] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -215,7 +215,7 @@ final class ApiController extends Controller
         $comment->card           = (int) $request->getData('card');
         $comment->createdBy      = new NullAccount($request->header->account);
 
-        if (!empty($uploadedFiles = $request->getFiles())) {
+        if (!empty($uploadedFiles = $request->files)) {
             $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
                 [],
                 [],
@@ -270,7 +270,7 @@ final class ApiController extends Controller
     public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
-            $response->set('kanban_board_create', new FormValidation($val));
+            $response->data['kanban_board_create'] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
@@ -412,7 +412,7 @@ final class ApiController extends Controller
     public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
-            $response->set('kanban_column_create', new FormValidation($val));
+            $response->data['kanban_column_create'] = new FormValidation($val);
             $response->header->status = RequestStatusCode::R_400;
 
             return;
