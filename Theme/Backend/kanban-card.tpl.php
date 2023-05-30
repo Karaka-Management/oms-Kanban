@@ -15,7 +15,7 @@ declare(strict_types=1);
 use phpOMS\Uri\UriFactory;
 
 /** @var \Modules\Kanban\Models\KanbanCard $card */
-$card = $this->getData('card');
+$card = $this->data['card'];
 
 $comments = $card->getComments();
 ?>

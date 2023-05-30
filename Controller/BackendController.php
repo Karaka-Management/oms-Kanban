@@ -52,7 +52,7 @@ final class BackendController extends Controller
     public function setupStyles(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         /** @var \phpOMS\Model\Html\Head $head */
-        $head = $response->get('Content')->getData('head');
+        $head = $response->get('Content')->head;
         $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css?v=1.0.0');
     }
 
@@ -73,7 +73,7 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-dashboard');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
@@ -83,7 +83,7 @@ final class BackendController extends Controller
             ->limit(20)
             ->execute();
 
-        $view->setData('boards', $list);
+        $view->data['boards'] = $list;
 
         return $view;
     }
@@ -127,9 +127,9 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
-        $view->setData('board', $board);
+        $view->data['board'] = $board;
 
         return $view;
     }
@@ -150,7 +150,7 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-archive');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
@@ -160,7 +160,7 @@ final class BackendController extends Controller
             ->limit(25)
             ->execute();
 
-        $view->setData('boards', $list);
+        $view->data['boards'] = $list;
 
         return $view;
     }
@@ -192,7 +192,7 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board-create');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         return $view;
     }
@@ -238,8 +238,8 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-card');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
-        $view->setData('card', $card);
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
+        $view->data['card'] = $card;
 
         return $view;
     }

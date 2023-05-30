@@ -16,12 +16,12 @@ use phpOMS\Uri\UriFactory;
 
 /** @var \phpOMS\Views\View $this */
 /** @var \Modules\News\Models\NewsArticle[] $boards */
-$boards = $this->getData('boards') ?? [];
+$boards = $this->data['boards'] ?? [];
 
 $previous = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \reset($boards)->id . '&ptype=p';
 $next     = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \end($boards)->id . '&ptype=n';
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <div class="col-xs-12">
