@@ -52,7 +52,7 @@ final class BackendController extends Controller
     public function setupStyles(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         /** @var \phpOMS\Model\Html\Head $head */
-        $head = $response->get('Content')->getData('head');
+        $head = $response->get('Content')->head;
         $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css?v=1.0.0');
     }
 
@@ -73,17 +73,17 @@ final class BackendController extends Controller
         $view = new View($this->app->l11nManager, $request, $response);
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-dashboard');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
             ->with('tags/title')
-            ->where('tags/title/language', $request->getLanguage())
+            ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(20)
             ->execute();
 
-        $view->setData('boards', $list);
+        $view->data['boards'] = $list;
 
         return $view;
     }
@@ -112,7 +112,7 @@ final class BackendController extends Controller
             ->with('columns/cards/tags')
             ->with('columns/cards/tags/title')
             ->where('id', (int) $request->getData('id'))
-            ->where('columns/cards/tags/title/language', $request->getLanguage())
+            ->where('columns/cards/tags/title/language', $request->header->l11n->language)
             ->execute();
 
         $accountId = $request->header->account;
@@ -127,9 +127,9 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
-        $view->setData('board', $board);
+        $view->data['board'] = $board;
 
         return $view;
     }
@@ -150,17 +150,17 @@ final class BackendController extends Controller
     {
         $view = new View($this->app->l11nManager, $request, $response);
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-archive');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
             ->with('tags/title')
-            ->where('tags/title/language', $request->getLanguage())
+            ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(25)
             ->execute();
 
-        $view->setData('boards', $list);
+        $view->data['boards'] = $list;
 
         return $view;
     }
@@ -192,7 +192,7 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board-create');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
         return $view;
     }
@@ -223,7 +223,7 @@ final class BackendController extends Controller
             ->with('comments/media')
             ->with('comments/createdBy')
             ->where('id', (int) $request->getData('id'))
-            ->where('tags/title/language', $response->getLanguage())
+            ->where('tags/title/language', $response->header->l11n->language)
             ->execute();
 
         $accountId = $request->header->account;
@@ -238,8 +238,8 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-card');
-        $view->addData('nav', $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response));
-        $view->setData('card', $card);
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
+        $view->data['card'] = $card;
 
         return $view;
     }

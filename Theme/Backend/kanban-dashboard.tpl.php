@@ -15,12 +15,12 @@ declare(strict_types=1);
 use phpOMS\Uri\UriFactory;
 
 /** @var \Modules\Kanban\Models\KanbanBoard[] $boards */
-$boards = $this->getData('boards');
+$boards = $this->data['boards'];
 
 $previous = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \reset($boards)->id . '&ptype=p';
 $next     = empty($boards) ? 'kanban/dashboard' : 'kanban/dashboard?{?}&id=' . \end($boards)->id . '&ptype=n';
 
-echo $this->getData('nav')->render(); ?>
+echo $this->data['nav']->render(); ?>
 
 <div class="row">
     <?php if (empty($boards)) : ?>

@@ -13,7 +13,7 @@
 declare(strict_types=1);
 
 /** @var \Modules\Kanban\Models\KanbanBoard $board */
-$board = $this->getData('board');
+$board = $this->data['board'];
 
 /** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
