@@ -78,7 +78,7 @@ final class BackendController extends Controller
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
             ->with('tags/title')
-            ->where('tags/title/language', $request->getLanguage())
+            ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(20)
             ->execute();
@@ -112,7 +112,7 @@ final class BackendController extends Controller
             ->with('columns/cards/tags')
             ->with('columns/cards/tags/title')
             ->where('id', (int) $request->getData('id'))
-            ->where('columns/cards/tags/title/language', $request->getLanguage())
+            ->where('columns/cards/tags/title/language', $request->header->l11n->language)
             ->execute();
 
         $accountId = $request->header->account;
@@ -155,7 +155,7 @@ final class BackendController extends Controller
         $list = KanbanBoardMapper::getAll()
             ->with('tags')
             ->with('tags/title')
-            ->where('tags/title/language', $request->getLanguage())
+            ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(25)
             ->execute();
@@ -223,7 +223,7 @@ final class BackendController extends Controller
             ->with('comments/media')
             ->with('comments/createdBy')
             ->where('id', (int) $request->getData('id'))
-            ->where('tags/title/language', $response->getLanguage())
+            ->where('tags/title/language', $response->header->l11n->language)
             ->execute();
 
         $accountId = $request->header->account;
