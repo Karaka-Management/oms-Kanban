@@ -63,7 +63,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
             $response->data['kanban_card_create'] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status             = RequestStatusCode::R_400;
 
             return;
         }
@@ -188,7 +188,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
             $response->data['kanban_comment_create'] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status                = RequestStatusCode::R_400;
 
             return;
         }
@@ -271,7 +271,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
             $response->data['kanban_board_create'] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status              = RequestStatusCode::R_400;
 
             return;
         }
@@ -413,7 +413,7 @@ final class ApiController extends Controller
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
             $response->data['kanban_column_create'] = new FormValidation($val);
-            $response->header->status = RequestStatusCode::R_400;
+            $response->header->status               = RequestStatusCode::R_400;
 
             return;
         }

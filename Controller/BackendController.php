@@ -238,7 +238,7 @@ final class BackendController extends Controller
         }
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-card');
-        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
+        $view->data['nav']  = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
         $view->data['card'] = $card;
 
         return $view;
