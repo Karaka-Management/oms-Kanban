@@ -194,6 +194,9 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board-create');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
 
+        $permissionView = new \Modules\Admin\Theme\Backend\Components\AccountPermissionSelector\BaseView($this->app->l11nManager, $request, $response);
+        $view->data['permissionView'] = $permissionView;
+
         return $view;
     }
 

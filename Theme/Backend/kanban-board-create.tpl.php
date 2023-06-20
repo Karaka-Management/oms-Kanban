@@ -40,3 +40,5 @@ echo $this->data['nav']->render();
         </section>
     </div>
 </div>
+
+<?= $this->data['permissionView']->render('board_permission'); ?>
