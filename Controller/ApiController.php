@@ -30,10 +30,8 @@ use Modules\Media\Models\NullMedia;
 use Modules\Tag\Models\NullTag;
 use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Message\Http\RequestStatusCode;
-use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
-use phpOMS\Model\Message\FormValidation;
 use phpOMS\Utils\Parser\Markdown\Markdown;
 
 /**
@@ -62,15 +60,15 @@ final class ApiController extends Controller
     public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
-            $response->data['kanban_card_create'] = new FormValidation($val);
-            $response->header->status             = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $card = $this->createKanbanCardFromRequest($request);
         $this->createModel($request->header->account, $card, KanbanCardMapper::class, 'card', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $card);
+        $this->createStandardCreateResponse($request, $response, $card);
     }
 
     /**
@@ -187,15 +185,15 @@ final class ApiController extends Controller
     public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
-            $response->data['kanban_comment_create'] = new FormValidation($val);
-            $response->header->status                = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $comment = $this->createKanbanCardCommentFromRequest($request);
         $this->createModel($request->header->account, $comment, KanbanCardCommentMapper::class, 'comment', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Card', 'Card successfully created.', $comment);
+        $this->createStandardCreateResponse($request, $response, $comment);
     }
 
     /**
@@ -270,15 +268,15 @@ final class ApiController extends Controller
     public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
-            $response->data['kanban_board_create'] = new FormValidation($val);
-            $response->header->status              = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $board = $this->createKanbanBoardFromRequest($request);
         $this->createModel($request->header->account, $board, KanbanBoardMapper::class, 'board',$request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully created.', $board);
+        $this->createStandardCreateResponse($request, $response, $board);
     }
 
     /**
@@ -367,10 +365,10 @@ final class ApiController extends Controller
     {
         /** @var \Modules\Kanban\Models\KanbanBoard $old */
         $old = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $old = clone $old;
-        $new = $this->updateBoardFromRequest($request);
+        $new = $this->updateBoardFromRequest($request, clone $old);
+
         $this->updateModel($request->header->account, $old, $new, KanbanBoardMapper::class, 'board', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Board', 'Board successfully updated', $new);
+        $this->createStandardUpdateResponse($request, $response, $new);
     }
 
     /**
@@ -382,18 +380,16 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    private function updateBoardFromRequest(RequestAbstract $request) : KanbanBoard
+    private function updateBoardFromRequest(RequestAbstract $request, KanbanBoard $new) : KanbanBoard
     {
-        /** @var KanbanBoard $board */
-        $board                 = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
-        $board->name           = (string) ($request->getData('title') ?? $board->name);
-        $board->description    = Markdown::parse((string) ($request->getData('plain') ?? $board->descriptionRaw));
-        $board->descriptionRaw = (string) ($request->getData('plain') ?? $board->descriptionRaw);
-        $board->order          = $request->getDataInt('order') ?? $board->order;
-        $board->setStatus($request->getDataInt('status') ?? $board->getStatus());
-        $board->style = (string) ($request->getData('style') ?? $board->style);
+        $new->name           = (string) ($request->getData('title') ?? $new->name);
+        $new->description    = Markdown::parse((string) ($request->getData('plain') ?? $new->descriptionRaw));
+        $new->descriptionRaw = (string) ($request->getData('plain') ?? $new->descriptionRaw);
+        $new->order          = $request->getDataInt('order') ?? $new->order;
+        $new->setStatus($request->getDataInt('status') ?? $new->getStatus());
+        $new->style = (string) ($request->getData('style') ?? $new->style);
 
-        return $board;
+        return $new;
     }
 
     /**
@@ -412,15 +408,15 @@ final class ApiController extends Controller
     public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
-            $response->data['kanban_column_create'] = new FormValidation($val);
-            $response->header->status               = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $column = $this->createKanbanColumnFromRequest($request);
         $this->createModel($request->header->account, $column, KanbanColumnMapper::class, 'column', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Column', 'Column successfully created.', $column);
+        $this->createStandardCreateResponse($request, $response, $column);
     }
 
     /**
