@@ -382,12 +382,12 @@ final class ApiController extends Controller
      */
     private function updateBoardFromRequest(RequestAbstract $request, KanbanBoard $new) : KanbanBoard
     {
-        $new->name           = (string) ($request->getData('title') ?? $new->name);
-        $new->description    = Markdown::parse((string) ($request->getData('plain') ?? $new->descriptionRaw));
-        $new->descriptionRaw = (string) ($request->getData('plain') ?? $new->descriptionRaw);
+        $new->name           = $request->getDataString('title') ?? $new->name;
+        $new->description    = Markdown::parse($request->getDataString('plain') ?? $new->descriptionRaw);
+        $new->descriptionRaw = $request->getDataString('plain') ?? $new->descriptionRaw;
         $new->order          = $request->getDataInt('order') ?? $new->order;
         $new->setStatus($request->getDataInt('status') ?? $new->getStatus());
-        $new->style = (string) ($request->getData('style') ?? $new->style);
+        $new->style = $request->getDataString('style') ?? $new->style;
 
         return $new;
     }
