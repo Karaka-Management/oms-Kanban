@@ -37,12 +37,12 @@ abstract class PermissionCategory extends Enum
     public const D_CREATE = [
         self::BOARD => [
             'DEFAULT' => ['RUDP'], // limited by own permissions
-            'MAX' => ['RUDP'] // limited by own permissions
+            'MAX'     => ['RUDP'], // limited by own permissions
         ],
 
         self::CARD => [
             'DEFAULT' => ['RU'], // limited by own permissions
-            'MAX' => ['RUD'] // limited by own permissions
+            'MAX'     => ['RUD'], // limited by own permissions
         ],
     ];
 }
