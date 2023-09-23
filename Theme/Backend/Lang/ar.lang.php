@@ -13,13 +13,17 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1' => 'نشيط',
-    ':bStatus2' => 'غير نشط',
-    ':bStatus3' => 'في الأرشيف',
-    'Archive'   => '#VALUE!',
-    'Back'      => '#VALUE!',
-    'Dashboard' => 'لوحة القيادة',
-    'Date'      => '#VALUE!',
-    'Status'    => '#VALUE!',
-    'Title'     => '#VALUE!',
+    ':bStatus1'   => 'نشيط',
+    ':bStatus2'   => 'غير نشط',
+    ':bStatus3'   => 'في الأرشيف',
+    'Archive'     => '#VALUE!',
+    'Back'        => '#VALUE!',
+    'Dashboard'   => 'لوحة القيادة',
+    'Date'        => '#VALUE!',
+    'Description' => '',
+    'Kanban'      => '',
+    'Name'        => '',
+    'Status'      => '#VALUE!',
+    'Tags'        => '',
+    'Title'       => '#VALUE!',
 ]];

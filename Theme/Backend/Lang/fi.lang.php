@@ -13,13 +13,17 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1' => 'Aktiivinen',
-    ':bStatus2' => 'Epäaktiivinen',
-    ':bStatus3' => 'Arkistoitu',
-    'Archive'   => '#VALUE!',
-    'Back'      => '#VALUE!',
-    'Dashboard' => 'Kojelauta',
-    'Date'      => '#VALUE!',
-    'Status'    => '#VALUE!',
-    'Title'     => '#VALUE!',
+    ':bStatus1'   => 'Aktiivinen',
+    ':bStatus2'   => 'Epäaktiivinen',
+    ':bStatus3'   => 'Arkistoitu',
+    'Archive'     => '#VALUE!',
+    'Back'        => '#VALUE!',
+    'Dashboard'   => 'Kojelauta',
+    'Date'        => '#VALUE!',
+    'Description' => '',
+    'Kanban'      => '',
+    'Name'        => '',
+    'Status'      => '#VALUE!',
+    'Tags'        => '',
+    'Title'       => '#VALUE!',
 ]];
