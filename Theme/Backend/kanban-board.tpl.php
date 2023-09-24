@@ -37,7 +37,7 @@ $layout      = \max(4, $columnCount);
                     <article><?= $card->description; ?></article>
 
                     <?php $tags = $card->getTags(); foreach ($tags as $tag) : ?>
-                        <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= !empty($tag->icon) ? '<i class="' . $this->printHtml($tag->icon) . '"></i>' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
+                        <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= empty($tag->icon) ? '' : '<i class="' . $this->printHtml($tag->icon) . '"></i>'; ?><?= $this->printHtml($tag->getL11n()); ?></span>
                     <?php endforeach; ?>
                 </div>
                 <div class="portlet-foot">
