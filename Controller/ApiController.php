@@ -49,7 +49,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -57,7 +57,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiKanbanCardCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateKanbanCardCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -174,7 +174,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -182,7 +182,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -257,7 +257,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -265,7 +265,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiKanbanBoardCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateKanbanBoardCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
@@ -353,7 +353,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -361,7 +361,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         /** @var \Modules\Kanban\Models\KanbanBoard $old */
         $old = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
@@ -397,7 +397,7 @@ final class ApiController extends Controller
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
-     * @param mixed            $data     Generic data
+     * @param array            $data     Generic data
      *
      * @return void
      *
@@ -405,7 +405,7 @@ final class ApiController extends Controller
      *
      * @since 1.0.0
      */
-    public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
+    public function apiKanbanColumnCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         if (!empty($val = $this->validateKanbanColumnCreate($request))) {
             $response->header->status = RequestStatusCode::R_400;
