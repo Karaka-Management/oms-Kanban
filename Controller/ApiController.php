@@ -103,7 +103,7 @@ final class ApiController extends Controller
                     $request->setData('language', $tag['language'], true);
 
                     $internalResponse = new HttpResponse();
-                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
+                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse);
 
                     if (!\is_array($data = $internalResponse->get($request->uri->__toString()))) {
                         continue;
@@ -308,7 +308,7 @@ final class ApiController extends Controller
                     $request->setData('language', $tag['language'], true);
 
                     $internalResponse = new HttpResponse();
-                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse, null);
+                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse);
 
                     if (!\is_array($data = $internalResponse->get($request->uri->__toString()))) {
                         continue;
