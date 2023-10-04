@@ -101,7 +101,7 @@ class KanbanCard implements \JsonSerializable
      * @var Tag[]
      * @since 1.0.0
      */
-    private array $tags = [];
+    public array $tags = [];
 
     /**
      * Column this card belongs to.
@@ -151,7 +151,7 @@ class KanbanCard implements \JsonSerializable
      * @var \Modules\Kanban\Models\KanbanCardComment[]
      * @since 1.0.0
      */
-    private array $comments = [];
+    public array $comments = [];
 
     /**
      * Media
@@ -159,7 +159,7 @@ class KanbanCard implements \JsonSerializable
      * @var Media[]
      * @since 1.0.0
      */
-    private array $media = [];
+    public array $media = [];
 
     /**
      * Constructor.

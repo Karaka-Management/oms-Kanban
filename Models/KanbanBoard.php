@@ -99,7 +99,7 @@ class KanbanBoard implements \JsonSerializable
      * @var Tag[]
      * @since 1.0.0
      */
-    private array $tags = [];
+    public array $tags = [];
 
     /**
      * Creator.
@@ -123,7 +123,7 @@ class KanbanBoard implements \JsonSerializable
      * @var \Modules\Kanban\Models\KanbanColumn[]
      * @since 1.0.0
      */
-    private array $columns = [];
+    public array $columns = [];
 
     /**
      * Constructor.

@@ -82,7 +82,7 @@ class KanbanCardComment implements \JsonSerializable
      * @var \Modules\Media\Models\Media[]
      * @since 1.0.0
      */
-    private array $media = [];
+    public array $media = [];
 
     /**
      * Constructor.

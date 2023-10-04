@@ -62,7 +62,7 @@ class KanbanColumn implements \JsonSerializable
      * @var array
      * @since 1.0.0
      */
-    private array $cards = [];
+    public array $cards = [];
 
     /**
      * Get id.
