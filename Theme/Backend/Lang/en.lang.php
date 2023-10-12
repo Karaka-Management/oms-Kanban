@@ -22,8 +22,8 @@ return ['Kanban' => [
     'Date'        => 'Date',
     'Description' => '',
     'Kanban'      => '',
-    'Name'        => '',
+    'Name'        => 'Name',
     'Status'      => 'Status',
-    'Tags'        => '',
+    'Tags'        => 'Tags',
     'Title'       => 'Title',
 ]];
