@@ -23,7 +23,7 @@ final class NullKanbanBoardTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\NullKanbanBoard
-     * @group framework
+     * @group module
      */
     public function testNull() : void
     {
@@ -32,11 +32,21 @@ final class NullKanbanBoardTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers Modules\Kanban\Models\NullKanbanBoard
-     * @group framework
+     * @group module
      */
     public function testId() : void
     {
         $null = new NullKanbanBoard(2);
         self::assertEquals(2, $null->id);
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\NullKanbanBoard
+     * @group module
+     */
+    public function testJsonSerialize() : void
+    {
+        $null = new NullKanbanBoard(2);
+        self::assertEquals(['id' => 2], $null);
     }
 }

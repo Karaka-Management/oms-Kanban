@@ -23,7 +23,7 @@ final class NullKanbanCardTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\NullKanbanCard
-     * @group framework
+     * @group module
      */
     public function testNull() : void
     {
@@ -32,11 +32,21 @@ final class NullKanbanCardTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers Modules\Kanban\Models\NullKanbanCard
-     * @group framework
+     * @group module
      */
     public function testId() : void
     {
         $null = new NullKanbanCard(2);
         self::assertEquals(2, $null->id);
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\NullKanbanCard
+     * @group module
+     */
+    public function testJsonSerialize() : void
+    {
+        $null = new NullKanbanCard(2);
+        self::assertEquals(['id' => 2], $null);
     }
 }

@@ -23,7 +23,7 @@ final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @covers Modules\Kanban\Models\NullKanbanColumn
-     * @group framework
+     * @group module
      */
     public function testNull() : void
     {
@@ -32,11 +32,21 @@ final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @covers Modules\Kanban\Models\NullKanbanColumn
-     * @group framework
+     * @group module
      */
     public function testId() : void
     {
         $null = new NullKanbanColumn(2);
         self::assertEquals(2, $null->id);
+    }
+
+    /**
+     * @covers Modules\Kanban\Models\NullKanbanColumn
+     * @group module
+     */
+    public function testJsonSerialize() : void
+    {
+        $null = new NullKanbanColumn(2);
+        self::assertEquals(['id' => 2], $null);
     }
 }
