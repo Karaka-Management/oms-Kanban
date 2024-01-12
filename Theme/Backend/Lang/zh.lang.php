@@ -13,12 +13,8 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1'   => '积极的',
-    ':bStatus2'   => '不活跃',
-    ':bStatus3'   => '存档',
     'Archive'     => '',
     'Back'        => '',
-    'Dashboard'   => '仪表板',
     'Date'        => '',
     'Description' => '',
     'Kanban'      => '',

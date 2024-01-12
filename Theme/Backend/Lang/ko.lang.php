@@ -13,12 +13,8 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1'   => '활동적인',
-    ':bStatus2'   => '비활성으로',
-    ':bStatus3'   => '보관',
     'Archive'     => '',
     'Back'        => '',
-    'Dashboard'   => '계기반',
     'Date'        => '',
     'Description' => '',
     'Kanban'      => '',

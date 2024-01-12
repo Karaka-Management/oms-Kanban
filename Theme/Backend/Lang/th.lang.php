@@ -13,12 +13,8 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1'   => 'คล่องแคล่ว',
-    ':bStatus2'   => 'ไม่ใช้งาน',
-    ':bStatus3'   => 'ที่เก็บถาวร',
     'Archive'     => '',
     'Back'        => '',
-    'Dashboard'   => 'แผงควบคุม',
     'Date'        => '',
     'Description' => '',
     'Kanban'      => '',

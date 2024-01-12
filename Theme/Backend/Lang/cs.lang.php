@@ -13,12 +13,8 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1'   => 'Aktivní',
-    ':bStatus2'   => 'Neaktivní',
-    ':bStatus3'   => 'Archivovaný',
     'Archive'     => '',
     'Back'        => '',
-    'Dashboard'   => 'Přístrojová deska',
     'Date'        => '',
     'Description' => '',
     'Kanban'      => '',

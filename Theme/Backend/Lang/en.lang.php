@@ -18,7 +18,6 @@ return ['Kanban' => [
     ':bStatus3'   => 'Archived',
     'Archive'     => 'Archive',
     'Back'        => 'Back',
-    'Dashboard'   => 'Dashboard',
     'Date'        => 'Date',
     'Description' => '',
     'Kanban'      => '',

@@ -13,12 +13,8 @@
 declare(strict_types=1);
 
 return ['Kanban' => [
-    ':bStatus1'   => 'نشيط',
-    ':bStatus2'   => 'غير نشط',
-    ':bStatus3'   => 'في الأرشيف',
     'Archive'     => '',
     'Back'        => '',
-    'Dashboard'   => 'لوحة القيادة',
     'Date'        => '',
     'Description' => '',
     'Kanban'      => '',
