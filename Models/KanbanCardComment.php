@@ -16,7 +16,6 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
-use Modules\Media\Models\Media;
 
 /**
  * Kanban card comment class.
@@ -77,14 +76,6 @@ class KanbanCardComment implements \JsonSerializable
     public \DateTimeImmutable $createdAt;
 
     /**
-     * Media.
-     *
-     * @var \Modules\Media\Models\Media[]
-     * @since 1.0.0
-     */
-    public array $media = [];
-
-    /**
      * Constructor.
      *
      * @since 1.0.0
@@ -93,44 +84,6 @@ class KanbanCardComment implements \JsonSerializable
     {
         $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int Model id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get the media files
-     *
-     * @return array
-     *
-     * @since 1.0.0
-     */
-    public function getMedia() : array
-    {
-        return $this->media;
-    }
-
-    /**
-     * Add a media file
-     *
-     * @param Media $media Media
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function addMedia(Media $media) : void
-    {
-        $this->media[] = $media;
     }
 
     /**
@@ -145,7 +98,7 @@ class KanbanCardComment implements \JsonSerializable
             'card'           => $this->card,
             'createdBy'      => $this->createdBy,
             'createdAt'      => $this->createdAt,
-            'media'          => $this->media,
+            'media'          => $this->files,
         ];
     }
 
@@ -156,4 +109,6 @@ class KanbanCardComment implements \JsonSerializable
     {
         return $this->toArray();
     }
+
+    use \Modules\Media\Models\MediaListTrait;
 }

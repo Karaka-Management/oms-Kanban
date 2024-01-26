@@ -220,7 +220,7 @@ final class BackendController extends Controller
         $card = KanbanCardMapper::get()
             ->with('tags')
             ->with('tags/title')
-            ->with('media')
+            ->with('files')
             ->with('createdBy')
             ->with('comments')
             ->with('comments/media')

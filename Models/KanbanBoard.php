@@ -16,7 +16,6 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
-use Modules\Tag\Models\NullTag;
 use Modules\Tag\Models\Tag;
 
 /**
@@ -137,84 +136,6 @@ class KanbanBoard implements \JsonSerializable
     }
 
     /**
-     * Get id.
-     *
-     * @return int Model id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get the status
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getStatus() : int
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the status
-     *
-     * @param int $status Status
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setStatus(int $status) : void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return array
-     *
-     * @since 1.0.0
-     */
-    public function getTags() : array
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Add tag
-     *
-     * @param Tag $tag Tag
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function addTag(Tag $tag) : void
-    {
-        $this->tags[] = $tag;
-    }
-
-    /**
-     * Get task elements.
-     *
-     * @param int $id Element id
-     *
-     * @return Tag
-     *
-     * @since 1.0.0
-     */
-    public function getTag(int $id) : Tag
-    {
-        return $this->tags[$id] ?? new NullTag();
-    }
-
-    /**
      * Get the columns
      *
      * @return array
@@ -266,10 +187,10 @@ class KanbanBoard implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'           => $this->id,
-            'status'       => $this->status,
-            'columns'      => $this->columns,
-            'tags'         => $this->tags,
+            'id'      => $this->id,
+            'status'  => $this->status,
+            'columns' => $this->columns,
+            'tags'    => $this->tags,
         ];
     }
 

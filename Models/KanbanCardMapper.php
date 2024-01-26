@@ -74,7 +74,7 @@ final class KanbanCardMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const HAS_MANY = [
-        'media'    => [
+        'files' => [
             'mapper'   => MediaMapper::class,
             'table'    => 'kanban_card_media',
             'external' => 'kanban_card_media_dst',

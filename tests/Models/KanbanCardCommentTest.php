@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Modules\Kanban\tests\Models;
 
 use Modules\Kanban\Models\KanbanCardComment;
-use Modules\Media\Models\NullMedia;
 
 /**
  * @internal
@@ -43,17 +42,7 @@ final class KanbanCardCommentTest extends \PHPUnit\Framework\TestCase
         self::assertEquals('', $this->comment->description);
         self::assertEquals(0, $this->comment->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->comment->createdAt);
-        self::assertEquals([], $this->comment->getMedia());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCardComment
-     * @group module
-     */
-    public function testMediaInputOutput() : void
-    {
-        $this->comment->addMedia($m = new NullMedia(7));
-        self::assertCount(1, $this->comment->getMedia());
+        self::assertEquals([], $this->comment->files);
     }
 
     /**

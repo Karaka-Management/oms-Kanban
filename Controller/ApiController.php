@@ -27,8 +27,6 @@ use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
 use Modules\Media\Models\NullMedia;
-use Modules\Tag\Models\NullTag;
-use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -90,30 +88,12 @@ final class ApiController extends Controller
         $card->column         = (int) $request->getData('column');
         $card->order          = $request->getDataInt('order') ?? 1;
         $card->ref            = $request->getDataInt('ref') ?? 0;
-        $card->setStatus($request->getDataInt('status') ?? CardStatus::ACTIVE);
-        $card->setType($request->getDataInt('type') ?? CardType::TEXT);
-        $card->createdBy = new NullAccount($request->header->account);
+        $card->status         = CardStatus::tryFromValue($request->getDataInt('status')) ?? CardStatus::ACTIVE;
+        $card->type           = CardType::tryFromValue($request->getDataInt('type')) ?? CardType::TEXT;
+        $card->createdBy      = new NullAccount($request->header->account);
 
-        if (!empty($tags = $request->getDataJson('tags'))) {
-            foreach ($tags as $tag) {
-                if (!isset($tag['id'])) {
-                    $request->setData('title', $tag['title'], true);
-                    $request->setData('color', $tag['color'], true);
-                    $request->setData('icon', $tag['icon'] ?? null, true);
-                    $request->setData('language', $tag['language'], true);
-
-                    $internalResponse = new HttpResponse();
-                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse);
-
-                    if (!\is_array($data = $internalResponse->getDataArray($request->uri->__toString()))) {
-                        continue;
-                    }
-
-                    $card->addTag($data['response']);
-                } else {
-                    $card->addTag(new NullTag((int) $tag['id']));
-                }
-            }
+        if ($request->hasData('tags')) {
+            $card->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
         }
 
         if (!empty($uploadedFiles = $request->files)) {
@@ -127,13 +107,13 @@ final class ApiController extends Controller
             );
 
             foreach ($uploaded as $media) {
-                $card->addMedia($media);
+                $card->files[] = $media;
             }
         }
 
         if (!empty($mediaFiles = $request->getDataJson('media'))) {
             foreach ($mediaFiles as $media) {
-                $card->addMedia(new NullMedia($media));
+                $card->files[] = new NullMedia($media);
             }
         }
 
@@ -224,7 +204,7 @@ final class ApiController extends Controller
             );
 
             foreach ($uploaded as $media) {
-                $comment->addMedia($media);
+                $comment->files[] = $media;
             }
         }
 
@@ -296,29 +276,11 @@ final class ApiController extends Controller
         $board->description    = Markdown::parse($request->getDataString('plain') ?? '');
         $board->descriptionRaw = $request->getDataString('plain') ?? '';
         $board->order          = $request->getDataInt('order') ?? 1;
-        $board->setStatus($request->getDataInt('status') ?? BoardStatus::ACTIVE);
-        $board->createdBy = new NullAccount($request->header->account);
+        $board->status         = BoardStatus::tryFromValue($request->getDataInt('status')) ?? BoardStatus::ACTIVE;
+        $board->createdBy      = new NullAccount($request->header->account);
 
-        if (!empty($tags = $request->getDataJson('tags'))) {
-            foreach ($tags as $tag) {
-                if (!isset($tag['id'])) {
-                    $request->setData('title', $tag['title'], true);
-                    $request->setData('color', $tag['color'], true);
-                    $request->setData('icon', $tag['icon'] ?? null, true);
-                    $request->setData('language', $tag['language'], true);
-
-                    $internalResponse = new HttpResponse();
-                    $this->app->moduleManager->get('Tag')->apiTagCreate($request, $internalResponse);
-
-                    if (!\is_array($data = $internalResponse->getDataArray($request->uri->__toString()))) {
-                        continue;
-                    }
-
-                    $board->addTag($data['response']);
-                } else {
-                    $board->addTag(new NullTag((int) $tag['id']));
-                }
-            }
+        if ($request->hasData('tags')) {
+            $board->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
         }
 
         return $board;
@@ -386,8 +348,8 @@ final class ApiController extends Controller
         $new->description    = Markdown::parse($request->getDataString('plain') ?? $new->descriptionRaw);
         $new->descriptionRaw = $request->getDataString('plain') ?? $new->descriptionRaw;
         $new->order          = $request->getDataInt('order') ?? $new->order;
-        $new->setStatus($request->getDataInt('status') ?? $new->getStatus());
-        $new->style = $request->getDataString('style') ?? $new->style;
+        $new->status         = BoardStatus::tryFromValue($request->getDataInt('status')) ?? $new->status;
+        $new->style          = $request->getDataString('style') ?? $new->style;
 
         return $new;
     }

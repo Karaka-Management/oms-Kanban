@@ -84,11 +84,11 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 
         self::assertEquals(
             [
-                'id'          => 0,
-                'name'        => 'Name',
-                'order'       => 3,
-                'board'       => 2,
-                'cards'       => [],
+                'id'    => 0,
+                'name'  => 'Name',
+                'order' => 3,
+                'board' => 2,
+                'cards' => [],
             ],
             $serialized
         );

@@ -65,18 +65,6 @@ class KanbanColumn implements \JsonSerializable
     public array $cards = [];
 
     /**
-     * Get id.
-     *
-     * @return int Model id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    /**
      * Get the cards
      *
      * @return array
@@ -128,11 +116,11 @@ class KanbanColumn implements \JsonSerializable
     public function toArray() : array
     {
         return [
-            'id'            => $this->id,
-            'name'          => $this->name,
-            'order'         => $this->order,
-            'board'         => $this->board,
-            'cards'         => $this->cards,
+            'id'    => $this->id,
+            'name'  => $this->name,
+            'order' => $this->order,
+            'board' => $this->board,
+            'cards' => $this->cards,
         ];
     }
 

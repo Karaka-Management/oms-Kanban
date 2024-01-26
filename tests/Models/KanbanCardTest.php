@@ -18,8 +18,6 @@ use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanCard;
 use Modules\Kanban\Models\NullKanbanCardComment;
-use Modules\Media\Models\NullMedia;
-use Modules\Tag\Models\Tag;
 use Modules\Tasks\Models\Task;
 
 /**
@@ -44,8 +42,8 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     public function testDefault() : void
     {
         self::assertEquals(0, $this->card->id);
-        self::assertEquals(CardStatus::ACTIVE, $this->card->getStatus());
-        self::assertEquals(CardType::TEXT, $this->card->getType());
+        self::assertEquals(CardStatus::ACTIVE, $this->card->status);
+        self::assertEquals(CardType::TEXT, $this->card->type);
         self::assertEquals('', $this->card->name);
         self::assertEquals('', $this->card->description);
         self::assertEquals(0, $this->card->column);
@@ -53,28 +51,8 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->card->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->card->createdAt);
         self::assertEquals([], $this->card->getComments());
-        self::assertEquals([], $this->card->getTags());
-        self::assertEquals([], $this->card->getMedia());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testStatusInputOutput() : void
-    {
-        $this->card->setStatus(CardStatus::ARCHIVED);
-        self::assertEquals(CardStatus::ARCHIVED, $this->card->getStatus());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testTypeInputOutput() : void
-    {
-        $this->card->setType(CardType::TASK);
-        self::assertEquals(CardType::TASK, $this->card->getType());
+        self::assertEquals([], $this->card->tags);
+        self::assertEquals([], $this->card->files);
     }
 
     /**
@@ -91,35 +69,11 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
      * @covers Modules\Kanban\Models\KanbanCard
      * @group module
      */
-    public function testMediaInputOutput() : void
-    {
-        $this->card->addMedia($m = new NullMedia(7));
-        self::assertCount(1, $this->card->getMedia());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
     public function testCommentInputOutput() : void
     {
         $this->card->addComment($card = new NullKanbanCardComment(5));
         self::assertEquals([$card], $this->card->getComments());
         self::assertEquals(1, $this->card->getCommentCount());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testTagInputOutput() : void
-    {
-        $tag = new Tag();
-        $tag->setL11n('Tag');
-
-        $this->card->addTag($tag);
-        self::assertEquals($tag, $this->card->getTag(0));
-        self::assertCount(1, $this->card->getTags());
     }
 
     /**
@@ -155,8 +109,8 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $this->card->descriptionRaw = 'DescriptionRaw';
         $this->card->order          = 3;
         $this->card->column         = 2;
-        $this->card->setStatus(CardStatus::ARCHIVED);
-        $this->card->setType(CardType::TASK);
+        $this->card->status         = CardStatus::ARCHIVED;
+        $this->card->type           = CardType::TASK;
 
         $serialized = $this->card->jsonSerialize();
         unset($serialized['createdBy']);

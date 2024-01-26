@@ -44,7 +44,7 @@ echo $this->data['nav']->render(); ?>
             </div>
             <div class="portlet-body">
                 <article><?= $board->description; ?></article>
-                <?php $tags = $board->getTags(); foreach ($tags as $tag) : ?>
+                <?php foreach ($board->tags as $tag) : ?>
                     <span class="tag" style="background: <?= $this->printHtml($tag->color); ?>"><?= empty($tag->icon) ? '' : ''; ?><?= $this->printHtml($tag->getL11n()); ?></span>
                 <?php endforeach; ?>
             </div>

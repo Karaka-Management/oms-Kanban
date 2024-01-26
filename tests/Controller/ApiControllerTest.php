@@ -30,7 +30,6 @@ use phpOMS\Module\ModuleAbstract;
 use phpOMS\Module\ModuleManager;
 use phpOMS\Router\WebRouter;
 use phpOMS\System\MimeType;
-use phpOMS\Uri\HttpUri;
 use phpOMS\Utils\TestUtils;
 
 /**
@@ -55,14 +54,14 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
             protected string $appName = 'Api';
         };
 
-        $this->app->dbPool          = $GLOBALS['dbpool'];
-        $this->app->unitId          = 1;
-        $this->app->accountManager  = new AccountManager($GLOBALS['session']);
-        $this->app->appSettings     = new CoreSettings();
-        $this->app->moduleManager   = new ModuleManager($this->app, __DIR__ . '/../../../Modules/');
-        $this->app->dispatcher      = new Dispatcher($this->app);
-        $this->app->eventManager    = new EventManager($this->app->dispatcher);
-        $this->app->l11nManager     = new L11nManager();
+        $this->app->dbPool         = $GLOBALS['dbpool'];
+        $this->app->unitId         = 1;
+        $this->app->accountManager = new AccountManager($GLOBALS['session']);
+        $this->app->appSettings    = new CoreSettings();
+        $this->app->moduleManager  = new ModuleManager($this->app, __DIR__ . '/../../../Modules/');
+        $this->app->dispatcher     = new Dispatcher($this->app);
+        $this->app->eventManager   = new EventManager($this->app->dispatcher);
+        $this->app->l11nManager    = new L11nManager();
         $this->app->eventManager->importFromFile(__DIR__ . '/../../../Web/Api/Hooks.php');
 
         $account = new Account();
@@ -96,7 +95,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiBoardCU() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('title', 'Controller Test Board');
@@ -110,7 +109,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
 
         // update
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('id', $bId);
@@ -127,7 +126,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreateColumn() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('title', 'Controller Test Column');
@@ -146,7 +145,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreateCard() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('title', 'Controller Test Card');
@@ -183,7 +182,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testCreateCommentCard() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('plain', 'Controller Test Description');
@@ -216,7 +215,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiKanbanBoardCreateInvalidData() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('invalid', '1');
@@ -232,7 +231,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiKanbanColumnCreateInvalidData() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('invalid', '1');
@@ -248,7 +247,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiKanbanCardCreateInvalidData() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('invalid', '1');
@@ -264,7 +263,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     public function testApiKanbanCardCommentCreateInvalidData() : void
     {
         $response = new HttpResponse();
-        $request  = new HttpRequest(new HttpUri(''));
+        $request  = new HttpRequest();
 
         $request->header->account = 1;
         $request->setData('invalid', '1');

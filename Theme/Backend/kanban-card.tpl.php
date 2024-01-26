@@ -34,8 +34,8 @@ $comments = $card->getComments();
                 <article><?= $card->description; ?></article>
             </div>
             <div class="portlet-foot">
-                <?php $files = $card->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->id);?>"><?= $file->name; ?></a></span>
+                <?php $files = $card->files; foreach ($files as $file) : ?>
+                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/view?id=' . $file->id);?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>
@@ -50,8 +50,8 @@ $comments = $card->getComments();
                 <article><?= $comment->description; ?></article>
             </div>
             <div class="portlet-foot">
-                <?php $files = $comment->getMedia(); foreach ($files as $file) : ?>
-                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/single?id=' . $file->id);?>"><?= $file->name; ?></a></span>
+                <?php $files = $comment->files; foreach ($files as $file) : ?>
+                     <span><a class="content" href="<?= UriFactory::build('{/base}/media/view?id=' . $file->id);?>"><?= $file->name; ?></a></span>
                 <?php endforeach; ?>
             </div>
         </section>

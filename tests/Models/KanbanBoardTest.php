@@ -17,7 +17,6 @@ namespace Modules\Kanban\tests\Models;
 use Modules\Kanban\Models\BoardStatus;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Kanban\Models\NullKanbanColumn;
-use Modules\Tag\Models\Tag;
 
 /**
  * @internal
@@ -41,22 +40,12 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     public function testDefault() : void
     {
         self::assertEquals(0, $this->board->id);
-        self::assertEquals(BoardStatus::ACTIVE, $this->board->getStatus());
+        self::assertEquals(BoardStatus::ACTIVE, $this->board->status);
         self::assertEquals('', $this->board->name);
         self::assertEquals('', $this->board->description);
         self::assertEquals(0, $this->board->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->board->createdAt);
         self::assertEquals([], $this->board->getColumns());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
-    public function testStatusInputOutput() : void
-    {
-        $this->board->setStatus(BoardStatus::ARCHIVED);
-        self::assertEquals(BoardStatus::ARCHIVED, $this->board->getStatus());
     }
 
     /**
@@ -85,32 +74,18 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
      * @covers Modules\Kanban\Models\KanbanBoard
      * @group module
      */
-    public function testTagInputOutput() : void
-    {
-        $tag = new Tag();
-        $tag->setL11n('Tag');
-
-        $this->board->addTag($tag);
-        self::assertEquals($tag, $this->board->getTag(0));
-        self::assertCount(1, $this->board->getTags());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
     public function testSerialize() : void
     {
-        $this->board->setStatus(BoardStatus::ARCHIVED);
+        $this->board->status = BoardStatus::ARCHIVED;
 
         $serialized = $this->board->jsonSerialize();
 
         self::assertEquals(
             [
-                'id'             => 0,
-                'status'         => BoardStatus::ARCHIVED,
-                'columns'        => [],
-                'tags'           => [],
+                'id'      => 0,
+                'status'  => BoardStatus::ARCHIVED,
+                'columns' => [],
+                'tags'    => [],
             ],
             $serialized
         );

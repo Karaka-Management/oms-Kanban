@@ -15,7 +15,7 @@ declare(strict_types=1);
 use phpOMS\Uri\UriFactory;
 
 /** @var \phpOMS\Views\View $this */
-/** @var \Modules\News\Models\NewsArticle[] $boards */
+/** @var \Modules\Kanban\Models\KanbanBoard[] $boards */
 $boards = $this->data['boards'] ?? [];
 
 $previous = empty($boards) ? 'kanban/archive' : 'kanban/archive?{?}&id=' . \reset($boards)->id . '&ptype=p';
@@ -72,10 +72,10 @@ echo $this->data['nav']->render(); ?>
                     $count = 0;
 
                 foreach ($boards as $key => $board) : ++$count;
-                    $url   = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->id);
+                    $url = UriFactory::build('{/base}/kanban/board?{?}&id=' . $board->id);
                 ?>
                     <tr tabindex="0" data-href="<?= $url; ?>">
-                        <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->getStatus()); ?></a>
+                        <td><a href="<?= $url; ?>"><?= $this->getHtml(':bStatus' . $board->status); ?></a>
                         <td><a href="<?= $url; ?>"><?= $this->printHtml($board->name); ?></a>
                         <td><a href="<?= $url; ?>"><?= $this->printHtml($board->createdAt->format('Y-m-d')); ?></a>
                 <?php endforeach; ?>

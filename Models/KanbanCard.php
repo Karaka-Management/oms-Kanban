@@ -16,8 +16,6 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
-use Modules\Media\Models\Media;
-use Modules\Tag\Models\NullTag;
 use Modules\Tag\Models\Tag;
 use Modules\Tasks\Models\Task;
 
@@ -154,14 +152,6 @@ class KanbanCard implements \JsonSerializable
     public array $comments = [];
 
     /**
-     * Media
-     *
-     * @var Media[]
-     * @since 1.0.0
-     */
-    public array $media = [];
-
-    /**
      * Constructor.
      *
      * @since 1.0.0
@@ -170,70 +160,6 @@ class KanbanCard implements \JsonSerializable
     {
         $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int Model id
-     *
-     * @since 1.0.0
-     */
-    public function getId() : int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get the status
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getStatus() : int
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set the status
-     *
-     * @param int $status Status
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setStatus(int $status) : void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get the card type
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getType() : int
-    {
-        return $this->type;
-    }
-
-    /**
-     * Set the card type
-     *
-     * @param int $type Card type
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function setType(int $type) : void
-    {
-        $this->type = $type;
     }
 
     /**
@@ -295,56 +221,6 @@ class KanbanCard implements \JsonSerializable
     }
 
     /**
-     * Get the media files
-     *
-     * @return array
-     *
-     * @since 1.0.0
-     */
-    public function getMedia() : array
-    {
-        return $this->media;
-    }
-
-    /**
-     * Add a media file
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function addMedia(Media $media) : void
-    {
-        $this->media[] = $media;
-    }
-
-    /**
-     * Get tags
-     *
-     * @return array
-     *
-     * @since 1.0.0
-     */
-    public function getTags() : array
-    {
-        return $this->tags;
-    }
-
-    /**
-     * Get task elements.
-     *
-     * @param int $id Element id
-     *
-     * @return Tag
-     *
-     * @since 1.0.0
-     */
-    public function getTag(int $id) : Tag
-    {
-        return $this->tags[$id] ?? new NullTag();
-    }
-
-    /**
      * Add tag
      *
      * @param Tag $tag Tag
@@ -376,7 +252,7 @@ class KanbanCard implements \JsonSerializable
             'createdBy'      => $this->createdBy,
             'createdAt'      => $this->createdAt,
             'comments'       => $this->comments,
-            'media'          => $this->media,
+            'media'          => $this->files,
         ];
     }
 
@@ -404,4 +280,6 @@ class KanbanCard implements \JsonSerializable
 
         return $card;
     }
+
+    use \Modules\Media\Models\MediaListTrait;
 }
