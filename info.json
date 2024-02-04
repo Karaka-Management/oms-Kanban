@@ -24,7 +24,9 @@
     },
     "providing": {
         "Navigation": "*",
-        "Media": "*"
+        "Media": "*",
+        "Kanban": "*",
+        "Search": "*"
     },
     "load": [
         {

@@ -97,7 +97,7 @@ final class ApiController extends Controller
         }
 
         if (!empty($uploadedFiles = $request->files)) {
-            $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
+            $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
                 [],
                 [],
                 $uploadedFiles,
@@ -111,10 +111,9 @@ final class ApiController extends Controller
             }
         }
 
-        if (!empty($mediaFiles = $request->getDataJson('media'))) {
-            foreach ($mediaFiles as $media) {
-                $card->files[] = new NullMedia($media);
-            }
+        $mediaFiles = $request->getDataJson('media');
+        foreach ($mediaFiles as $media) {
+            $card->files[] = new NullMedia($media);
         }
 
         return $card;
@@ -194,7 +193,7 @@ final class ApiController extends Controller
         $comment->createdBy      = new NullAccount($request->header->account);
 
         if (!empty($uploadedFiles = $request->files)) {
-            $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
+            $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
                 [],
                 [],
                 $uploadedFiles,

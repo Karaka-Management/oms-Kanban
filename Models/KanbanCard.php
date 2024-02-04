@@ -62,7 +62,7 @@ class KanbanCard implements \JsonSerializable
     public int $type = CardType::TEXT;
 
     /**
-     * Color schme.
+     * Color scheme.
      *
      * @var string
      * @since 1.0.0
