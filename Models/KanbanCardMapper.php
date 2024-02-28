@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\AccountMapper;
+use Modules\Comments\Models\CommentListMapper;
 use Modules\Media\Models\MediaMapper;
 use Modules\Tag\Models\TagMapper;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
@@ -50,8 +51,22 @@ final class KanbanCardMapper extends DataMapperFactory
         'kanban_card_color'          => ['name' => 'kanban_card_color',          'type' => 'string',            'internal' => 'color'],
         'kanban_card_ref'            => ['name' => 'kanban_card_ref',            'type' => 'int',               'internal' => 'ref'],
         'kanban_card_column'         => ['name' => 'kanban_card_column',         'type' => 'int',               'internal' => 'column'],
+        'kanban_card_comment_list' => ['name' => 'kanban_card_comment_list', 'type' => 'int',               'internal' => 'commentList'],
         'kanban_card_created_at'     => ['name' => 'kanban_card_created_at',     'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
         'kanban_card_created_by'     => ['name' => 'kanban_card_created_by',     'type' => 'int',               'internal' => 'createdBy', 'readonly' => true],
+    ];
+
+    /**
+     * Has one relation.
+     *
+     * @var array<string, array{mapper:class-string, external:string, by?:string, column?:string, conditional?:bool}>
+     * @since 1.0.0
+     */
+    public const OWNS_ONE = [
+        'commentList' => [
+            'mapper'   => CommentListMapper::class,
+            'external' => 'kanban_card_comment_list',
+        ],
     ];
 
     /**
@@ -79,12 +94,6 @@ final class KanbanCardMapper extends DataMapperFactory
             'table'    => 'kanban_card_media',
             'external' => 'kanban_card_media_dst',
             'self'     => 'kanban_card_media_src',
-        ],
-        'comments' => [
-            'mapper'   => KanbanCardCommentMapper::class,
-            'table'    => 'kanban_card_comment',
-            'self'     => 'kanban_card_comment_card',
-            'external' => null,
         ],
         'tags' => [
             'mapper'   => TagMapper::class,

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace Modules\Kanban\Controller;
 
+use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\NullAccount;
 use Modules\Kanban\Models\BoardStatus;
 use Modules\Kanban\Models\CardStatus;
@@ -21,12 +22,14 @@ use Modules\Kanban\Models\CardType;
 use Modules\Kanban\Models\KanbanBoard;
 use Modules\Kanban\Models\KanbanBoardMapper;
 use Modules\Kanban\Models\KanbanCard;
-use Modules\Kanban\Models\KanbanCardComment;
-use Modules\Kanban\Models\KanbanCardCommentMapper;
 use Modules\Kanban\Models\KanbanCardMapper;
 use Modules\Kanban\Models\KanbanColumn;
 use Modules\Kanban\Models\KanbanColumnMapper;
+use Modules\Kanban\Models\PermissionCategory;
 use Modules\Media\Models\NullMedia;
+use Modules\Notification\Models\Notification;
+use Modules\Notification\Models\NotificationMapper;
+use Modules\Notification\Models\NotificationType;
 use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
@@ -42,6 +45,32 @@ use phpOMS\Utils\Parser\Markdown\Markdown;
  */
 final class ApiController extends Controller
 {
+    // @todo Create another notification whenever a comment is created for a card
+    //      The card owner and all previous commentators should receive a notification
+    private function createCardNotifications(KanbanCard $card, RequestAbstract $request) : void
+    {
+        $accounts = AccountMapper::findReadPermission(
+            $this->app->unitId,
+            self::NAME,
+            PermissionCategory::CARD,
+            $card->id
+        );
+
+        foreach ($accounts as $account) {
+            $notification = new Notification();
+            $notification->module = self::NAME;
+            $notification->title = $card->name;
+            $notification->createdBy = $card->createdBy;
+            $notification->createdFor = new NullAccount($account);
+            $notification->type = NotificationType::CREATE;
+            $notification->category = PermissionCategory::CARD;
+            $notification->element = $card->id;
+            $notification->redirect = '{/base}/kanban/card?{?}&id=' . $card->id;
+
+            $this->createModel($request->header->account, $notification, NotificationMapper::class, 'notification', $request->getOrigin());
+        }
+    }
+
     /**
      * Routing end-point for application behavior.
      *
@@ -66,6 +95,9 @@ final class ApiController extends Controller
 
         $card = $this->createKanbanCardFromRequest($request);
         $this->createModel($request->header->account, $card, KanbanCardMapper::class, 'card', $request->getOrigin());
+
+        $this->createCardNotifications($card, $request);
+
         $this->createStandardCreateResponse($request, $response, $card);
     }
 
@@ -91,6 +123,15 @@ final class ApiController extends Controller
         $card->status         = CardStatus::tryFromValue($request->getDataInt('status')) ?? CardStatus::ACTIVE;
         $card->type           = CardType::tryFromValue($request->getDataInt('type')) ?? CardType::TEXT;
         $card->createdBy      = new NullAccount($request->header->account);
+
+        // allow comments
+        if ($request->hasData('allow_comments')
+            && ($commentApi = $this->app->moduleManager->get('Comments', 'Api'))::ID > 0
+        ) {
+            /** @var \Modules\Comments\Controller\ApiController $commentApi */
+            $commnetList           = $commentApi->createCommentList();
+            $card->commentList = $commnetList;
+        }
 
         if ($request->hasData('tags')) {
             $card->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
@@ -141,89 +182,6 @@ final class ApiController extends Controller
                 $request->hasData('type')
                 && !CardType::isValidValue((int) $request->getData('type'))
             ))
-        ) {
-            return $val;
-        }
-
-        return [];
-    }
-
-    /**
-     * Routing end-point for application behavior.
-     *
-     * @param RequestAbstract  $request  Request
-     * @param ResponseAbstract $response Response
-     * @param array            $data     Generic data
-     *
-     * @return void
-     *
-     * @api
-     *
-     * @since 1.0.0
-     */
-    public function apiKanbanCardCommentCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
-    {
-        if (!empty($val = $this->validateKanbanCardCommentCreate($request))) {
-            $response->header->status = RequestStatusCode::R_400;
-            $this->createInvalidCreateResponse($request, $response, $val);
-
-            return;
-        }
-
-        $comment = $this->createKanbanCardCommentFromRequest($request);
-        $this->createModel($request->header->account, $comment, KanbanCardCommentMapper::class, 'comment', $request->getOrigin());
-        $this->createStandardCreateResponse($request, $response, $comment);
-    }
-
-    /**
-     * Method to create comment from request.
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return KanbanCardComment
-     *
-     * @since 1.0.0
-     */
-    public function createKanbanCardCommentFromRequest(RequestAbstract $request) : KanbanCardComment
-    {
-        $comment                 = new KanbanCardComment();
-        $comment->description    = Markdown::parse($request->getDataString('plain') ?? '');
-        $comment->descriptionRaw = $request->getDataString('plain') ?? '';
-        $comment->card           = (int) $request->getData('card');
-        $comment->createdBy      = new NullAccount($request->header->account);
-
-        if (!empty($uploadedFiles = $request->files)) {
-            $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
-                [],
-                [],
-                $uploadedFiles,
-                $request->header->account,
-                __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
-                '/Modules/Kanban',
-            );
-
-            foreach ($uploaded as $media) {
-                $comment->files[] = $media;
-            }
-        }
-
-        return $comment;
-    }
-
-    /**
-     * Validate comment create request
-     *
-     * @param RequestAbstract $request Request
-     *
-     * @return array<string, bool>
-     *
-     * @since 1.0.0
-     */
-    private function validateKanbanCardCommentCreate(RequestAbstract $request) : array
-    {
-        $val = [];
-        if (($val['plain'] = !$request->hasData('plain'))
-            || ($val['card'] = !$request->hasData('card'))
         ) {
             return $val;
         }

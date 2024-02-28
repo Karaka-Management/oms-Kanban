@@ -20,7 +20,9 @@
         "Admin": "1.0.0",
         "Tasks": "1.0.0",
         "Calendar": "1.0.0",
-        "Tools": "1.0.0"
+        "Tools": "1.0.0",
+        "Comments": "1.0.0",
+        "Notification": "1.0.0"
     },
     "providing": {
         "Navigation": "*",

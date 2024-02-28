@@ -34,6 +34,9 @@ use phpOMS\Views\View;
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
+ *
+ * @todo Implement unread cards/comments notification/highlight
+ *      https://github.com/Karaka-Management/oms-Kanban/issues/5
  */
 final class BackendController extends Controller
 {
@@ -53,7 +56,7 @@ final class BackendController extends Controller
     {
         /** @var \phpOMS\Model\Html\Head $head */
         $head = $response->data['Content']->head;
-        $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css?v=1.0.0');
+        $head->addAsset(AssetType::CSS, '/Modules/Kanban/Theme/Backend/css/styles.css?v=' . self::VERSION);
     }
 
     /**
@@ -108,7 +111,8 @@ final class BackendController extends Controller
         $board = KanbanBoardMapper::get()
             ->with('columns')
             ->with('columns/cards')
-            ->with('columns/cards/comments')
+            ->with('columns/cards/commentList')
+            ->with('columns/cards/commentList/comments')
             ->with('columns/cards/tags')
             ->with('columns/cards/tags/title')
             ->where('id', (int) $request->getData('id'))
@@ -222,9 +226,10 @@ final class BackendController extends Controller
             ->with('tags/title')
             ->with('files')
             ->with('createdBy')
-            ->with('comments')
-            ->with('comments/media')
-            ->with('comments/createdBy')
+            ->with('commentList')
+            ->with('commentList/comments')
+            ->with('commentList/comments/media')
+            ->with('commentList/comments/createdBy')
             ->where('id', (int) $request->getData('id'))
             ->where('tags/title/language', $response->header->l11n->language)
             ->execute();
@@ -243,6 +248,34 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-card');
         $view->data['nav']  = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
         $view->data['card'] = $card;
+
+        // Comments module available
+        $commentModule = $this->app->moduleManager->get('Comments');
+        if ($commentModule::ID > 0) {
+            $head = $response->data['Content']->head;
+            $head->addAsset(AssetType::CSS, 'Modules/Comments/Theme/Backend/css/styles.css?v=' . self::VERSION);
+
+            $commentCreateView = new \Modules\Comments\Theme\Backend\Components\Comment\CreateView($this->app->l11nManager, $request, $response);
+            $commentListView   = new \Modules\Comments\Theme\Backend\Components\Comment\ListView($this->app->l11nManager, $request, $response);
+
+            $view->data['commentCreate'] = $commentCreateView;
+            $view->data['commentList']   = $commentListView;
+
+            $view->data['commentPermissions'] = [
+                'moderation' => $this->app->accountManager->get($request->header->account)->hasPermission(
+                    PermissionType::MODIFY, $this->app->unitId, $this->app->appId, $commentModule::NAME, PermissionCategory::MODERATION, $card->commentList->id ?? null
+                ),
+                'list_modify' => $this->app->accountManager->get($request->header->account)->hasPermission(
+                    PermissionType::MODIFY, $this->app->unitId, $this->app->appId, $commentModule::NAME, PermissionCategory::LIST, $card->commentList->id ?? null
+                ),
+                'list_read' => $this->app->accountManager->get($request->header->account)->hasPermission(
+                    PermissionType::READ, $this->app->unitId, $this->app->appId, $commentModule::NAME, PermissionCategory::LIST, $card->commentList->id ?? null
+                ),
+                'write' => $this->app->accountManager->get($request->header->account)->hasPermission(
+                    PermissionType::READ, $this->app->unitId, $this->app->appId, $commentModule::NAME, PermissionCategory::COMMENT, null
+                ),
+            ];
+        }
 
         return $view;
     }

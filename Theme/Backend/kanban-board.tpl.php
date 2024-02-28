@@ -17,13 +17,10 @@ $board = $this->data['board'];
 
 /** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
 $columns = $board->getColumns();
-
-$columnCount = \count($columns);
-$layout      = \max(4, $columnCount);
 ?>
-<div class="row kanban-board">
+<div class="row kanban-board" style="flex-wrap: nowrap;">
     <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
-    <div id="kanban-column-<?= $i; ?>" class="box kanban-column">
+    <div id="kanban-column-<?= $i; ?>" class="box col-xs-3" style="min-width: 300px;">
         <header><?= $this->printHtml($column->name); ?></header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = \phpOMS\Uri\UriFactory::build('kanban/card?{?}&id=' . $card->id);
@@ -31,7 +28,7 @@ $layout      = \max(4, $columnCount);
             <section id="kanban-card-<?= $this->printHtml($i . '-' . $j); ?>" class="portlet" draggable="true">
                 <div class="portlet-head">
                     <a href="<?= $url; ?>"><?= $this->printHtml($card->name); ?></a>
-                    <div><span class="tag"><?= $card->getCommentCount(); ?></span></div>
+                    <span class="tag end-xs"><?= \count($card->commentList->comments); ?></span>
                 </div>
                 <div class="portlet-body">
                     <article><?= $card->description; ?></article>
@@ -42,7 +39,7 @@ $layout      = \max(4, $columnCount);
                 </div>
                 <div class="portlet-foot">
                     <div class="overflowfix">
-                        <a href="<?= $url; ?>" class="button floatRight"><?= $this->getHtml('More', '0', '0'); ?></a>
+                        <a href="<?= $url; ?>" class="button rf"><?= $this->getHtml('More', '0', '0'); ?></a>
                     </div>
                 </div>
             </section>

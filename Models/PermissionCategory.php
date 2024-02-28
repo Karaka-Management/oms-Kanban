@@ -34,6 +34,10 @@ abstract class PermissionCategory extends Enum
 
     public const KANBAN = 4;
 
+    public const LIST = 5;
+
+    public const MODERATION = 4;
+
     public const D_CREATE = [
         self::BOARD => [
             'DEFAULT' => ['RUDP'], // limited by own permissions

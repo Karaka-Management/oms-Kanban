@@ -16,6 +16,7 @@ namespace Modules\Kanban\Models;
 
 use Modules\Admin\Models\Account;
 use Modules\Admin\Models\NullAccount;
+use Modules\Comments\Models\CommentList;
 use Modules\Tag\Models\Tag;
 use Modules\Tasks\Models\Task;
 
@@ -26,6 +27,10 @@ use Modules\Tasks\Models\Task;
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
+ *
+ * @todo Implement unread cards/comments notification/highlight
+ *      See tasks for inspiration. However, here we also need to highlight the entire board for unread content
+ *      https://github.com/Karaka-Management/oms-Kanban/issues/5
  */
 class KanbanCard implements \JsonSerializable
 {
@@ -144,12 +149,12 @@ class KanbanCard implements \JsonSerializable
     public \DateTimeImmutable $createdAt;
 
     /**
-     * Comments.
+     * Comments
      *
-     * @var \Modules\Kanban\Models\KanbanCardComment[]
+     * @var null|CommentList
      * @since 1.0.0
      */
-    public array $comments = [];
+    public ?CommentList $commentList = null;
 
     /**
      * Constructor.
@@ -160,64 +165,6 @@ class KanbanCard implements \JsonSerializable
     {
         $this->createdAt = new \DateTimeImmutable('now');
         $this->createdBy = new NullAccount();
-    }
-
-    /**
-     * Count the amount of comments in a card
-     *
-     * @return int
-     *
-     * @since 1.0.0
-     */
-    public function getCommentCount() : int
-    {
-        return \count($this->comments);
-    }
-
-    /**
-     * Get the comments
-     *
-     * @return array
-     *
-     * @since 1.0.0
-     */
-    public function getComments() : array
-    {
-        return $this->comments;
-    }
-
-    /**
-     * Add a comment
-     *
-     * @param KanbanCardComment $comment Comment
-     *
-     * @return void
-     *
-     * @since 1.0.0
-     */
-    public function addComment(KanbanCardComment $comment) : void
-    {
-        $this->comments[] = $comment;
-    }
-
-    /**
-     * Remove a comment
-     *
-     * @param int $id Comment id
-     *
-     * @return bool
-     *
-     * @since 1.0.0
-     */
-    public function removeComment(int $id) : bool
-    {
-        if (isset($this->comments[$id])) {
-            unset($this->comments[$id]);
-
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -251,7 +198,7 @@ class KanbanCard implements \JsonSerializable
             'ref'            => $this->ref,
             'createdBy'      => $this->createdBy,
             'createdAt'      => $this->createdAt,
-            'comments'       => $this->comments,
+            'comments'       => $this->commentList,
             'media'          => $this->files,
         ];
     }

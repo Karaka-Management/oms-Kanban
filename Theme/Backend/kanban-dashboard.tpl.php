@@ -50,7 +50,7 @@ echo $this->data['nav']->render(); ?>
             </div>
             <div class="portlet-foot">
                  <div class="overflowfix">
-                    <a tabindex="0" href="<?= $url; ?>" class="button floatRight"><?= $this->getHtml('Open', '0', '0'); ?></a>
+                    <a tabindex="0" href="<?= $url; ?>" class="button rf"><?= $this->getHtml('Open', '0', '0'); ?></a>
                 </div>
             </div>
         </section>
