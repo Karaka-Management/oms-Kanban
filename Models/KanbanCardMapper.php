@@ -51,7 +51,7 @@ final class KanbanCardMapper extends DataMapperFactory
         'kanban_card_color'          => ['name' => 'kanban_card_color',          'type' => 'string',            'internal' => 'color'],
         'kanban_card_ref'            => ['name' => 'kanban_card_ref',            'type' => 'int',               'internal' => 'ref'],
         'kanban_card_column'         => ['name' => 'kanban_card_column',         'type' => 'int',               'internal' => 'column'],
-        'kanban_card_comment_list' => ['name' => 'kanban_card_comment_list', 'type' => 'int',               'internal' => 'commentList'],
+        'kanban_card_comment_list'   => ['name' => 'kanban_card_comment_list', 'type' => 'int',               'internal' => 'commentList'],
         'kanban_card_created_at'     => ['name' => 'kanban_card_created_at',     'type' => 'DateTimeImmutable', 'internal' => 'createdAt', 'readonly' => true],
         'kanban_card_created_by'     => ['name' => 'kanban_card_created_by',     'type' => 'int',               'internal' => 'createdBy', 'readonly' => true],
     ];

@@ -64,10 +64,10 @@ final class SearchController extends Controller
                 'link'      => '{/base}/kanban/card?id=' . $doc->id,
                 'account'   => '',
                 'createdAt' => $doc->createdAt,
-                'image' => '',
-                'tags'  => $doc->tags,
-                'type'  => 'list_links',
-                'module'  => 'Kanban',
+                'image'     => '',
+                'tags'      => $doc->tags,
+                'type'      => 'list_links',
+                'module'    => 'Kanban',
             ];
         }
 

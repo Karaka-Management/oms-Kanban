@@ -45,8 +45,19 @@ use phpOMS\Utils\Parser\Markdown\Markdown;
  */
 final class ApiController extends Controller
 {
-    // @todo Create another notification whenever a comment is created for a card
-    //      The card owner and all previous commentators should receive a notification
+    /**
+     * Create a notification for a card
+     *
+     * @param KanbanCard      $card    Card to create notification for
+     * @param RequestAbstract $request Request
+     *
+     * @return void
+     *
+     * @todo Create another notification whenever a comment is created for a card
+     *      The card owner and all previous commentators should receive a notification
+     *
+     * @since 1.0.0
+     */
     private function createCardNotifications(KanbanCard $card, RequestAbstract $request) : void
     {
         $accounts = AccountMapper::findReadPermission(
@@ -57,15 +68,15 @@ final class ApiController extends Controller
         );
 
         foreach ($accounts as $account) {
-            $notification = new Notification();
-            $notification->module = self::NAME;
-            $notification->title = $card->name;
-            $notification->createdBy = $card->createdBy;
+            $notification             = new Notification();
+            $notification->module     = self::NAME;
+            $notification->title      = $card->name;
+            $notification->createdBy  = $card->createdBy;
             $notification->createdFor = new NullAccount($account);
-            $notification->type = NotificationType::CREATE;
-            $notification->category = PermissionCategory::CARD;
-            $notification->element = $card->id;
-            $notification->redirect = '{/base}/kanban/card?{?}&id=' . $card->id;
+            $notification->type       = NotificationType::CREATE;
+            $notification->category   = PermissionCategory::CARD;
+            $notification->element    = $card->id;
+            $notification->redirect   = '{/base}/kanban/card?{?}&id=' . $card->id;
 
             $this->createModel($request->header->account, $notification, NotificationMapper::class, 'notification', $request->getOrigin());
         }
@@ -129,7 +140,7 @@ final class ApiController extends Controller
             && ($commentApi = $this->app->moduleManager->get('Comments', 'Api'))::ID > 0
         ) {
             /** @var \Modules\Comments\Controller\ApiController $commentApi */
-            $commnetList           = $commentApi->createCommentList();
+            $commnetList       = $commentApi->createCommentList();
             $card->commentList = $commnetList;
         }
 
