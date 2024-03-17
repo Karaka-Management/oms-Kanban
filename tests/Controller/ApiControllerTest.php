@@ -179,39 +179,6 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
      * @covers Modules\Kanban\Controller\ApiController
      * @group module
      */
-    public function testCreateCommentCard() : void
-    {
-        $response = new HttpResponse();
-        $request  = new HttpRequest();
-
-        $request->header->account = 1;
-        $request->setData('plain', 'Controller Test Description');
-        $request->setData('card', '1');
-
-        if (!\is_file(__DIR__ . '/test_tmp.md')) {
-            \copy(__DIR__ . '/test.md', __DIR__ . '/test_tmp.md');
-        }
-
-        TestUtils::setMember($request, 'files', [
-            'file1' => [
-                'name'     => 'test.md',
-                'type'     => MimeType::M_TXT,
-                'tmp_name' => __DIR__ . '/test_tmp.md',
-                'error'    => \UPLOAD_ERR_OK,
-                'size'     => \filesize(__DIR__ . '/test_tmp.md'),
-            ],
-        ]);
-
-        $request->setData('media', \json_encode([1]));
-
-        $this->module->apiKanbanCardCommentCreate($request, $response);
-        self::assertGreaterThan(0, $response->getDataArray('')['response']->id);
-    }
-
-    /**
-     * @covers Modules\Kanban\Controller\ApiController
-     * @group module
-     */
     public function testApiKanbanBoardCreateInvalidData() : void
     {
         $response = new HttpResponse();
@@ -253,22 +220,6 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         $request->setData('invalid', '1');
 
         $this->module->apiKanbanCardCreate($request, $response);
-        self::assertEquals(RequestStatusCode::R_400, $response->header->status);
-    }
-
-    /**
-     * @covers Modules\Kanban\Controller\ApiController
-     * @group module
-     */
-    public function testApiKanbanCardCommentCreateInvalidData() : void
-    {
-        $response = new HttpResponse();
-        $request  = new HttpRequest();
-
-        $request->header->account = 1;
-        $request->setData('invalid', '1');
-
-        $this->module->apiKanbanCardCommentCreate($request, $response);
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 }

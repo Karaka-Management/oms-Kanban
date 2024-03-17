@@ -50,7 +50,6 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(0, $this->card->order);
         self::assertEquals(0, $this->card->createdBy->id);
         self::assertInstanceOf('\DateTimeImmutable', $this->card->createdAt);
-        self::assertEquals([], $this->card->getComments());
         self::assertEquals([], $this->card->tags);
         self::assertEquals([], $this->card->files);
     }
@@ -63,30 +62,6 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     {
         $this->card->column = 1;
         self::assertEquals(1, $this->card->column);
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testCommentInputOutput() : void
-    {
-        $this->card->addComment($card = new NullKanbanCardComment(5));
-        self::assertEquals([$card], $this->card->getComments());
-        self::assertEquals(1, $this->card->getCommentCount());
-    }
-
-    /**
-     * @covers Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
-    public function testCommentRemove() : void
-    {
-        $this->card->addComment($comment = new NullKanbanCardComment(5));
-        self::assertCount(1, $this->card->getComments());
-        self::assertTrue($this->card->removeComment(0));
-        self::assertCount(0, $this->card->getComments());
-        self::assertFalse($this->card->removeComment(0));
     }
 
     /**
@@ -127,7 +102,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
                 'column'         => 2,
                 'order'          => 3,
                 'ref'            => 0,
-                'comments'       => [],
+                'comments'       => null,
                 'media'          => [],
             ],
             $serialized
