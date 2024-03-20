@@ -20,13 +20,11 @@ use Modules\Kanban\Models\KanbanColumnMapper;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanColumnMapper::class)]
 final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @depends Modules\Kanban\tests\Models\KanbanBoardMapperTest::testCRUD
-     * @covers \Modules\Kanban\Models\KanbanColumnMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\DependsExternal('\Modules\Kanban\tests\Models\KanbanBoardMapperTest', 'testCRUD')]
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $column = new KanbanColumn();

@@ -19,31 +19,23 @@ use Modules\Kanban\Models\NullKanbanCard;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\NullKanbanCard::class)]
 final class NullKanbanCardTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testNull() : void
     {
         self::assertInstanceOf('\Modules\Kanban\Models\KanbanCard', new NullKanbanCard());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testId() : void
     {
         $null = new NullKanbanCard(2);
         self::assertEquals(2, $null->id);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testJsonSerialize() : void
     {
         $null = new NullKanbanCard(2);

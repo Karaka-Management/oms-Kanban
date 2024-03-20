@@ -21,13 +21,11 @@ use Modules\Kanban\Models\KanbanCardCommentMapper;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanCardCommentMapper::class)]
 final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
-     * @covers \Modules\Kanban\Models\KanbanCardCommentMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\DependsExternal('\Modules\Kanban\tests\Models\KanbanCardMapperTest', 'testCRUD')]
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $comment = new KanbanCardComment();

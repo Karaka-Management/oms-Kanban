@@ -21,6 +21,7 @@ use Modules\Kanban\Models\NullKanbanColumn;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanBoard::class)]
 final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
 {
     private KanbanBoard $board;
@@ -33,10 +34,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
         $this->board = new KanbanBoard();
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->board->id);
@@ -48,20 +46,14 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $this->board->getColumns());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testColumnsInputOutput() : void
     {
         $this->board->addColumn($column = new NullKanbanColumn(2));
         self::assertEquals([$column], $this->board->getColumns());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testColumnRemove() : void
     {
         $this->board->addColumn(new NullKanbanColumn(2));
@@ -70,10 +62,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($this->board->removeColumn(0));
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
         $this->board->status = BoardStatus::ARCHIVED;

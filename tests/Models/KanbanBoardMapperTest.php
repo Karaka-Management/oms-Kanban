@@ -21,12 +21,10 @@ use Modules\Kanban\Models\KanbanBoardMapper;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanBoardMapper::class)]
 final class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\Kanban\Models\KanbanBoardMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $board = new KanbanBoard();

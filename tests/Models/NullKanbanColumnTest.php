@@ -19,31 +19,23 @@ use Modules\Kanban\Models\NullKanbanColumn;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\NullKanbanColumn::class)]
 final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testNull() : void
     {
         self::assertInstanceOf('\Modules\Kanban\Models\KanbanColumn', new NullKanbanColumn());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testId() : void
     {
         $null = new NullKanbanColumn(2);
         self::assertEquals(2, $null->id);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testJsonSerialize() : void
     {
         $null = new NullKanbanColumn(2);

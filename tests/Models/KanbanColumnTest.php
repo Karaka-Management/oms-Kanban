@@ -20,6 +20,7 @@ use Modules\Kanban\Models\KanbanColumn;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanColumn::class)]
 final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
     private KanbanColumn $column;
@@ -32,10 +33,7 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         $this->column = new KanbanColumn();
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->column->id);
@@ -45,20 +43,14 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $this->column->getCards());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCardInputOutput() : void
     {
         $this->column->addCard(new KanbanCard());
         self::assertCount(1, $this->column->getCards());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCardRemove() : void
     {
         $this->column->addCard(new KanbanCard());
@@ -68,10 +60,7 @@ final class KanbanColumnTest extends \PHPUnit\Framework\TestCase
         self::assertFalse($this->column->removeCard(0));
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanColumn
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
         $this->column->name  = 'Name';

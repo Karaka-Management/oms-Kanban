@@ -19,31 +19,23 @@ use Modules\Kanban\Models\NullKanbanBoard;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\NullKanbanBoard::class)]
 final class NullKanbanBoardTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testNull() : void
     {
         self::assertInstanceOf('\Modules\Kanban\Models\KanbanBoard', new NullKanbanBoard());
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testId() : void
     {
         $null = new NullKanbanBoard(2);
         self::assertEquals(2, $null->id);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\NullKanbanBoard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testJsonSerialize() : void
     {
         $null = new NullKanbanBoard(2);

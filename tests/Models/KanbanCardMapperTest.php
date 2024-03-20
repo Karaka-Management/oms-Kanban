@@ -24,13 +24,11 @@ use Modules\Tag\Models\Tag;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanCardMapper::class)]
 final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
-     * @covers \Modules\Kanban\Models\KanbanCardMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\DependsExternal('\Modules\Kanban\tests\Models\KanbanColumnMapperTest', 'testCRUD')]
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCRUD() : void
     {
         $card = new KanbanCard();
@@ -61,10 +59,7 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($card->ref, $cardR->ref);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanCardMapper
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testTaskCard() : void
     {
         $card = new KanbanCard();

@@ -35,6 +35,7 @@ use phpOMS\Utils\TestUtils;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Controller\ApiController::class)]
 final class ApiControllerTest extends \PHPUnit\Framework\TestCase
 {
     protected ApplicationAbstract $app;
@@ -88,10 +89,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         TestUtils::setMember($this->module, 'app', $this->app);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiBoardCU() : void
     {
         $response = new HttpResponse();
@@ -119,10 +117,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals('New Controller Test Board', $response->getDataArray('')['response']->name);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCreateColumn() : void
     {
         $response = new HttpResponse();
@@ -138,10 +133,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, $response->getDataArray('')['response']->id);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCreateCard() : void
     {
         $response = new HttpResponse();
@@ -175,10 +167,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertGreaterThan(0, $response->getDataArray('')['response']->id);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiKanbanBoardCreateInvalidData() : void
     {
         $response = new HttpResponse();
@@ -191,10 +180,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiKanbanColumnCreateInvalidData() : void
     {
         $response = new HttpResponse();
@@ -207,10 +193,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
         self::assertEquals(RequestStatusCode::R_400, $response->header->status);
     }
 
-    /**
-     * @covers \Modules\Kanban\Controller\ApiController
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testApiKanbanCardCreateInvalidData() : void
     {
         $response = new HttpResponse();

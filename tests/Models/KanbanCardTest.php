@@ -23,6 +23,7 @@ use Modules\Tasks\Models\Task;
 /**
  * @internal
  */
+#[\PHPUnit\Framework\Attributes\CoversClass(\Modules\Kanban\Models\KanbanCard::class)]
 final class KanbanCardTest extends \PHPUnit\Framework\TestCase
 {
     private KanbanCard $card;
@@ -35,10 +36,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
         $this->card = new KanbanCard();
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testDefault() : void
     {
         self::assertEquals(0, $this->card->id);
@@ -54,29 +52,20 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
         self::assertEquals([], $this->card->files);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testColumnInputOutput() : void
     {
         $this->card->column = 1;
         self::assertEquals(1, $this->card->column);
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testCreateFromTask() : void
     {
         self::assertInstanceOf('\Modules\Kanban\Models\KanbanCard', $this->card->createFromTask(new Task()));
     }
 
-    /**
-     * @covers \Modules\Kanban\Models\KanbanCard
-     * @group module
-     */
+    #[\PHPUnit\Framework\Attributes\Group('module')]
     public function testSerialize() : void
     {
         $this->card->name           = 'Title';
