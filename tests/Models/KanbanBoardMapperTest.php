@@ -24,7 +24,7 @@ use Modules\Kanban\Models\KanbanBoardMapper;
 final class KanbanBoardMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\Kanban\Models\KanbanBoardMapper
+     * @covers \Modules\Kanban\Models\KanbanBoardMapper
      * @group module
      */
     public function testCRUD() : void

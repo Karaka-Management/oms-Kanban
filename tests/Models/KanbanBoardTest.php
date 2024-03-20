@@ -34,7 +34,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanBoard
+     * @covers \Modules\Kanban\Models\KanbanBoard
      * @group module
      */
     public function testDefault() : void
@@ -49,7 +49,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanBoard
+     * @covers \Modules\Kanban\Models\KanbanBoard
      * @group module
      */
     public function testColumnsInputOutput() : void
@@ -59,7 +59,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanBoard
+     * @covers \Modules\Kanban\Models\KanbanBoard
      * @group module
      */
     public function testColumnRemove() : void
@@ -71,7 +71,7 @@ final class KanbanBoardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanBoard
+     * @covers \Modules\Kanban\Models\KanbanBoard
      * @group module
      */
     public function testSerialize() : void

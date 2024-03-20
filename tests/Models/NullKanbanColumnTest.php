@@ -22,7 +22,7 @@ use Modules\Kanban\Models\NullKanbanColumn;
 final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @covers Modules\Kanban\Models\NullKanbanColumn
+     * @covers \Modules\Kanban\Models\NullKanbanColumn
      * @group module
      */
     public function testNull() : void
@@ -31,7 +31,7 @@ final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\NullKanbanColumn
+     * @covers \Modules\Kanban\Models\NullKanbanColumn
      * @group module
      */
     public function testId() : void
@@ -41,7 +41,7 @@ final class NullKanbanColumnTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\NullKanbanColumn
+     * @covers \Modules\Kanban\Models\NullKanbanColumn
      * @group module
      */
     public function testJsonSerialize() : void

@@ -24,7 +24,7 @@ final class KanbanColumnMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @depends Modules\Kanban\tests\Models\KanbanBoardMapperTest::testCRUD
-     * @covers Modules\Kanban\Models\KanbanColumnMapper
+     * @covers \Modules\Kanban\Models\KanbanColumnMapper
      * @group module
      */
     public function testCRUD() : void

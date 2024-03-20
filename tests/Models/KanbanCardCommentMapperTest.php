@@ -25,7 +25,7 @@ final class KanbanCardCommentMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
-     * @covers Modules\Kanban\Models\KanbanCardCommentMapper
+     * @covers \Modules\Kanban\Models\KanbanCardCommentMapper
      * @group module
      */
     public function testCRUD() : void

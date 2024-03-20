@@ -89,7 +89,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testApiBoardCU() : void
@@ -120,7 +120,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testCreateColumn() : void
@@ -139,7 +139,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testCreateCard() : void
@@ -176,7 +176,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testApiKanbanBoardCreateInvalidData() : void
@@ -192,7 +192,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testApiKanbanColumnCreateInvalidData() : void
@@ -208,7 +208,7 @@ final class ApiControllerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Controller\ApiController
+     * @covers \Modules\Kanban\Controller\ApiController
      * @group module
      */
     public function testApiKanbanCardCreateInvalidData() : void

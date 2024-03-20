@@ -28,7 +28,7 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @depends Modules\Kanban\tests\Models\KanbanCardMapperTest::testCRUD
-     * @covers Modules\Kanban\Models\KanbanCardMapper
+     * @covers \Modules\Kanban\Models\KanbanCardMapper
      * @group module
      */
     public function testCRUD() : void
@@ -62,7 +62,7 @@ final class KanbanCardMapperTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanCardMapper
+     * @covers \Modules\Kanban\Models\KanbanCardMapper
      * @group module
      */
     public function testTaskCard() : void

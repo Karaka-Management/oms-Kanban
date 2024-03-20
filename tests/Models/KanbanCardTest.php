@@ -36,7 +36,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanCard
+     * @covers \Modules\Kanban\Models\KanbanCard
      * @group module
      */
     public function testDefault() : void
@@ -55,7 +55,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanCard
+     * @covers \Modules\Kanban\Models\KanbanCard
      * @group module
      */
     public function testColumnInputOutput() : void
@@ -65,7 +65,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanCard
+     * @covers \Modules\Kanban\Models\KanbanCard
      * @group module
      */
     public function testCreateFromTask() : void
@@ -74,7 +74,7 @@ final class KanbanCardTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @covers Modules\Kanban\Models\KanbanCard
+     * @covers \Modules\Kanban\Models\KanbanCard
      * @group module
      */
     public function testSerialize() : void
