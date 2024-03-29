@@ -62,13 +62,24 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/card(\?.*$|$)' => [
+    '^.*/kanban/card/view(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCard',
             'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::READ,
+                'state'  => PermissionCategory::CARD,
+            ],
+        ],
+    ],
+    '^.*/kanban/card/create(\?.*$|$)' => [
+        [
+            'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCard',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::NAME,
+                'type'   => PermissionType::CREATE,
                 'state'  => PermissionCategory::CARD,
             ],
         ],
@@ -81,6 +92,17 @@ return [
                 'module' => BackendController::NAME,
                 'type'   => PermissionType::CREATE,
                 'state'  => PermissionCategory::KANBAN,
+            ],
+        ],
+    ],
+    '^.*/kanban/edit(\?.*$|$)' => [
+        [
+            'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanBoardEdit',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::NAME,
+                'type'   => PermissionType::MODIFY,
+                'state'  => PermissionCategory::BOARD,
             ],
         ],
     ],

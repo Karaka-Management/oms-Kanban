@@ -16,8 +16,8 @@ echo $this->data['nav']->render();
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-4">
         <section class="portlet">
-            <form action="<?= \phpOMS\Uri\UriFactory::build('{/api}...'); ?>" method="post">
-                <div class="portlet-head"><?= $this->getHtml('Kanban'); ?></div>
+            <form action="<?= \phpOMS\Uri\UriFactory::build('{/api}kanban/create?csrf={$CSRF}'); ?>" method="post">
+                <div class="portlet-head"><?= $this->getHtml('Board'); ?></div>
                 <div class="portlet-body">
                     <div class="form-group">
                         <label for="iTitle"><?= $this->getHtml('Name'); ?></label>
@@ -26,11 +26,7 @@ echo $this->data['nav']->render();
 
                     <div class="form-group">
                         <label for="iDescription"><?= $this->getHtml('Description'); ?></label>
-                        <textarea id="iDescription" name="description"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="iTags"><?= $this->getHtml('Tags'); ?></label>
+                        <textarea id="iDescription" name="plain"></textarea>
                     </div>
                 </div>
                 <div class="portlet-foot">
@@ -41,4 +37,7 @@ echo $this->data['nav']->render();
     </div>
 </div>
 
+<!--
+@todo Implement
 <?= $this->data['permissionView']->render('board_permission'); ?>
+-->
