@@ -18,7 +18,7 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/kanban(\?.*$|$)' => [
+    '^/kanban(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:setupStyles',
             'verb'       => RouteVerb::GET,
@@ -29,7 +29,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/dashboard(\?.*$|$)' => [
+    '^/kanban/dashboard(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanDashboard',
             'verb'       => RouteVerb::GET,
@@ -40,7 +40,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/archive(\?.*$|$)' => [
+    '^/kanban/archive(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanArchive',
             'verb'       => RouteVerb::GET,
@@ -51,7 +51,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/board(\?.*$|$)' => [
+    '^/kanban/board(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanBoard',
             'verb'       => RouteVerb::GET,
@@ -62,7 +62,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/card/view(\?.*$|$)' => [
+    '^/kanban/card/view(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCard',
             'verb'       => RouteVerb::GET,
@@ -73,7 +73,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/card/create(\?.*$|$)' => [
+    '^/kanban/card/create(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCard',
             'verb'       => RouteVerb::GET,
@@ -84,7 +84,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/create(\?.*$|$)' => [
+    '^/kanban/create(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanBoardCreate',
             'verb'       => RouteVerb::GET,
@@ -95,7 +95,7 @@ return [
             ],
         ],
     ],
-    '^.*/kanban/edit(\?.*$|$)' => [
+    '^/kanban/edit(\?.*$|$)' => [
         [
             'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanBoardEdit',
             'verb'       => RouteVerb::GET,
