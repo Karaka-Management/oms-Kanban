@@ -84,7 +84,7 @@ final class BackendController extends Controller
             ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(20)
-            ->execute();
+            ->executeGetArray();
 
         $view->data['boards'] = $list;
 
@@ -162,7 +162,7 @@ final class BackendController extends Controller
             ->where('tags/title/language', $request->header->l11n->language)
             ->sort('createdAt', OrderType::DESC)
             ->limit(25)
-            ->execute();
+            ->executeGetArray();
 
         $view->data['boards'] = $list;
 

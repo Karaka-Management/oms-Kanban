@@ -30,7 +30,7 @@ $columns = $board->getColumns();
     <div id="kanban-column-<?= $i; ?>" class="box col-xs-3" style="min-width: 300px;">
         <header class="simple-flex">
             <span><?= $this->printHtml($column->name); ?></span>
-            <a href="<?= UriFactory::build('{/base}/kanban/card/create?{?}&id=' . $board->id) ?>"><i class="g-icon">add_circle</i></a>
+            <a href="<?= UriFactory::build('{/base}/kanban/card/create?{?}&id=' . $board->id); ?>"><i class="g-icon">add_circle</i></a>
         </header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = UriFactory::build('{/base}/kanban/card/view?{?}&id=' . $card->id);
