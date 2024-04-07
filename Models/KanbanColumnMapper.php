@@ -17,7 +17,7 @@ namespace Modules\Kanban\Models;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
- * Mapper class.
+ * KanbanColumn mapper class.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 2.0

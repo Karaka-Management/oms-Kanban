@@ -21,7 +21,7 @@ use Modules\Tag\Models\TagMapper;
 use phpOMS\DataStorage\Database\Mapper\DataMapperFactory;
 
 /**
- * Mapper class.
+ * KanbanCard mapper class.
  *
  * @package Modules\Kanban\Models
  * @license OMS License 2.0
