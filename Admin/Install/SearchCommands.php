@@ -22,6 +22,7 @@ return [
         [
             'dest'       => '\Modules\Kanban\Controller\SearchController:searchGeneral',
             'verb'       => RouteVerb::ANY,
+            'active'     => true,
             'permission' => [
                 'module' => SearchController::NAME,
                 'type'   => PermissionType::READ,

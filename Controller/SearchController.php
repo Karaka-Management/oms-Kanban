@@ -61,7 +61,7 @@ final class SearchController extends Controller
             $results[] = [
                 'title'     => $doc->name,
                 'summary'   => '',
-                'link'      => '{/base}/kanban/card?id=' . $doc->id,
+                'link'      => '{/base}/kanban/card/view?id=' . $doc->id,
                 'account'   => '',
                 'createdAt' => $doc->createdAt,
                 'image'     => '',

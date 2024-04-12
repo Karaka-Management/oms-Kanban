@@ -148,14 +148,15 @@ final class ApiController extends Controller
             $card->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
         }
 
-        if (!empty($uploadedFiles = $request->files)) {
+        // @todo Implement correct path (based on board id)
+        if (!empty($request->files)) {
             $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
-                [],
-                [],
-                $uploadedFiles,
-                $request->header->account,
-                __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
-                '/Modules/Kanban',
+                names: [],
+                fileNames: [],
+                files: $request->files,
+                account: $request->header->account,
+                basePath: __DIR__ . '/../../../Modules/Media/Files/Modules/Kanban',
+                virtualPath: '/Modules/Kanban',
             );
 
             foreach ($uploaded as $media) {
