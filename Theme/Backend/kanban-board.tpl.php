@@ -12,25 +12,23 @@
  */
 declare(strict_types=1);
 
+use Modules\Kanban\Models\NullKanbanBoard;
 use phpOMS\Uri\UriFactory;
 
 /** @var \Modules\Kanban\Models\KanbanBoard $board */
-$board = $this->data['board'];
-
-/** @var \Modules\Kanban\Models\KanbanColumn[] $columns */
-$columns = $board->getColumns();
+$board = $this->data['board'] ?? new NullKanbanBoard();
 ?>
 <div class="row">
     <div class="box">
-        <a class="button" href="<?= UriFactory::build('{/base}/kanban/edit?board=' . $board->id); ?>"><?= $this->getHtml('Edit', '0', '0'); ?></a>
+        <a class="button" href="<?= UriFactory::build('{/base}/kanban/edit?id=' . $board->id); ?>"><?= $this->getHtml('Edit', '0', '0'); ?></a>
     </div>
 </div>
 <div class="row kanban-board" style="flex-wrap: nowrap;">
-    <?php $i = 0; foreach ($columns as $column) : $i++; $cards = $column->getCards(); ?>
+    <?php $i = 0; foreach ($board->columns as $column) : $i++; $cards = $column->getCards(); ?>
     <div id="kanban-column-<?= $i; ?>" class="box col-xs-3" style="min-width: 300px;">
         <header class="simple-flex">
             <span><?= $this->printHtml($column->name); ?></span>
-            <a href="<?= UriFactory::build('{/base}/kanban/card/create?{?}&id=' . $board->id); ?>"><i class="g-icon">add_circle</i></a>
+            <a href="<?= UriFactory::build('{/base}/kanban/card/create?column=' . $board->id); ?>"><i class="g-icon">add_circle</i></a>
         </header>
         <?php $j = 0; foreach ($cards as $card) : $j++;
             $url = UriFactory::build('{/base}/kanban/card/view?{?}&id=' . $card->id);

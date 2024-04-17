@@ -80,7 +80,7 @@ return [
     ],
     '^/kanban/card/create(\?.*$|$)' => [
         [
-            'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCard',
+            'dest'       => '\Modules\Kanban\Controller\BackendController:viewKanbanCardCreate',
             'verb'       => RouteVerb::GET,
             'active'     => true,
             'permission' => [
