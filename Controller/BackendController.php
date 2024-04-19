@@ -106,12 +106,6 @@ final class BackendController extends Controller
     public function viewKanbanBoard(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
-        if (!$request->hasData('id')) {
-            $response->header->status = RequestStatusCode::R_404;
-            $view->setTemplate('/Web/Backend/Error/404');
-
-            return $view;
-        }
 
         /** @var \Modules\Kanban\Models\KanbanBoard $board */
         $board = KanbanBoardMapper::get()
@@ -125,6 +119,13 @@ final class BackendController extends Controller
             ->where('columns/cards/tags/title/language', $request->header->l11n->language)
             ->sort('columns/order', OrderType::ASC)
             ->execute();
+
+        if (!$board->id) {
+            $response->header->status = RequestStatusCode::R_404;
+            $view->setTemplate('/Web/Backend/Error/404');
+
+            return $view;
+        }
 
         $accountId = $request->header->account;
 
@@ -160,7 +161,13 @@ final class BackendController extends Controller
     public function viewKanbanBoardEdit(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
-        if (!$request->hasData('id')) {
+
+        $view->data['board'] = KanbanBoardMapper::get()
+            ->with('columns')
+            ->where('id', (int) $request->getData('id'))
+            ->execute();
+
+        if ($view->data['board']->id === 0) {
             $response->header->status = RequestStatusCode::R_404;
             $view->setTemplate('/Web/Backend/Error/404');
 
@@ -169,11 +176,6 @@ final class BackendController extends Controller
 
         $view->setTemplate('/Modules/Kanban/Theme/Backend/kanban-board-create');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005801001, $request, $response);
-
-        $view->data['board'] = KanbanBoardMapper::get()
-            ->with('columns')
-            ->where('id', (int) $request->getData('id'))
-            ->execute();
 
         return $view;
     }
@@ -257,12 +259,6 @@ final class BackendController extends Controller
     public function viewKanbanCard(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
-        if (!$request->hasData('id')) {
-            $response->header->status = RequestStatusCode::R_404;
-            $view->setTemplate('/Web/Backend/Error/404');
-
-            return $view;
-        }
 
         /** @var \Modules\Kanban\Models\KanbanCard $card */
         $card = KanbanCardMapper::get()
@@ -277,6 +273,13 @@ final class BackendController extends Controller
             ->where('id', (int) $request->getData('id'))
             ->where('tags/title/language', $response->header->l11n->language)
             ->execute();
+
+        if ($card->id === 0) {
+            $response->header->status = RequestStatusCode::R_404;
+            $view->setTemplate('/Web/Backend/Error/404');
+
+            return $view;
+        }
 
         $accountId = $request->header->account;
 
