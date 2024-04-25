@@ -268,7 +268,7 @@ final class BackendController extends Controller
             ->with('createdBy')
             ->with('commentList')
             ->with('commentList/comments')
-            ->with('commentList/comments/media')
+            ->with('commentList/comments/files')
             ->with('commentList/comments/createdBy')
             ->where('id', (int) $request->getData('id'))
             ->where('tags/title/language', $response->header->l11n->language)
