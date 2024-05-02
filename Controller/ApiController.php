@@ -16,6 +16,7 @@ namespace Modules\Kanban\Controller;
 
 use Modules\Admin\Models\AccountMapper;
 use Modules\Admin\Models\NullAccount;
+use Modules\Comments\Models\Comment;
 use Modules\Kanban\Models\BoardStatus;
 use Modules\Kanban\Models\CardStatus;
 use Modules\Kanban\Models\CardType;
@@ -53,8 +54,7 @@ final class ApiController extends Controller
      *
      * @return void
      *
-     * @todo Create another notification whenever a comment is created for a card
-     *      The card owner and all previous commentators should receive a notification
+     * @performance This should happen in the cli if possible?
      *
      * @since 1.0.0
      */
@@ -66,6 +66,52 @@ final class ApiController extends Controller
             PermissionCategory::CARD,
             $card->id
         );
+
+        foreach ($accounts as $account) {
+            $notification             = new Notification();
+            $notification->module     = self::NAME;
+            $notification->title      = $card->name;
+            $notification->createdBy  = $card->createdBy;
+            $notification->createdFor = new NullAccount($account);
+            $notification->type       = NotificationType::CREATE;
+            $notification->category   = PermissionCategory::CARD;
+            $notification->element    = $card->id;
+            $notification->redirect   = '{/base}/kanban/card?{?}&id=' . $card->id;
+
+            $this->createModel($request->header->account, $notification, NotificationMapper::class, 'notification', $request->getOrigin());
+        }
+    }
+
+    /**
+     * Create a notification for a card
+     *
+     * @param Comment         $comment Comment to create notification for
+     * @param RequestAbstract $request Request
+     *
+     * @return void
+     *
+     * @performance This should happen in the cli if possible?
+     *
+     * @since 1.0.0
+     */
+    private function createCommentNotifications(Comment $comment, RequestAbstract $request) : void
+    {
+        $card = KanbanCardMapper::get()
+            ->with('commentList')
+            ->with('commentList/comments')
+            ->where('commentList', $comment->list)
+            ->execute();
+
+        $accounts = [];
+        if ($card->createdBy->id !== $comment->createdBy->id) {
+            $accounts[] = $card->createdBy->id;
+        }
+
+        foreach ($card->commentList->comments as $element) {
+            if ($element->createdBy->id !== $comment->createdBy->id) {
+                $accounts[] = $element->createdBy->id;
+            }
+        }
 
         foreach ($accounts as $account) {
             $notification             = new Notification();
@@ -388,5 +434,26 @@ final class ApiController extends Controller
         }
 
         return [];
+    }
+
+    /**
+     * Api method to create comment
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param array            $data     Generic data
+     *
+     * @return void
+     *
+     * @api
+     *
+     * @since 1.0.0
+     */
+    public function apiCommentCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
+    {
+        $this->app->moduleManager->get('Comment', 'Api')->apiCommentCreate($request, $response, $data);
+        $comment = $response->getDataArray($request->uri->__toString())['response'];
+
+        $this->createCommentNotifications($comment, $request);
     }
 }

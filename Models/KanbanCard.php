@@ -27,10 +27,6 @@ use Modules\Tasks\Models\Task;
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
- *
- * @todo Implement unread cards/comments notification/highlight
- *      See tasks for inspiration. However, here we also need to highlight the entire board for unread content
- *      https://github.com/Karaka-Management/oms-Kanban/issues/5
  */
 class KanbanCard implements \JsonSerializable
 {

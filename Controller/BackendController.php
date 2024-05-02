@@ -34,9 +34,6 @@ use phpOMS\Views\View;
  * @link    https://jingga.app
  * @since   1.0.0
  * @codeCoverageIgnore
- *
- * @todo Implement unread cards/comments notification/highlight
- *      https://github.com/Karaka-Management/oms-Kanban/issues/5
  */
 final class BackendController extends Controller
 {

@@ -15,6 +15,9 @@ declare(strict_types=1);
 use Modules\Kanban\Models\NullKanbanBoard;
 use phpOMS\Uri\UriFactory;
 
+// @todo Allow card templates? maybe at least colors?
+//      https://github.com/Karaka-Management/oms-Kanban/issues/10
+
 /** @var \Modules\Kanban\Models\KanbanBoard $board */
 $board = $this->data['board'] ?? new NullKanbanBoard();
 ?>
