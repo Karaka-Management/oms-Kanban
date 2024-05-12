@@ -190,9 +190,11 @@ final class ApiController extends Controller
             $card->commentList = $commnetList;
         }
 
+        /*
         if ($request->hasData('tags')) {
             $card->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
         }
+        */
 
         // @todo Implement correct path (based on board id)
         if (!empty($request->files)) {
@@ -294,9 +296,11 @@ final class ApiController extends Controller
         $board->status         = BoardStatus::tryFromValue($request->getDataInt('status')) ?? BoardStatus::ACTIVE;
         $board->createdBy      = new NullAccount($request->header->account);
 
+        /*
         if ($request->hasData('tags')) {
             $board->tags = $this->app->moduleManager->get('Tag', 'Api')->createTagsFromRequest($request);
         }
+        */
 
         return $board;
     }
