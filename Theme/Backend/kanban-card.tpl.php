@@ -16,7 +16,7 @@ use Modules\Comments\Models\CommentListStatus;
 use phpOMS\Uri\UriFactory;
 
 /** @var \Modules\Kanban\Models\KanbanCard $card */
-$card = $this->data['card'];
+$card  = $this->data['card'];
 $isNew = $card->id === 0;
 
 $editPossible = $card->createdBy->id === $this->request->header->account;

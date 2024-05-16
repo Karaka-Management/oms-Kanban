@@ -107,9 +107,11 @@ final class ApiController extends Controller
             $accounts[] = $card->createdBy->id;
         }
 
-        foreach ($card->commentList->comments as $element) {
-            if ($element->createdBy->id !== $comment->createdBy->id) {
-                $accounts[] = $element->createdBy->id;
+        if ($card->commentList !== null) {
+            foreach ($card->commentList->comments as $element) {
+                if ($element->createdBy->id !== $comment->createdBy->id) {
+                    $accounts[] = $element->createdBy->id;
+                }
             }
         }
 
@@ -456,7 +458,14 @@ final class ApiController extends Controller
     public function apiCommentCreate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         $this->app->moduleManager->get('Comment', 'Api')->apiCommentCreate($request, $response, $data);
-        $comment = $response->getDataArray($request->uri->__toString())['response'];
+        $comment = $response->getDataArray($request->uri->__toString())['response'] ?? null;
+
+        if ($comment === null) {
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $comment);
+
+            return;
+        }
 
         $this->createCommentNotifications($comment, $request);
     }
