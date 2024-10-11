@@ -23,7 +23,10 @@ echo $this->data['nav']->render();
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-4">
         <section class="portlet">
-            <form action="<?= \phpOMS\Uri\UriFactory::build('{/api}kanban?csrf={$CSRF}'); ?>" method="<?= $isNew ? 'PUT' : 'POST'; ?>">
+            <form
+                action="<?= \phpOMS\Uri\UriFactory::build('{/api}kanban?csrf={$CSRF}'); ?>"
+                method="<?= $isNew ? 'PUT' : 'POST'; ?>"
+                <?= $isNew ? 'data-redirect="' . UriFactory::build('{/base}/kanban/board') . '?id={/0/response/id}"' : ''; ?>>
                 <div class="portlet-head"><?= $this->getHtml('Board'); ?></div>
                 <div class="portlet-body">
                     <div class="form-group">
