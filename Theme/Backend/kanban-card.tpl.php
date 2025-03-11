@@ -21,7 +21,6 @@ $isNew = $card->id === 0;
 
 $editPossible = $card->createdBy->id === $this->request->header->account;
 ?>
-
 <div class="row">
     <div class="box">
         <a tabindex="0" class="button" href="<?= $this->request->getReferer() !== '' ? $this->request->getReferer() : UriFactory::build('kanban/dashboard'); ?>"><?= $this->getHtml('Back'); ?></a>
