@@ -347,7 +347,7 @@ final class ApiController extends Controller
     public function apiKanbanBoardUpdate(RequestAbstract $request, ResponseAbstract $response, array $data = []) : void
     {
         /** @var \Modules\Kanban\Models\KanbanBoard $old */
-        $old = KanbanBoardMapper::get()->where('id', (int) $request->getData('id'))->execute();
+        $old = KanbanBoardMapper::get()->where('id', $request->getDataInt('id') ?? 0)->execute();
         $new = $this->updateBoardFromRequest($request, clone $old);
 
         $this->updateModel($request->header->account, $old, $new, KanbanBoardMapper::class, 'board', $request->getOrigin());

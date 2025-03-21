@@ -112,7 +112,7 @@ final class BackendController extends Controller
             ->with('columns/cards/commentList/comments')
             ->with('columns/cards/tags')
             ->with('columns/cards/tags/title')
-            ->where('id', (int) $request->getData('id'))
+            ->where('id', $request->getDataInt('id') ?? 0)
             ->where('columns/cards/tags/title/language', $request->header->l11n->language)
             ->sort('columns/order', OrderType::ASC)
             ->execute();
@@ -161,7 +161,7 @@ final class BackendController extends Controller
 
         $view->data['board'] = KanbanBoardMapper::get()
             ->with('columns')
-            ->where('id', (int) $request->getData('id'))
+            ->where('id', $request->getDataInt('id') ?? 0)
             ->execute();
 
         if ($view->data['board']->id === 0) {
@@ -267,7 +267,7 @@ final class BackendController extends Controller
             ->with('commentList/comments')
             ->with('commentList/comments/files')
             ->with('commentList/comments/createdBy')
-            ->where('id', (int) $request->getData('id'))
+            ->where('id', $request->getDataInt('id') ?? 0)
             ->where('tags/title/language', $response->header->l11n->language)
             ->execute();
 
